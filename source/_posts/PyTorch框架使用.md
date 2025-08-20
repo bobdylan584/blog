@@ -72,7 +72,7 @@ tags:
 
   Pytorch2.0引入了torch.compile，可以支持对训练过程的加速，同时引入了TorchDynamo，主要替换torch.jit.trace和torch.jit.script。另外在这个版本中编译器性能大幅提升，分布式运行方面也做了一定的优化。
 
-![1733816358935](assets/1733816358935.png)
+![1755683355970](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683355970.png)
 
 ## 张量创建
 
@@ -84,23 +84,23 @@ tags:
 
 - PyTorch中，张量以"类"的形式封装起来，对张量的一些运算、处理的方法（数值计算、矩阵操作、自动求导）被封装在类中。
 
-![1733817329667](assets/1733817329667.png)
+![1755683379528](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683379528.png)
 
 ==多个二维张量组成三维张量==
 
-![1733817373409](assets/1733817373409.png)
+![1755683390562](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683390562.png)
 
 ==多个三维张量组成四维张量==
 
 ==多个四维张量组成五维张量==
 
-![1733817419397](assets/1733817419397.png)
+![1755683402867](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683402867.png)
 
 ### 基本创建方式
 
 > - 张量的数据类型有
 >
->   ![1662778155632](assets/1662778155632.png)
+>   ![1755683432431](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683432431.png)
 >
 > - 张量中默认的数据类型是**float32(torch.FloatTensor)**
 
@@ -367,7 +367,7 @@ tags:
 
 > 点乘（Hadamard）也称为元素级乘积，指的是相同形状的张量对应位置的元素相乘，使用mul和运算符 * 实现。
 >
-> ![1733825192893](assets/1733825192893.png)
+> ![1755683482850](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683482850.png)
 
 ```python
 data1 = torch.tensor([[1, 2], [3, 4]])
@@ -665,7 +665,7 @@ print(new_data.shape)
 
 训练神经网络时，最常用的算法就是反向传播。在该算法中，参数（模型权重）会根据损失函数关于对应参数的梯度进行调整。为了计算这些梯度，PyTorch内置了名为 torch.autograd 的微分模块。它支持任意计算图的自动梯度计算：
 
-![1733908229516](assets/1733908229516.png)
+![1755683516296](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683516296.png)
 
 接下来我们使用这个结构进行自动微分模块的介绍，我们使用 backward 方法、grad 属性来实现梯度的计算和访问。
 
@@ -831,7 +831,7 @@ print("b的梯度", b.grad)
 - 设置损失函数和优化器
 - 模型训练
 
-![1733908449747](assets/1733908449747.png)
+![1755683539603](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683539603.png)
 
 要使用的API：
 
@@ -951,8 +951,6 @@ if __name__ == '__main__':
     train()
 ```
 
-![1733909608918](assets/1733909608918.png)
+![1755683572740](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683572740.png)
 
-![1733909623818](assets/1733909623818.png)
-
-​	
+![1755683586353](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1755683586353.png)	
