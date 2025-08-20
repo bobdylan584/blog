@@ -102,3 +102,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+marked:
+  prependRoot: true   # 将图片路径视为相对路径，并加上根路径
+  postAsset: true      # 启用对文章资源文件夹的支持
