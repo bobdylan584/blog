@@ -5,7 +5,7 @@ echo          Git 自动化提交工具
 echo ========================================
 echo.
 
-echo 第一步：添加所有更改到暂存区
+echo 第一步：添加所有更改到暂存区，执行代码：git add .
 git add .
 if %errorlevel% neq 0 (
     echo 错误：添加文件失败！
@@ -26,7 +26,7 @@ if "%commit_msg%"=="" (
 )
 
 echo.
-echo 第三步：正在提交更改...
+echo 第三步：正在提交更改...;执行如下代码
 git commit -m "%commit_msg%"
 if %errorlevel% neq 0 (
     echo 错误：提交失败！可能没有需要提交的更改。
@@ -39,7 +39,7 @@ echo 提交成功！
 echo.
 
 echo 第四步：正在推送到远程仓库...
-git push origin main
+git push origin master:main
 if %errorlevel% neq 0 (
     echo 错误：推送失败！请检查网络或权限。
     pause
