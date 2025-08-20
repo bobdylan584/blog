@@ -1,2 +1,1 @@
 hexo clean
-PAUSE
