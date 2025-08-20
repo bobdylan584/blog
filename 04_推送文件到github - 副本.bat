@@ -26,7 +26,7 @@ if "%commit_msg%"=="" (
 )
 
 echo.
-echo 第三步：正在提交更改...;执行如下代码
+echo 第三步：正在提交更改...;执行如下代码git commit -m "%commit_msg%"
 git commit -m "%commit_msg%"
 if %errorlevel% neq 0 (
     echo 错误：提交失败！可能没有需要提交的更改。
@@ -38,7 +38,7 @@ endlocal
 echo 提交成功！
 echo.
 
-echo 第四步：正在推送到远程仓库...
+echo 第四步：正在推送到远程仓库...；执行如下代码：git push origin master:main
 git push origin master:main
 if %errorlevel% neq 0 (
     echo 错误：推送失败！请检查网络或权限。
