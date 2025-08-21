@@ -1,6 +1,6 @@
 ---
 title: Python调用Ollama平台本地部署QWen大模型API实现聊天机器人
-date: 2023-07-31 21:21:51
+date: 2024-11-31 21:21:51
 tag: Local deploy_LLM
 ---
 

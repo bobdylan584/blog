@@ -1,6 +1,6 @@
 ---
 title: day06 RAG
-date: 2023-09-26 21:21:51
+date: 2024-03-15 11:44:53
 tag: RAG_Notes
 ---
 

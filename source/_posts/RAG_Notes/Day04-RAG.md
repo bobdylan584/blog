@@ -1,6 +1,6 @@
 ---
 title: Day04-RAG
-date: 2023-09-07 21:21:51
+date: 2025-01-07 21:21:51
 tag: RAG_Notes
 ---
 
