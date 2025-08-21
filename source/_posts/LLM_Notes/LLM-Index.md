@@ -1,12 +1,12 @@
 ---
-title: day06-LLM
+title: LLM-Index
 date: 2024-11-22 21:21:51
 tag: LLM_Notes
 ---
 
 
 
-# day06
+# LLM-Index
 
 ## 昨日回顾
 

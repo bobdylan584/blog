@@ -1,14 +1,12 @@
 ---
-title: Day04-RAG
+title: RAG流程
 date: 2025-01-07 21:21:51
 tag: RAG_Notes
 ---
 
 
 
-# Day04-RAG
-
-流程：
+# RAG流程：
 
 mysql储存FQA高频问答对数据
 

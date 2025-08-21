@@ -1,12 +1,12 @@
 ---
-title: day05RAG
+title: RAG-Langchain
 date: 2025-01-04 01:21:51
 tag: RAG_Notes
 ---
 
 
 
-# day05RAG
+# RAG-Langchain
 
 ## RAG
 

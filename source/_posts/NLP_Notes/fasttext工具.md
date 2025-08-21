@@ -1,10 +1,10 @@
 ---
-title: day13_课堂笔记
+title: fasttext工具
 date: 2024-02-25 22:45:19
 tag: NLP_Notes
 ---
 
-# day13_课堂笔记
+# fasttext工具
 
 ## 1 fasttext工具
 

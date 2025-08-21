@@ -1,10 +1,10 @@
 ---
-title: day14_课堂笔记
+title: transformers库使用
 date: 2024-03-13 14:27:36
 tag: NLP_Notes
 ---
 
-# day14_课堂笔记
+# transformers库使用
 
 ## 1 transformers库使用
 

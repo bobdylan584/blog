@@ -1,14 +1,12 @@
 ---
-title: day06 RAG
+title: RAG-Milvus
 date: 2024-03-15 11:44:53
 tag: RAG_Notes
 ---
 
 
 
-# day06 RAG
-
-Milvus
+# RAG-Milvus
 
 配置文件，
 
