@@ -1,0 +1,1722 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="02-BERT%2BPET%E6%96%B9%E5%BC%8F%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%8B%E7%BB%8D.html">
+      
+      
+        <link rel="next" href="04-BERT%2BPET%E6%96%B9%E5%BC%8F%E6%A8%A1%E5%9E%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%AD%E7%BB%83.html">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>3.3 BERT+PET方式数据预处理 - 大模型微调技术V6.1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bertpet" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="大模型微调技术V6.1" class="md-header__button md-logo" aria-label="大模型微调技术V6.1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            大模型微调技术V6.1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.3 BERT+PET方式数据预处理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="大模型微调技术V6.1" class="md-nav__button md-logo" aria-label="大模型微调技术V6.1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    大模型微调技术V6.1
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    1、大模型微调的主要方式
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            1、大模型微调的主要方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F/01-%E5%A4%A7%E6%A8%A1%E5%9E%8BPrompt-Tuning%E6%96%B9%E6%B3%95.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.1 大模型Prompt-Tuning方法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F/02-%E5%A4%A7%E6%A8%A1%E5%9E%8BPEFT%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.2 大模型PEFT微调方法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    2、基于GPT2的医疗问诊机器人
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            2、基于GPT2的医疗问诊机器人
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-%E5%9F%BA%E4%BA%8EGPT2%E7%9A%84%E5%8C%BB%E7%96%97%E9%97%AE%E8%AF%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/01-%E5%8C%BB%E7%96%97%E9%97%AE%E8%AF%8A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AE%9E%E7%8E%B0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.1 医疗问诊机器人实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    3、新零售行业评价决策系统
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            3、新零售行业评价决策系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.1 项目背景介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-BERT%2BPET%E6%96%B9%E5%BC%8F%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.2 BERT+PET方式文本分类介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3.3 BERT+PET方式数据预处理
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="03-BERT%2BPET%E6%96%B9%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.3 BERT+PET方式数据预处理
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bertpet" class="md-nav__link">
+    <span class="md-ellipsis">
+      基于BERT+PET方式数据预处理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      学习目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bertpet_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      BERT+PET方式数据预处理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BERT+PET方式数据预处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 查看项目数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 查看项目数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-traintxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 train.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-devtxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 dev.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-prompttxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 prompt.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-verbalizertxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 verbalizer.txt
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 编写Config类项目文件配置代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 编写数据处理相关代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 编写数据处理相关代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-templatepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 template.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-data_preprocesspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 data_preprocess.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-data_loaderpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 data_loader.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-BERT%2BPET%E6%96%B9%E5%BC%8F%E6%A8%A1%E5%9E%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%AD%E7%BB%83.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.4 BERT+PET方式模型代码实现和训练
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-BERT%2BP-Tuning%E6%96%B9%E5%BC%8F%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.5 BERT+P-Tuning方式文本分类介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-BERT%2BP-Tuning%E6%96%B9%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.6 BERT+P-Tuning方式数据预处理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-BERT%2BP-Tuning%E6%96%B9%E5%BC%8F%E6%A8%A1%E5%9E%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%AD%E7%BB%83.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.7 BERT+P-Tuning方式模型代码实现和训练
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    4、基于ChatGLM微调多任务实战
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            4、基于ChatGLM微调多任务实战
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-%E5%9F%BA%E4%BA%8EChatGLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E7%8E%B0%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%2B%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AE%9E%E6%88%98/01-%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.1 项目整体简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-%E5%9F%BA%E4%BA%8EChatGLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E7%8E%B0%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%2B%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AE%9E%E6%88%98/02-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.2 多任务数据预处理方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-%E5%9F%BA%E4%BA%8EChatGLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E7%8E%B0%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%2B%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AE%9E%E6%88%98/03-LoRA%E6%96%B9%E5%BC%8F%E6%A8%A1%E5%9E%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%AD%E7%BB%83.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.3 LoRA方式微调ChatGLM模型代码实现和训练
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-%E5%9F%BA%E4%BA%8EChatGLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E7%8E%B0%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%2B%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AE%9E%E6%88%98/%E8%B6%8B%E5%8A%A8%E4%BA%91%E4%BD%BF%E7%94%A8%E3%80%8A%E8%A1%A5%E5%85%85%E3%80%8B.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.4 趋动云使用《扩展》
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bertpet" class="md-nav__link">
+    <span class="md-ellipsis">
+      基于BERT+PET方式数据预处理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      学习目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bertpet_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      BERT+PET方式数据预处理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BERT+PET方式数据预处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 查看项目数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 查看项目数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-traintxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 train.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-devtxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 dev.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-prompttxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 prompt.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-verbalizertxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 verbalizer.txt
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 编写Config类项目文件配置代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 编写数据处理相关代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 编写数据处理相关代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-templatepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 template.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-data_preprocesspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 data_preprocess.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-data_loaderpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 data_loader.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>3.3 BERT+PET方式数据预处理</h1>
+
+<h2 id="bertpet">基于BERT+PET方式数据预处理<a class="headerlink" href="#bertpet" title="Permanent link">&para;</a></h2>
+<h2 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>了解本项目数据类型和表现格式</li>
+<li>掌握数据处理的工具函数代码实现</li>
+</ul>
+<hr />
+<h2 id="bertpet_1">BERT+PET方式数据预处理<a class="headerlink" href="#bertpet_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>本项目中对数据部分的预处理步骤如下:</li>
+<li>查看项目数据集</li>
+<li>编写Config类项目文件配置代码</li>
+<li>编写数据处理相关代码</li>
+</ul>
+<h3 id="1">1 查看项目数据集<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>数据存放位置：llm_tuning/prompt_tasks/PET/data</p>
+</li>
+<li>
+<p>data文件夹里面包含4个txt文档，分别为：train.txt、dev.txt、prompt.txt、verbalizer.txt</p>
+</li>
+</ul>
+<hr />
+<h4 id="11-traintxt">1.1 train.txt<a class="headerlink" href="#11-traintxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>train.txt为训练数据集，其部分数据展示如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>水果  脆脆的，甜味可以，可能时间有点长了，水分不是很足。
+平板  华为机器肯定不错，但第一次碰上京东最糟糕的服务，以后不想到京东购物了。
+书籍  为什么不认真的检查一下， 发这么一本脏脏的书给顾客呢！
+衣服  手感不错，用料也很好，不知道水洗后怎样，相信大品牌，质量过关，五星好评！！！
+水果  苹果有点小，不过好吃，还有几个烂的。估计是故意的放的。差评。
+衣服  掉色掉的厉害，洗一次就花了
+</code></pre></div>
+<blockquote>
+<p>train.txt一共包含63条样本数据，每一行用<code>\t</code>分开，前半部分为标签(label)，后半部分为原始输入 (用户评论)。</p>
+<p>如果想使用自定义数据训练，只需要仿照上述示例数据构建数据集即可。</p>
+</blockquote>
+<hr />
+<h4 id="12-devtxt">1.2 dev.txt<a class="headerlink" href="#12-devtxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>dev.txt为验证数据集，其部分数据展示如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>书籍  &quot;一点都不好笑,很失望,内容也不是很实用&quot;
+衣服  完全是一条旧裤子。
+手机  相机质量不错，如果阳光充足，可以和数码相机媲美．界面比较人性化，容易使用．软件安装简便
+书籍  明明说有货，结果送货又没有了。并且也不告诉我，怎么评啊
+洗浴  非常不满意，晚上洗的头发，第二天头痒痒的不行了，还都是头皮屑。
+水果  这个苹果感觉是长熟的苹果，没有打蜡，不错，又甜又脆
+</code></pre></div>
+<blockquote>
+<p>dev.txt一共包含590条样本数据，每一行用<code>\t</code>分开，前半部分为标签(label)，后半部分为原始输入 (用户评论)。</p>
+<p>如果想使用自定义数据训练，只需要仿照上述示例数据构建数据集即可。</p>
+</blockquote>
+<h4 id="13-prompttxt">1.3 prompt.txt<a class="headerlink" href="#13-prompttxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>prompt.txt为人工设定提示模版，其数据展示如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>这是一条{MASK}评论：{textA}
+</code></pre></div>
+<blockquote>
+<p>其中，用大括号括起来的部分为「自定义参数」，可以自定义设置大括号内的值。</p>
+<p>示例中 {MASK} 代表 [MASK] token 的位置，{textA} 代表评论数据的位置。</p>
+<p>你可以改为自己想要的模板，例如想新增一个 {textB} 参数：</p>
+<div class="highlight"><pre><span></span><code>{textA}和{textB}是{MASK}同的意思。
+</code></pre></div>
+</blockquote>
+<h4 id="14-verbalizertxt">1.4 verbalizer.txt<a class="headerlink" href="#14-verbalizertxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>verbalizer.txt 主要用于定义「真实标签」到「标签预测词」之间的映射。在有些情况下，将「真实标签」作为 [MASK] 去预测可能不具备很好的语义通顺性，因此，我们会对「真实标签」做一定的映射。</p>
+</li>
+<li>
+<p>例如：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&quot;中国爆冷2-1战胜韩国&quot;是一则[MASK][MASK]新闻。 体育
+</code></pre></div>
+<ul>
+<li>
+<p>这句话中的标签为「体育」，但如果我们将标签设置为「足球」会更容易预测。</p>
+</li>
+<li>
+<p>因此，我们可以对「体育」这个 label 构建许多个子标签，在推理时，只要预测到子标签最终推理出真实标签即可，如下：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>体育 -&gt; 足球,篮球,网球,棒球,乒乓,体育
+</code></pre></div>
+<ul>
+<li>项目中标签词映射数据展示如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>电脑  电脑
+水果  水果
+平板  平板
+衣服  衣服
+酒店  酒店
+洗浴  洗浴
+书籍  书籍
+蒙牛  蒙牛
+手机  手机
+电器  电器
+</code></pre></div>
+<blockquote>
+<p>verbalizer.txt 一共包含10个类别，上述数据中，我们使用了1对1的verbalizer, 如果想定义一对多的映射，只需要在后面用","分割即可， eg: </p>
+<div class="highlight"><pre><span></span><code>水果    苹果,香蕉,橘子
+</code></pre></div>
+<p>若想使用自定义数据训练，只需要仿照示例数据构建数据集</p>
+</blockquote>
+<h3 id="2-config">2 编写Config类项目文件配置代码<a class="headerlink" href="#2-config" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>代码路径：llm_tuning/prompt_tasks/PET/pet_config.py</p>
+</li>
+<li>
+<p>config文件目的：配置项目常用变量，一般这些变量属于不经常改变的，比如：训练文件路径、模型训练次数、模型超参数等等</p>
+</li>
+</ul>
+<p>具体代码实现：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">base_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="c1"># print(f&#39;base_dir--&gt;{base_dir}&#39;)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ProjectConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 初始化设备配置，根据系统环境选择使用GPU或CPU</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cuda:0&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+        <span class="c1"># self.device = &quot;mps:0&quot;</span>
+
+        <span class="c1"># 预训练模型路径配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_model</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;../../bert-base-chinese&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 训练、验证数据集路径配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;data/train.txt&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dev_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;data/dev.txt&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 提示词和标签映射文件路径配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;data/prompt.txt&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbalizer</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;data/verbalizer.txt&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 模型输入序列最大长度配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_seq_len</span> <span class="o">=</span> <span class="mi">256</span>
+
+        <span class="c1"># 设置训练的超参数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># 每个批次的大小，根据显存和模型大小调整</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">5e-5</span>  <span class="c1"># 学习率，影响模型收敛速度和效果</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 权重衰减，用于防止过拟合，这里不使用权重衰减</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warmup_ratio</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># 学习率预热比例，帮助模型初期更快地学习</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_label_len</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 最大标签长度，限制输出序列的最大长度</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># 训练的轮数，即整个数据集通过模型的次数</span>
+
+        <span class="c1"># 日志和验证配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging_steps</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valid_steps</span> <span class="o">=</span> <span class="mi">20</span>
+
+        <span class="c1"># 模型保存路径配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;save_model&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">ProjectConfig</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">prompt_file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">pre_model</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="3">3 编写数据处理相关代码<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>代码路径：llm_tuning/prompt_tasks/PET/data_handle/</p>
+</li>
+<li>
+<p>data_handle文件夹中一共包含三个py脚本：template.py、data_preprocess.py、data_loader.py</p>
+</li>
+</ul>
+<h4 id="31-templatepy">3.1 template.py<a class="headerlink" href="#31-templatepy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>目的：构建固定模版类，text2id的转换</p>
+</li>
+<li>
+<p>定义HardTemplate类代码如下：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rich</span><span class="w"> </span><span class="kn">import</span> <span class="nb">print</span>  <span class="c1"># 终端层次显示</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.pet_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectConfig</span>
+
+
+<span class="c1"># 使用硬模板，人工定义句子和[MASK]之间的位置关系。</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HardTemplate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        初始化Prompt对象的构造函数</span>
+<span class="sd">        :param prompt: prompt格式定义字符串, 表示待处理的提示模板 e.g. -&gt; &quot;这是一条{MASK}评论：{textA}。&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span>  <span class="c1"># 保存原始的提示模板字符串</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 根据文字prompt拆分为各part的列表</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_tokens</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MASK&#39;</span><span class="p">}</span>   <span class="c1"># 初始化自定义token集合，至少包含&#39;MASK&#39; token</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt_analysis</span><span class="p">()</span>  <span class="c1"># 解析prompt模板，初始化时即对prompt进行分析处理</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">prompt_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        将prompt文字模板拆解为可映射的数据结构。</span>
+<span class="sd">        Examples:</span>
+<span class="sd">            prompt -&gt; &quot;这是一条{MASK}评论：{textA}。&quot;</span>
+<span class="sd">            inputs_list -&gt; [&#39;这&#39;, &#39;是&#39;, &#39;一&#39;, &#39;条&#39;, &#39;MASK&#39;, &#39;评&#39;, &#39;论&#39;, &#39;：&#39;, &#39;textA&#39;, &#39;。&#39;]</span>
+<span class="sd">            custom_tokens -&gt; {&#39;textA&#39;, &#39;MASK&#39;}</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># print(f&#39;prompt--&gt;{self.prompt}&#39;)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 遍历提示模板字符串中的每个字符</span>
+        <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">):</span>
+            <span class="n">str_part</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="c1"># 如果当前字符不是&#39;{&#39;, &#39;}&#39;，则直接添加到输入列表中</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;}&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">inputs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="c1"># 如果遇到&#39;{&#39;，表示进入自定义字段部分</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;{&#39;</span><span class="p">:</span>  <span class="c1"># 进入自定义字段</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># 继续遍历直到遇到&#39;}&#39;，并将自定义字段的值拼接到str_part中</span>
+                <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;}&#39;</span><span class="p">:</span>
+                    <span class="n">str_part</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>  <span class="c1"># 拼接该自定义字段的值</span>
+                    <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># print(f&#39;idx--&gt;{idx}&#39;)</span>
+            <span class="c1"># 如果遇到&#39;}&#39;，但没有对应的&#39;{&#39;，抛出异常提示括号不匹配</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;}&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;遇到了单独的 &#39;}&#39;, 请检查输入的prompt。&quot;</span><span class="p">)</span>
+            <span class="c1"># 如果str_part不为空，表示已经完整地获取了一个自定义字段</span>
+            <span class="k">if</span> <span class="n">str_part</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">inputs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">str_part</span><span class="p">)</span>  <span class="c1"># 将所有自定义字段添加到输入列表中</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">custom_tokens</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">str_part</span><span class="p">)</span>  <span class="c1"># 将所有自定义字段存储，后续会检测输入信息是否完整</span>
+            <span class="c1"># 移动到下一个字符</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># print(f&#39;self.inputs_list--&gt;{self.inputs_list}&#39;)</span>
+        <span class="c1"># print(f&#39;self.custom_tokens--&gt;{self.custom_tokens}&#39;)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">inputs_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                 <span class="n">tokenizer</span><span class="p">,</span>
+                 <span class="n">mask_length</span><span class="p">,</span>
+                 <span class="n">max_seq_len</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        输入一个样本，转换为符合模板的格式。</span>
+<span class="sd">        :param inputs_dict: prompt中的参数字典, e.g. -&gt; { &quot;textA&quot;: &quot;这个手机也太卡了&quot;, &quot;MASK&quot;: &quot;[MASK]&quot;}</span>
+<span class="sd">        :param tokenizer: 用于encoding文本的分词器</span>
+<span class="sd">        :param mask_length: MASK token 的长度</span>
+<span class="sd">        :param max_seq_len: 最大的句子长度</span>
+<span class="sd">        :return:</span>
+<span class="sd">        dict -&gt; {</span>
+<span class="sd">                &#39;text&#39;: &#39;[CLS]这是一条[MASK]评论：这个手机也太卡了。[SEP]&#39;,</span>
+<span class="sd">                &#39;input_ids&#39;: [1, 47, 10, 7, 304, 3, 480, 279, 74, 47, 27, 247, 98, 105, 512, 777, 15, 12043, 2],</span>
+<span class="sd">                &#39;token_type_ids&#39;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],</span>
+<span class="sd">                &#39;attention_mask&#39;: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],</span>
+<span class="sd">                &#39;mask_position&#39;: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
+<span class="sd">            }</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># 定义输出格式</span>
+        <span class="c1"># 初始化一个字典对象以存储处理后的输出数据</span>
+        <span class="c1"># 该字典包含了文本数据及其对应的编码信息、注意力掩码和掩码位置等关键信息</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># 存储原始文本数据</span>
+            <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="c1"># 存储文本经过分词和数值化后的输入ID序列</span>
+            <span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="c1"># 存储段嵌入（token type embeddings）的ID序列，用于区分不同句子</span>
+            <span class="s1">&#39;token_type_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="c1"># 存储注意力掩码，用于指示每个token是否应该被关注</span>
+            <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="c1"># 存储掩码位置，即在输入序列中被掩码的token的位置</span>
+            <span class="s1">&#39;mask_position&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># print(f&#39;inputs_dict--&gt;{inputs_dict}&#39;)</span>
+        <span class="c1"># 初始化一个空字符串，用于构建最终的格式化字符串</span>
+        <span class="n">str_formated</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># 遍历输入列表中的每个值</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs_list</span><span class="p">:</span>
+            <span class="c1"># 检查当前值是否在custom_tokens中</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_tokens</span><span class="p">:</span>
+                <span class="c1"># 如果当前值是&#39;MASK&#39;，使用mask_length副本的inputs_dict中的对应值</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;MASK&#39;</span><span class="p">:</span>
+                    <span class="n">str_formated</span> <span class="o">+=</span> <span class="n">inputs_dict</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="n">mask_length</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># 对于其他自定义值，直接添加inputs_dict中的对应值</span>
+                    <span class="n">str_formated</span> <span class="o">+=</span> <span class="n">inputs_dict</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 如果当前值不是custom_tokens中的值，直接添加到格式化字符串中</span>
+                <span class="n">str_formated</span> <span class="o">+=</span> <span class="n">value</span>
+        <span class="c1"># 打印格式化后的字符串，用于调试和验证</span>
+        <span class="c1"># print(f&#39;str_formated--&gt;{str_formated}&#39;)</span>
+
+        <span class="c1"># 使用tokenizer对格式化后的字符串进行编码</span>
+        <span class="c1"># 编码配置包括截断、最大长度设置和填充，以满足模型输入的要求</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">str_formated</span><span class="p">,</span>
+                            <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">max_length</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">,</span>
+                            <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">)</span>
+        <span class="c1"># print(&#39;*&#39; * 80)</span>
+        <span class="c1"># print(f&#39;encoded---&gt;{encoded}&#39;)</span>
+        <span class="c1"># 将编码后的输入ID赋值给输出字典中的&#39;input_ids&#39;键</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
+        <span class="c1"># 将编码后的token类型ID赋值给输出字典中的&#39;token_type_ids&#39;键</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;token_type_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded</span><span class="p">[</span><span class="s1">&#39;token_type_ids&#39;</span><span class="p">]</span>
+        <span class="c1"># 将编码后的注意力掩码赋值给输出字典中的&#39;attention_mask&#39;键</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span>
+
+        <span class="c1"># print(tokenizer.convert_ids_to_tokens(encoded[&#39;input_ids&#39;]))</span>
+        <span class="c1"># 将编码后的输入ID转换为文本，并存储到输出字典中</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_ids_to_tokens</span><span class="p">(</span><span class="n">encoded</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]))</span>
+        <span class="c1"># print(f&#39;outputs--&gt;{outputs}&#39;)</span>
+
+        <span class="c1"># 将掩码标记 &#39;[MASK]&#39; 转换为其对应的ID</span>
+        <span class="n">mask_token_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">(</span><span class="s1">&#39;[MASK]&#39;</span><span class="p">)</span>
+        <span class="c1"># print(f&#39;mask_token_id--&gt;{mask_token_id}&#39;)</span>
+        <span class="c1"># print(np.array(outputs[&#39;input_ids&#39;]) == mask_token_id)</span>
+        <span class="c1"># print(np.where(np.array(outputs[&#39;input_ids&#39;]) == mask_token_id))</span>
+        <span class="c1"># 计算并获取输入ID中&#39;mask&#39;标记的位置，并将其转换为列表</span>
+        <span class="n">mask_position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">mask_token_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="c1"># print(f&#39;mask_position--&gt;{mask_position}&#39;)</span>
+        <span class="c1"># 将计算出的mask_position添加到outputs字典中</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;mask_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask_position</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># 创建ProjectConfig对象以获取项目配置</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">ProjectConfig</span><span class="p">()</span>
+
+    <span class="c1"># 根据预训练模型配置，加载分词器</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">pre_model</span><span class="p">)</span>
+
+    <span class="c1"># 定义一个硬模板对象，用于构建特定格式的输入文本</span>
+    <span class="n">hard_template</span> <span class="o">=</span> <span class="n">HardTemplate</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;这是一条</span><span class="si">{MASK}</span><span class="s1">评论：</span><span class="si">{textA}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># 打印硬模板的输入列表和自定义token信息，以便调试</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;inputs_list--&gt;</span><span class="si">{</span><span class="n">hard_template</span><span class="o">.</span><span class="n">inputs_list</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;custom_tokens--&gt;</span><span class="si">{</span><span class="n">hard_template</span><span class="o">.</span><span class="n">custom_tokens</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 使用硬模板、分词器和指定的输入字典构建一个模板实例</span>
+    <span class="c1"># 调用模板对象, 自动调用__call__方法</span>
+    <span class="n">tep</span> <span class="o">=</span> <span class="n">hard_template</span><span class="p">(</span>
+        <span class="n">inputs_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;textA&#39;</span><span class="p">:</span> <span class="s1">&#39;包装不错，苹果挺甜的，个头也大。&#39;</span><span class="p">,</span> <span class="s1">&#39;MASK&#39;</span><span class="p">:</span> <span class="s1">&#39;[MASK]&#39;</span><span class="p">},</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">mask_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">max_seq_len</span><span class="o">=</span><span class="mi">30</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;tep---&gt;</span><span class="si">{</span><span class="n">tep</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h4 id="32-data_preprocesspy">3.2 data_preprocess.py<a class="headerlink" href="#32-data_preprocesspy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>目的: 将样本数据转换为模型接受的输入数据</li>
+<li>定义数据转换方法convert_example()，代码如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="c1"># partial：把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.data_handle.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">HardTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.pet_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectConfig</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_example</span><span class="p">(</span>
+        <span class="n">examples</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">max_seq_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">max_label_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">hard_template</span><span class="p">:</span> <span class="n">HardTemplate</span><span class="p">,</span>
+        <span class="n">train_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_tensor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    将样本数据转换为模型接收的输入数据。</span>
+<span class="sd">    :param examples: dict类型。训练数据样本,</span>
+<span class="sd">    e.g. -&gt; {</span>
+<span class="sd">            &quot;text&quot;: [&#39;手机    这个手机也太卡了。&#39;,</span>
+<span class="sd">                     &#39;体育    世界杯为何迟迟不见宣传&#39;,</span>
+<span class="sd">                     ...</span>
+<span class="sd">            ]}</span>
+<span class="sd">    :param tokenizer: 分词器对象</span>
+<span class="sd">    :param max_seq_len: int类型。句子的最大长度，若没有达到最大长度，则padding为最大长度</span>
+<span class="sd">    :param max_label_len: int类型。最大label长度，若没有达到最大长度，则padding为最大长度</span>
+<span class="sd">    :param hard_template: HardTemplate类型。模板类</span>
+<span class="sd">    :param train_mode: bool类型。训练阶段 or 推理阶段</span>
+<span class="sd">    :param return_tensor: bool类型。是否返回tensor类型，如不是，则返回numpy类型。</span>
+<span class="sd">    :return:</span>
+<span class="sd">        dict (str: np.array) -&gt; tokenized_output = {</span>
+<span class="sd">                        &#39;input_ids&#39;: [[1, 47, 10, 7, 304, 3, 3, 3, 3, 47, 27, 247, 98, 105, 512, 777, 15, 12043, 2], ...],</span>
+<span class="sd">                        &#39;token_type_ids&#39;: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ...],</span>
+<span class="sd">                        &#39;attention_mask&#39;: [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], ...],</span>
+<span class="sd">                        &#39;mask_positions&#39;: [[5, 6, 7, 8], ...],</span>
+<span class="sd">                        &#39;mask_labels&#39;: [[2372, 3442, 0, 0], [2643, 4434, 2334, 0], ...]</span>
+<span class="sd">                    }</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># 初始化一个字典，用于存储token化的输出信息</span>
+    <span class="n">tokenized_output</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># 输入文本的token ID序列</span>
+        <span class="s1">&#39;token_type_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># token类型ID序列，用于区分不同句子的token</span>
+        <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># 注意力掩码序列，用于标识真实token与padding token</span>
+        <span class="s1">&#39;mask_positions&#39;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># mask标签在输入序列中的位置</span>
+        <span class="s1">&#39;mask_labels&#39;</span><span class="p">:</span> <span class="p">[]</span>  <span class="c1"># 需要预测的mask标签的真实值</span>
+    <span class="p">}</span>
+    <span class="c1"># print(f&#39;examples--》{examples}&#39;)</span>
+    <span class="c1"># 遍历examples中的&#39;text&#39;列表，获取索引和文本内容</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">example</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">examples</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]):</span>
+        <span class="c1"># 判断是否处于训练模式</span>
+        <span class="k">if</span> <span class="n">train_mode</span><span class="p">:</span>
+            <span class="c1"># print(f&#39;example--&gt;{example}&#39;)</span>
+            <span class="c1"># 将文本内容按制表符分割，获取标签和内容</span>
+            <span class="n">label</span><span class="p">,</span> <span class="n">content</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># print(f&#39;label--&gt;{label}&#39;)</span>
+            <span class="c1"># print(f&#39;content--&gt;{content}&#39;)</span>
+
+            <span class="c1"># 使用tokenizer对标签进行编</span>
+            <span class="n">label_encoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
+            <span class="c1"># print(f&#39;label_encoded--&gt;{label_encoded}&#39;)</span>
+
+            <span class="c1"># 如果标签长度超过最大标签长度, 将标签编码序列的长度限制在最大标签长度内</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_encoded</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">max_label_len</span><span class="p">:</span>
+                <span class="n">label_encoded</span> <span class="o">=</span> <span class="n">label_encoded</span><span class="p">[:</span><span class="n">max_label_len</span><span class="p">]</span>
+            <span class="c1"># 如果标签长度小于最大标签长度, 将标签编码序列进行填充，以确保其长度与max_label_len相等</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 这里使用了tokenizer的pad_token_id属性作为填充元素</span>
+                <span class="c1"># print(f&#39;tokenizer.pad_token_id--&gt;{tokenizer.pad_token_id}&#39;)</span>
+                <span class="n">label_encoded</span> <span class="o">=</span> <span class="n">label_encoded</span> <span class="o">+</span> <span class="p">[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_label_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_encoded</span><span class="p">))</span>
+
+            <span class="c1"># 将编码后的标签添加到tokenized_output字典中的&#39;mask_labels&#39;列表中</span>
+            <span class="n">tokenized_output</span><span class="p">[</span><span class="s1">&#39;mask_labels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_encoded</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 如果不是训练模式，直接将文本内容进行修剪并使用</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="c1"># 初始化输入字典，用于准备文本数据和特殊标记</span>
+        <span class="n">inputs_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;textA&#39;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>  <span class="c1"># &#39;textA&#39; 键对应的是后续处理的主要文本内容</span>
+            <span class="s1">&#39;MASK&#39;</span><span class="p">:</span> <span class="s1">&#39;[MASK]&#39;</span>  <span class="c1"># &#39;MASK&#39; 键用于标识特殊的掩码标记，常用于语言模型中</span>
+        <span class="p">}</span>
+        <span class="c1"># print(f&#39;inputs_dict--&gt;{inputs_dict}&#39;)</span>
+
+        <span class="c1"># 使用硬模板编码方法处理输入数据</span>
+        <span class="c1"># 该方法将输入数据字典、tokenizer、最大序列长度和最大标签长度作为参数</span>
+        <span class="c1"># 目的是将输入数据编码成模型所需的格式</span>
+        <span class="n">encoded_inputs</span> <span class="o">=</span> <span class="n">hard_template</span><span class="p">(</span>
+            <span class="n">inputs_dict</span><span class="o">=</span><span class="n">inputs_dict</span><span class="p">,</span>
+            <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">max_seq_len</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">,</span>
+            <span class="n">mask_length</span><span class="o">=</span><span class="n">max_label_len</span><span class="p">)</span>
+        <span class="c1"># print(f&#39;encoded_inputs--&gt;{encoded_inputs}&#39;)</span>
+
+        <span class="c1"># 将编码后的输入ID添加到输出字典中的input_ids列表</span>
+        <span class="n">tokenized_output</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoded_inputs</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">])</span>
+        <span class="c1"># 将编码后的token类型ID添加到输出字典中的token_type_ids列表</span>
+        <span class="n">tokenized_output</span><span class="p">[</span><span class="s1">&#39;token_type_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoded_inputs</span><span class="p">[</span><span class="s2">&quot;token_type_ids&quot;</span><span class="p">])</span>
+        <span class="c1"># 将编码后的注意力掩码添加到输出字典中的attention_mask列表</span>
+        <span class="n">tokenized_output</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoded_inputs</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">])</span>
+        <span class="c1"># 将遮罩位置信息添加到输出字典中的mask_positions列表</span>
+        <span class="n">tokenized_output</span><span class="p">[</span><span class="s1">&#39;mask_positions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoded_inputs</span><span class="p">[</span><span class="s2">&quot;mask_position&quot;</span><span class="p">])</span>
+    <span class="c1"># print(f&#39;tokenized_output--&gt;{tokenized_output}&#39;)</span>
+
+    <span class="c1"># 遍历tokenized_output字典，其中k是键，v是值</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tokenized_output</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># 如果return_tensor为True，将值转换为torch.LongTensor类型</span>
+        <span class="k">if</span> <span class="n">return_tensor</span><span class="p">:</span>
+            <span class="n">tokenized_output</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="c1"># 否则，将值转换为numpy数组</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokenized_output</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tokenized_output</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># 创建ProjectConfig对象以获取项目配置</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">ProjectConfig</span><span class="p">()</span>
+
+    <span class="c1"># 使用预训练模型的分词器进行初始化</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">pre_model</span><span class="p">)</span>
+
+    <span class="c1"># 定义一个硬模板，用于将特定的文本结构化到模型输入中</span>
+    <span class="c1"># {MASK}用于指示模型需要预测的位置，{textA}是输入文本的占位符</span>
+    <span class="n">hard_template</span> <span class="o">=</span> <span class="n">HardTemplate</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;这是一条</span><span class="si">{MASK}</span><span class="s1">评论：</span><span class="si">{textA}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 定义示例输入，包含需要处理的文本数据</span>
+    <span class="c1"># 每个元素是一个包含类别和评论文本的字符串，用制表符分隔</span>
+    <span class="n">examples</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;手机    这个手机也太卡了。&#39;</span><span class="p">,</span> <span class="s1">&#39;体育 世界杯为何迟迟不见宣传&#39;</span><span class="p">]}</span>
+    <span class="n">tokenized_output</span> <span class="o">=</span> <span class="n">convert_example</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_seq_len</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">max_label_len</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hard_template</span><span class="o">=</span><span class="n">hard_template</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;tokenized_output--&gt;</span><span class="si">{</span><span class="n">tokenized_output</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+
+    <span class="c1"># 使用functools.partial函数创建一个部分应用函数convert_func</span>
+    <span class="c1"># 此函数基于convert_example函数，预先设置了一些参数，以便于后续的调用中简化操作</span>
+    <span class="c1"># 这样做是为了优化样本处理流程，将频繁使用的参数固定下来，提高代码复用性和灵活性</span>
+    <span class="n">convert_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">convert_example</span><span class="p">,</span>
+                           <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+                           <span class="n">hard_template</span><span class="o">=</span><span class="n">hard_template</span><span class="p">,</span>
+                           <span class="n">max_seq_len</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                           <span class="n">max_label_len</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># 加载训练数据集</span>
+    <span class="c1"># 使用ProjectConfig中定义的训练数据路径</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">train_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;train_dataset--&gt;</span><span class="si">{</span><span class="n">train_dataset</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># print(train_dataset[&#39;train&#39;])</span>
+    <span class="c1"># print(train_dataset[&#39;train&#39;][&#39;text&#39;])</span>
+
+    <span class="c1"># 使用map方法对训练数据集进行批量转换</span>
+    <span class="c1"># batched=True相当于将train_dataset看成一个批次的样本直接对数据进行处理，节省时间</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">convert_func</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dataset--&gt;</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 遍历数据集中的训练数据部分</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]:</span>
+        <span class="c1"># 打印当前训练数据示例</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="c1"># 打印输入ID序列的长度</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]))</span>
+        <span class="c1"># 打印输入ID序列的数据类型</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]))</span>
+        <span class="c1"># 仅打印第一个训练数据示例后跳出循环</span>
+        <span class="k">break</span>
+</code></pre></div>
+<hr />
+<h4 id="33-data_loaderpy">3.3 data_loader.py<a class="headerlink" href="#33-data_loaderpy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>目的：定义数据加载器</li>
+<li>定义获取数据加载器的方法get_data()，代码如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">default_data_collator</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.data_handle.data_preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.data_handle.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">HardTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prompt_tasks.PET.pet_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectConfig</span>
+
+<span class="c1"># 实例化项目配置文件</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">ProjectConfig</span><span class="p">()</span>
+
+<span class="c1"># 使用项目配置文件中指定的预训练模型，初始化一个自动分词器</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">pre_model</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    加载训练和验证数据集，并进行预处理以适应模型训练。</span>
+<span class="sd">    该函数首先读取提示模板文件，然后使用该模板创建一个硬模板对象。</span>
+<span class="sd">    接着，它加载原始数据集，并将其转换为适合模型训练的格式。</span>
+<span class="sd">    最后，它将处理后的数据集包装在DataLoader对象中，以便在训练过程中方便地访问数据。</span>
+<span class="sd">    :return: train_dataloader: 训练数据集的DataLoader对象。</span>
+<span class="sd">    dev_dataloader: 验证数据集的DataLoader对象。</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># 读取提示模板文件的第一行作为prompt</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">prompt_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># prompt定义</span>
+    <span class="c1"># print(f&#39;prompt--&gt;{prompt}&#39;)</span>
+
+    <span class="c1"># 使用读取的prompt创建一个硬模板对象</span>
+    <span class="n">hard_template</span> <span class="o">=</span> <span class="n">HardTemplate</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+
+    <span class="c1"># 创建一个新函数，用于将示例转换为模型训练所需的格式</span>
+    <span class="n">new_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">convert_example</span><span class="p">,</span>
+                       <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+                       <span class="n">hard_template</span><span class="o">=</span><span class="n">hard_template</span><span class="p">,</span>
+                       <span class="n">max_seq_len</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">max_seq_len</span><span class="p">,</span>
+                       <span class="n">max_label_len</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">max_label_len</span><span class="p">)</span>
+
+    <span class="c1"># 加载原始文本数据集</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+                           <span class="n">data_files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="n">pc</span><span class="o">.</span><span class="n">train_path</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">:</span> <span class="n">pc</span><span class="o">.</span><span class="n">dev_path</span><span class="p">})</span>
+    <span class="c1"># print(f&#39;dataset--&gt;{dataset}&#39;)</span>
+
+    <span class="c1"># 使用新函数对数据集进行映射，进行批量处理</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">new_func</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># print(f&#39;dataset改变之后的--&gt;{dataset}&#39;)</span>
+
+    <span class="c1"># 提取训练数据集和验证数据集</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span>
+    <span class="c1"># print(f&#39;train_dataset--&gt;{train_dataset}&#39;)</span>
+    <span class="c1"># print(f&#39;train_dataset[0]--&gt;{train_dataset[0]}&#39;)</span>
+    <span class="n">dev_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">]</span>
+    <span class="c1"># print(f&#39;dev_dataset--&gt;{dev_dataset}&#39;)</span>
+    <span class="c1"># print(&#39;dev_dataset&#39;, dev_dataset[0])</span>
+
+    <span class="c1"># 使用default_data_collator将数据转换为tensor数据类型</span>
+    <span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span>
+                                  <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">collate_fn</span><span class="o">=</span><span class="n">default_data_collator</span><span class="p">,</span>
+                                  <span class="n">batch_size</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="c1"># print(f&#39;train_dataloader--&gt;{train_dataloader}&#39;)</span>
+    <span class="n">dev_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dev_dataset</span><span class="p">,</span>
+                                <span class="n">collate_fn</span><span class="o">=</span><span class="n">default_data_collator</span><span class="p">,</span>
+                                <span class="n">batch_size</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+
+    <span class="c1"># 返回处理后的训练和验证数据集的DataLoader对象</span>
+    <span class="k">return</span> <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">dev_dataloader</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># 获取训练和验证数据集的加载器</span>
+    <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">dev_dataloader</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dev_dataloader</span><span class="p">))</span>
+
+    <span class="c1"># 遍历训练数据集加载器</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i---&gt;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;value---&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># 打印当前数据项中&#39;input_ids&#39;的数据类型</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">break</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

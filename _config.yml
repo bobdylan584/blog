@@ -28,8 +28,18 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
 
+## skip_render:   deepseek改过
+# 找到或添加 skip_render 配置
+skip_render:
+  # - "html_file/**"  # 添加这一行，跳过整个Fine_Tuning目录
+  # - "html_file/EduRAG/**/*"
+  - "html_file/**/*"  # 跳过整个 html_file 目录下的所有文件
+  - "html_file/**/*.html"  # 明确跳过所有 HTML 文件
+  - "html_file/**/*.css"
+  - "html_file/**/*.js"
+  - "html_file/**/*.png"
+  - "html_file/**/*.jpg"
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post

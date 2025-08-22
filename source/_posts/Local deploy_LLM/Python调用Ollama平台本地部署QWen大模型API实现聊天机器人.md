@@ -12,7 +12,7 @@ tag: Local deploy_LLM
 * 熟练使用Streamlit
 * 掌握基于Ollama平台Python语言聊天机器人实现
 
-## 【熟悉】黑马智聊机器人
+## 【熟悉】阿甘智聊机器人
 
 ### 项目介绍
 
@@ -59,7 +59,7 @@ tag: Local deploy_LLM
 
 ```python
 import ollama
-response = ollama.chat(model='qwen2:0.5b',messages=[{'role': 'user', 'content': '从前有座山，山里有个庙，续写一下', },])
+response = ollama.chat(model='qwen2:0.5b',messages=[{'role': 'user', 'content': '从前有座山，山里有个庙，庙里有个和尚叫二等兵下士阿甘，续写一下', },])
 print(response.message.content)
 print(response['message']['content'])
 ```
