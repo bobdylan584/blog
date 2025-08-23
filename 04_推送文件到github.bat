@@ -9,7 +9,7 @@ echo.
 
 
 echo 第一步：添加所有更改到暂存区，执行代码：git add .  git add . - 添加所有更改文件到暂存区
-git add --all
+git add . --ignore-submodules
 if %errorlevel% neq 0 (
     echo 错误：添加文件失败！
     pause
@@ -33,7 +33,7 @@ if "%commit_msg%"=="" (
 
 
 echo.
-echo 第三步：正在提交更改...;执行如下代码git commit -m "%commit_msg%"
+echo 第三步：正在提交更改...;执行如下代码git commit -m "%commit_msg%" 或者git push origin master:main
 git commit -m "%commit_msg%"
 if %errorlevel% neq 0 (
     echo 错误：提交失败！可能没有需要提交的更改。
