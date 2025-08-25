@@ -46,6 +46,7 @@ echo 提交成功！
 echo.
 
 echo 第四步：正在推送到远程仓库...；执行如下代码：git push origin master:main；记得开梯子。
+pause
 git push origin master:main
 if %errorlevel% neq 0 (
     echo 错误：推送失败！请检查网络或权限。
