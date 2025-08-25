@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 甘虎文的博客
+title: 甘虎文'blogs
 subtitle: '探索技术 & 分享生活'
-description: ''
-keywords:
+description: '慢慢且充实的生活并分享自己的成就'
+keywords: Patience and passion are keys in life
 author: 甘虎文
 language: en
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -109,7 +109,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
-theme: butterfly
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
