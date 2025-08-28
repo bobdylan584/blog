@@ -33,7 +33,9 @@ i18n_dir: :lang
 # 找到或添加 skip_render 配置
 skip_render:
   - html_file/**/*
-  - html_file/Fine_Tuning/**/*
+  - "html_file/**/*.html"
+  - "Fine_Tuning/**/*"
+  - "*.html"
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
