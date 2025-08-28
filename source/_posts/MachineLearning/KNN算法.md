@@ -22,7 +22,7 @@ tag: MachineLearning
 
 K-近邻算法（K Nearest Neighbor，简称KNN）。比如：根据你的“邻居”来推断出你的类别
 
-![image-20230831143226786](image-20230831143226786.png)
+![image-20230831143226786](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143226786.png)
 
 KNN算法思想：如果一个样本在特征空间中的 k 个最相似的样本中的大多数属于某一个类别，则该样本也属于这个类别 
 
@@ -32,29 +32,29 @@ KNN算法思想：如果一个样本在特征空间中的 k 个最相似的样�
 
 利用K近邻算法预测电影类型
 
-<img src="image-20230831143341119.png" alt="image-20230831143341119" />
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143341119.png)
 
 
 
-![image-20230831143403932](image-20230831143403932.png)
+![image-20230831143403932](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143403932.png)
 
-![image-20230831143443988](image-20230831143443988.png)
+![image-20230831143443988](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143443988.png)
 
-![image-20230831143436328](image-20230831143436328.png)
+![image-20230831143436328](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143436328.png)
 
-![image-20230831143456524](image-20230831143456524.png)
+![image-20230831143456524](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143456524.png)
 
-![image-20230831143430741](image-20230831143430741.png)
+![image-20230831143430741](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143430741.png)
 
-![image-20230831143503916](image-20230831143503916.png)
+![image-20230831143503916](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143503916.png)
 
-![image-20230831143416184](image-20230831143416184.png)
+![image-20230831143416184](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831143416184.png)
 
 
 
 ### 【知道】K值的选择
 
-![image-20230831152503338](image-20230831152503338.png)
+![image-20230831152503338](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831152503338.png)
 
 
 
@@ -68,7 +68,7 @@ KNN算法思想：如果一个样本在特征空间中的 k 个最相似的样�
 
 - 分类问题的处理流程：
 
-![image-20230831145236097](image-20230831145236097.png)
+![image-20230831145236097](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831145236097.png)
 
 1.计算未知样本到每一个训练样本的距离
 
@@ -84,7 +84,7 @@ KNN算法思想：如果一个样本在特征空间中的 k 个最相似的样�
 
 - 回归问题的处理流程：
 
-![image-20230831145250261](image-20230831145250261.png)
+![image-20230831145250261](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831145250261.png)
 
 1.计算未知样本到每一个训练样本的距离
 
@@ -169,17 +169,17 @@ print(model.predict([[4,4,5]]))
 
 ### 【掌握】欧式距离
 
-![image-20230831153948263](image-20230831153948263.png)
+![image-20230831153948263](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831153948263.png)
 
 
 
 ### 【掌握】曼哈顿距离
 
-![image-20230831154005301](image-20230831154005301.png)
+![image-20230831154005301](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831154005301.png)
 
 ### 【了解】切比雪夫距离
 
-![image-20230831154033908](image-20230831154033908.png)
+![image-20230831154033908](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831154033908.png)
 
 
 
@@ -187,7 +187,7 @@ print(model.predict([[4,4,5]]))
 
 •闵可夫斯基距离 Minkowski Distance 闵氏距离，不是一种新的距离的度量方式。而是距离的组合 是对多个距离度量公式的概括性的表述
 
-![image-20230831154217579](image-20230831154217579.png)
+![image-20230831154217579](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831154217579.png)
 
 
 
@@ -207,13 +207,13 @@ print(model.predict([[4,4,5]]))
 
 特征的**单位或者大小相差较大，或者某特征的方差相比其他的特征要大出几个数量级**，**容易影响（支配）目标结果**，使得一些模型（算法）无法学习到其它的特征。
 
-![image-20230831155159883](image-20230831155159883.png)
+![image-20230831155159883](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831155159883.png)
 
 ### 【掌握】归一化
 
 通过对原始数据进行变换把数据映射到【mi,mx】(默认为[0,1])之间
 
-![image-20230831155813699](image-20230831155813699.png)
+![image-20230831155813699](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831155813699.png)
 
 数据归一化的API实现
 
@@ -235,7 +235,7 @@ sklearn.preprocessing.MinMaxScaler (feature_range=(0,1)… )
 
 通过对原始数据进行标准化，转换为均值为0标准差为1的标准正态分布的数据
 
-![image-20230831160053298](image-20230831160053298.png)
+![image-20230831160053298](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831160053298.png)
 
 * mean 为特征的平均值
 * σ 为特征的标准差
@@ -277,11 +277,11 @@ print(process.var_)
 
 鸢尾花Iris Dataset数据集是机器学习领域经典数据集，鸢尾花数据集包含了150条鸢尾花信息，每50条取自三个鸢尾花中之一：Versicolour、Setosa和Virginica
 
-![](0_QHogxF9l4hy0Xxub.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/0_QHogxF9l4hy0Xxub.png)
 
 每个花的特征用如下属性描述：
 
-![](0_SHhnoaaIm36pc1bd.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/0_SHhnoaaIm36pc1bd.png)
 
 代码实现：
 
@@ -430,7 +430,7 @@ if __name__ == '__main__':
 
 交叉验证是一种数据集的分割方法，将训练集划分为 n 份，其中一份做验证集、其他n-1份做训练集集 
 
-![image-20230831163236810](image-20230831163236810.png)
+![image-20230831163236810](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831163236810.png)
 
 **交叉验证法原理**：将数据集划分为 cv=10 份：
 
@@ -446,17 +446,17 @@ if __name__ == '__main__':
 
 
 
-![image-20230831163329892](image-20230831163329892.png)
+![image-20230831163329892](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831163329892.png)
 
 ### 【知道】网格搜索
 
-![image-20230831163559554](image-20230831163559554.png)
+![image-20230831163559554](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831163559554.png)
 
-![image-20230910154650041](image-20230910154650041.png)
+![image-20230910154650041](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230910154650041.png)
 
 交叉验证网格搜索的API:
 
-![image-20230831163636694](image-20230831163636694.png)
+![image-20230831163636694](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831163636694.png)
 
 
 
@@ -512,7 +512,7 @@ print(f'模型评估: {estimator.score(x_test, y_test)}')   # 因为数据量和
 
 ### 利用KNN算法实现手写数字识别
 
-![image-20230831164024844](image-20230831164024844.png)
+![image-20230831164024844](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/image-20230831164024844.png)
 
 MNIST手写数字识别 是计算机视觉领域中 "hello world"级别的数据集
 
@@ -545,7 +545,7 @@ MNIST手写数字识别 是计算机视觉领域中 "hello world"级别的数据
 ```
 
 数据集示例如下:
-<img src="16.png" />
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/MachineLearning/KNN_algorithm/16.png)
 
 ```python
 import matplotlib.pyplot as plt
@@ -635,27 +635,3 @@ if __name__ == '__main__':
 ```
 
 
-
-## 作业
-
-1.完成KNN算法部分的思维导图
-
-
-
-2.说明常见的距离度量方法
-
-
-
-
-
-3.说明特征预处理的方法
-
-
-
-4.编写KNN代码实现鸢尾花分类案例
-
-
-
-
-
-5.编写KNN代码实现手写数字识别（特征预处理，交叉验证网格搜索）

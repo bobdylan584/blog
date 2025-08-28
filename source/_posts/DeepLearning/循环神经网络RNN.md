@@ -8,7 +8,7 @@
 
 我们要明确什么是序列数据，时间序列数据是指在不同时间点上收集到的数据，这类数据反映了某一事物、现象等随时间的变化状态或程度。这是时间序列数据的定义，当然这里也可以不是时间，比如文字序列，但总归序列数据有一个特点——**后面的数据跟前面的数据有关系**。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734745895344.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734745895344.png)
 
 ### 1.2 RNN应用场景
 
@@ -27,7 +27,7 @@ NLP的目标是让机器能够“听懂”和“读懂”自然语言，并进�
 
 NLP涵盖了从文本到语音、从语音到文本的各个方面，它涉及多种技术，包括语法分析、语义理解、情感分析、机器翻译等。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734746204314.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734746204314.png)
 
 ## 2 词嵌入层
 
@@ -41,7 +41,7 @@ NLP涵盖了从文本到语音、从语音到文本的各个方面，它涉及�
 
 词嵌入层首先会根据输入的词的数量构建一个**词向量矩阵**，例如: 我们有 100 个词，每个词希望转换成 128 维度的向量，那么构建的矩阵形状即为: 100*128，输入的每个词都对应了一个该矩阵中的一个向量。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734747074293.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734747074293.png)
 
 **词嵌入层在RNN中的作用**：
 
@@ -145,7 +145,7 @@ if __name__ == '__main__':
 
 当我们希望使用循环网络来对 "我爱你" 进行语义提取时，RNN计算过程是什么样的呢？
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/01.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/01.png)
 
 上图中h表示==隐藏状态==，隐藏状态保存了**序列数据中的历史信息**，并将这些信息传递给下一个时间步，从而允许RNN处理和预测序列数据中的元素。
 
@@ -163,15 +163,15 @@ if __name__ == '__main__':
 
 上图中，为了更加容易理解，虽然画了 3 个神经元, 但是实际上只有一个神经元，"我爱你" 三个字是重复输入到同一个神经元中。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/RNN2.gif)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/RNN2.gif)
 
 我们举个例子来理解上图的工作过程，假设我们要实现文本生成，也就是输入 "我爱" 这两个字，来预测出 "你"，其如下图所示:
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/02.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/02.png)
 
 将上图展开成不同时间步的形式，如下图所示:
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/03.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/03.png)
 
 首先初始化出第一个隐藏状态，一般都是全0的一个向量，然后将 "我" 进行词嵌入，转换为向量的表示形式，送入到第一个时间步，然后输出隐藏状态 h1，然后将 h1 和 "爱" 输入到第二个时间步，得到隐藏状态 h2, 将 h2 送入到全连接网络，得到 "你" 的预测概率。
 
@@ -179,9 +179,9 @@ if __name__ == '__main__':
 
 **1. 计算隐藏状态：**每个时间步的隐藏状态$$h_t$$是根据当前输入$$x_t$$和前一时刻的隐藏状态$$h_{t-1}$$计算的。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/05.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/05.png)
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734749643694.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734749643694.png)
 
 上述公式中:
 
@@ -215,14 +215,14 @@ if __name__ == '__main__':
 
 - **输出计算**：基于当前隐藏状态$$h_t​$$，神经元生成当前时刻的输出$$y_t​$$，该输出可以用于任务的最终预测。
 
-  ![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1735401373292.png)
+  ![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1735401373292.png)
 
 
 **文本生成示例：**
 
 假设我们使用RNN进行**文本生成**，输入是一个初始词语或一段上下文（例如，“m”）。RNN会通过隐藏状态逐步生成下一个词的概率分布，然后根据概率选择最可能的下一个词。
 
-![1735443424646](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1735443424646.png)
+![1735443424646](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1735443424646.png)
 
 1. 输入：“m” → 词向量输入$$x_1$$（对应“m”）
 
@@ -311,7 +311,7 @@ if __name__ == '__main__':
 
 文本生成任务是一种常见的自然语言处理任务，输入一个开始词能够预测出后面的词序列。本案例将会使用循环神经网络来实现周杰伦歌词生成任务。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734750013375.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734750013375.png)
 
 ### 4.1 导入工具包
 
@@ -350,7 +350,7 @@ import time
 
 所谓的词表就是将语料进行分词，然后给每一个词分配一个唯一的编号，便于我们送入词嵌入层。
 
-![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734750711996.png)
+![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734750711996.png)
 
 接下来, 我们对周杰伦歌词的数据进行处理构建词表，具体流程如下：
 
@@ -413,7 +413,7 @@ if __name__ == "__main__":
 
 - word_to_index: 存储了词到编号的映射
 
-  ![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com//DeepLearning/RNN/1734751188623.png)
+  ![](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DeepLearning/RNN/1734751188623.png)
 
 ### 4.4 构建数据集对象
 
