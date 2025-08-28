@@ -156,7 +156,7 @@ modelscope download --model ZhipuAI/ChatGLM-6B --local_dir ./
 
 项目代码架构图：
 
-![image-20250822045752984](image-20250822045752984.png)
+![image-20250822045752984](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-20250822045752984.png)
 
 
 
@@ -290,7 +290,7 @@ if __name__ == '__main__':
 
 - 模型输入和标签的构建思路：
 
-<img src="image-20250822121925643.png" alt="image-20250822121925643" style="zoom:80%;" />
+![阿甘的图片丢了](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-20250822121925643.png)
 
 - 目的: 将样本数据转换为模型接受的输入数据
     - 定义数据转换方法convert_example()

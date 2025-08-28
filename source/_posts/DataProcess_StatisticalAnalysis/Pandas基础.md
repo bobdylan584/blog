@@ -1,6 +1,6 @@
 ---
-title: Pandas进阶
-date: 2024-04-22 21:21:51
+title: Pandas入门
+date: 2024-03-15 21:21:51
 tag: DataProcess_StatisticalAnalysis
 ---
 
@@ -25,7 +25,7 @@ Python在数据处理上独步天下：代码灵活、开发快速；尤其是Py
   - 有专门的处理缺失数据的API
   - 强大而灵活的分组、聚合、转换功能
 
-![image-20240831102204286](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240831102204286.png)
+![-20240831102204286](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240831102204286.png)
 
 适用场景:
 
@@ -548,7 +548,7 @@ data.tail(5)
 
 ![image-20240831111650351](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240831111650351.png)
 
-* 1- 修改行列索引值
+* 1- 修改行列索引值1
 
 ```python
 stu = ["学生_" + str(i) for i in range(score_df.shape[0])]
@@ -889,7 +889,7 @@ Name: p_change, dtype: float64
 - 使用cumsum等实现累计分析
 - 应用apply函数实现数据的自定义处理
 
-## 算术运算
+## 算法运算
 
 - add(other)
 
@@ -999,7 +999,7 @@ Numpy当中已经详细介绍，在这里我们演示min(最小值), max(最大�
 - max()、min()
 
 ```python
-# 使用统计函数：0 代表列    求结果， 1 代表行求统计结果
+# 使用统计函数：0 代表列求结果， 1 代表行求统计结果
 data.max(0)
 
 open                   34.99
@@ -2150,7 +2150,7 @@ gs['city']
 <pandas.core.groupby.generic.SeriesGroupBy object at 0x000001B1DB2B4FA0>
 ```
 
-【基于多列进行分组】
+​		【基于多列进行分组】
 
 ```python
 # 基于顾客性别、不同城市分组
@@ -2241,13 +2241,13 @@ gs2
 
 ![image-20240831232858699](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240831232858699.png)
 
-- 交叉表（了解）：
+- 交叉表：
 
   交叉表用于计算一列数据对于另外一列数据的分组个数(用于统计分组频率的特殊透视表)
 
   - pd.crosstab(value1, value2)
 
-- 透视表（掌握）：
+- 透视表：
 
   透视表是将原有的DataFrame的列分别作为行索引和列索引，然后对指定的列应用聚集函数
 

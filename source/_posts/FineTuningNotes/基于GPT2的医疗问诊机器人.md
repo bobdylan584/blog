@@ -37,7 +37,7 @@ tag: FineTuningNotes
 
 **整体代码结构：**
 
-![image-20250817174320793](image-20250817174320793.png)
+![image-20250817174320793](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-20250817174320793.png)
 
 
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
 - 步骤
 
-![image-20250819162817399](image-20250819162817399.png)
+![image-20250819162817399](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-20250819162817399.png)
 
 ```properties
 1. 加载分词器
@@ -934,7 +934,7 @@ def calculate_acc(logit, labels, ignore_index=-100):
 
 思路：
 
-![image-20250821115913951](image-20250821115913951.png)
+![image-20250821115913951](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-20250821115913951.png)
 
 代码位置：llm_tuning/Gpt2_Chatbot/interact.py
 
@@ -1562,4 +1562,4 @@ if __name__ == '__main__':
 
     
 
-![image-20250817163410599](image-20250817163410599.png)
+![阿甘的图片丢了](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/FineTuning/img/image-blackhose.png)

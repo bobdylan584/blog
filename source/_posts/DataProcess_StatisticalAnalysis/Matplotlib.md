@@ -18,7 +18,7 @@ tag: DataProcess_StatisticalAnalysis
 
 ## 什么是Matplotlib
 
-![image-20240902053742408](image-20240902053742408.png)
+![image-20240902053742408](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902053742408.png)
 
 - 是专门用于开发2D图表(包括3D图表)
 
@@ -33,7 +33,7 @@ tag: DataProcess_StatisticalAnalysis
 
 例如下面两个图为数字展示和图形展示：
 
-![image-20240902053758921](image-20240902053758921.png)
+![image-20240902053758921](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902053758921.png)
 
 ## 实现一个简单的Matplotlib画图 — 以折线图为例
 
@@ -81,11 +81,11 @@ plt.plot([1, 2, 3, 4, 5, 6 ,7], [17,17,18,15,11,11,13])
 plt.show()
 ```
 
-![image-20240902053843435](image-20240902053843435.png)
+![image-20240902053843435](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902053843435.png)
 
 ## 认识Matplotlib图像结构(了解)
 
-![image-20240902053935190](image-20240902053935190.png)
+![image-20240902053935190](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902053935190.png)
 
 ## 小结
 
@@ -115,7 +115,7 @@ plt.show()
 
 效果：
 
-![image-20240902054526938](image-20240902054526938.png)
+![image-20240902054526938](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902054526938.png)
 
 ### 准备数据并画出初始折线图
 
@@ -143,7 +143,7 @@ plt.show()
 >
 > **分布**：数值在指定区间内是 **均匀分布** 的，这意味着每个数值出现的概率是相等的。
 
-![image-20240902054833670](image-20240902054833670.png)
+![image-20240902054833670](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902054833670.png)
 
 ### 添加自定义x,y刻度
 
@@ -168,11 +168,11 @@ plt.xticks(x[::5], x_ticks_label[::5])
 plt.yticks(y_ticks[::5])
 ```
 
-![image-20240902060239499](image-20240902060239499.png)
+![image-20240902060239499](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902060239499.png)
 
 如果没有解决过中文问题的话，会显示这个样子：
 
-![image-20240902060218522](image-20240902060218522.png)
+![image-20240902060218522](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902060218522.png)
 
 ### 中文显示问题解决
 
@@ -180,7 +180,7 @@ plt.yticks(y_ticks[::5])
 
 下载中文字体（黑体，看准系统版本）
 
-- 步骤一：下载 [SimHei](images/SimHei.ttf) 字体（或者其他的支持中文显示的字体也行）
+- 步骤一：下载 [SimHei](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/images/SimHei.ttf) 字体（或者其他的支持中文显示的字体也行）
 
 - 步骤二：安装字体
 
@@ -238,7 +238,7 @@ mpl.rcParams["axes.unicode_minus"] = False
 plt.grid(True, linestyle='--', alpha=0.5)
 ```
 
-![image-20240902060406346](image-20240902060406346.png)
+![image-20240902060406346](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902060406346.png)
 
 ### 添加描述信息
 
@@ -252,7 +252,7 @@ plt.ylabel("温度")
 plt.title("中午11点0分到12点之间的温度变化图示", fontsize=20)
 ```
 
-![image-20240902060626347](image-20240902060626347.png)
+![image-20240902060626347](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902060626347.png)
 
 ### 图片保存
 
@@ -317,7 +317,7 @@ plt.show()
 
 收集到北京当天温度变化情况，温度在1度到3度。怎么去添加另一个在同一坐标系当中的不同图形，**其实很简单只需要再次plot即可**，但是需要区分线条，如下显示
 
-![image-20240902060840535](image-20240902060840535-1725228522315-1.png)
+![image-20240902060840535](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902060840535-1725228522315-1.png)
 
 ```python
 # 增加北京的温度数据
@@ -419,7 +419,7 @@ plt.show()
 
 如果我们想要将上海和北京的天气图显示在同一个图的不同坐标系当中，效果如下：
 
-![image-20240902061104339](image-20240902061104339.png)
+![image-20240902061104339](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061104339.png)
 
 可以通过subplots函数实现(旧的版本中有subplot，使用起来不方便)，推荐subplots函数
 
@@ -519,7 +519,7 @@ plt.show()
 
   - 注意：plt.plot()除了可以画折线图，也可以用于画各种数学函数图像
 
-   ![image-20240902061313324](image-20240902061313324.png)
+   ![image-20240902061313324](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061313324.png)
 
 代码：
 
@@ -547,7 +547,7 @@ plt.show()
 
 https://matplotlib.org/stable/gallery/index.html
 
-![image-20240902061545668](image-20240902061545668.png)
+![image-20240902061545668](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061545668.png)
 
 ## 常见图形种类及意义
 
@@ -559,7 +559,7 @@ https://matplotlib.org/stable/gallery/index.html
 
   api：plt.plot(x, y)
 
-![image-20240902061634477](image-20240902061634477.png)
+![image-20240902061634477](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061634477.png)
 
 ### 柱形图
 
@@ -582,7 +582,7 @@ align : 每个柱状图的位置对齐方式
 color:选择柱状图的颜色
 ```
 
-![image-20240902061718147](image-20240902061718147.png)
+![image-20240902061718147](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061718147.png)
 
 ### 直方图
 
@@ -598,7 +598,7 @@ x : 需要传递的数据
 bins : 组距
 ```
 
-![image-20240902061837887](image-20240902061837887.png)
+![image-20240902061837887](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061837887.png)
 
 ### 饼图
 
@@ -616,7 +616,7 @@ bins : 组距
   colors:每部分颜色
   ```
 
-![image-20240902061901342](image-20240902061901342.png)
+![image-20240902061901342](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061901342.png)
 
 ### 散点图
 
@@ -626,7 +626,7 @@ bins : 组距
 
 api：plt.scatter(x, y)
 
-![image-20240902061919118](image-20240902061919118.png)
+![image-20240902061919118](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/DataProcess_StatisticalAnalysis/images/image-20240902061919118.png)
 
 ## 柱状图绘制
 
