@@ -1,3 +1,10 @@
+---
+date: 2023-06-12 07:33:29
+title: 循环神经网络RNN
+categories: [AI_Module, DeepLearning, 循环神经网络RNN]
+tag: AI_Module
+---
+
 # 循环神经网络RNN
 
 ## 1 RNN介绍

@@ -1,3 +1,10 @@
+---
+date: 2023-04-22 21:05:39
+title: 卷积神经网络CNN
+categories: [AI_Module, DeepLearning, 卷积神经网络CNN]
+tag: AI_Module
+---
+
 # 卷积神经网络CNN
 
 ## 1 图像基础知识
