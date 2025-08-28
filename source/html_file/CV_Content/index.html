@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
+    
+    
+      
+        <title>计算机视觉基础CV</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?".":"."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="计算机视觉基础CV" class="md-header__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机视觉基础CV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              课程介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="计算机视觉基础CV" class="md-nav__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    计算机视觉基础CV
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          课程介绍
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        课程介绍
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.计算机视觉定义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.常见任务
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.应用场景
+  </a>
+  
+    <nav class="md-nav" aria-label="3.应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 人脸识别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 视频监控
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 图片识别分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 辅助驾驶
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.发展历史（了解）
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第一章 图像分类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章 图像分类" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 图像分类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/01-overview/" class="md-nav__link">
+        1.1 图像分类简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/02-AlexNet/" class="md-nav__link">
+        1.2 AlexNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/03-VGGNet/" class="md-nav__link">
+        1.3 VGG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/04-GoogLeNet/" class="md-nav__link">
+        1.4 GoogLeNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/05-ResNet/" class="md-nav__link">
+        1.5 ResNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/06-%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" class="md-nav__link">
+        1.6 图像增强
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/07-%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="md-nav__link">
+        1.7 模型微调
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/08-%E6%B1%BD%E8%BD%A6%E8%BD%A6%E5%9E%8B%E5%88%86%E7%B1%BB%E6%A1%88%E4%BE%8B/" class="md-nav__link">
+        1.8 汽车车型分类案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第二章 目标检测
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章 目标检测" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 目标检测
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/00-overview/" class="md-nav__link">
+        2.1 目标检测概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/01-RCNN/" class="md-nav__link">
+        2.2 R-CNN网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/02-Faster-RCNN/" class="md-nav__link">
+        2.3 Faster-RCNN网络
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/03-wheat_detection_fasterRCNN/" class="md-nav__link">
+        2.4 麦穗检测案例-FasterRCNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/04-yolo/" class="md-nav__link">
+        2.5.yolo系列
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/05-yoloV4%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.6.yoloV4算法详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/06-yoloV5%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.7.yoloV5算法详解及案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.计算机视觉定义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.常见任务
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.应用场景
+  </a>
+  
+    <nav class="md-nav" aria-label="3.应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 人脸识别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 视频监控
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 图片识别分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 辅助驾驶
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.发展历史（了解）
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="_1">计算机视觉<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>知道计算机视觉的定义</li>
+<li>知道计算机视觉常见任务</li>
+<li>知道计算机视觉的应用场景</li>
+</ul>
+<hr />
+<h2 id="1">1.计算机视觉定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>计算机视觉是指用摄像机和电脑及其他相关设备，对生物视觉的一种模拟。它的主要任务让计算机理解图片或者视频中的内容，就像人类和许多其他生物每天所做的那样。</p>
+<p><img alt="image-20201013160059140" src="assets/image-20201013160059140.png" /></p>
+<p>我们可以将其任务目标拆分为：</p>
+<ul>
+<li>
+<p>让计算机理解图片中的场景（办公室，客厅，咖啡厅等）</p>
+</li>
+<li>
+<p>让计算机识别场景中包含的物体（宠物，交通工具，人等）</p>
+</li>
+<li>
+<p>让计算机定位物体在图像中的位置（物体的大小，边界等）</p>
+</li>
+<li>
+<p>让计算机理解物体之间的关系或行为（是在对话，比赛或吵架等），以及图像表达的意义（喜庆的，悲伤的等）</p>
+</li>
+</ul>
+<p>那我们在OpenCV阶段，主要学习图像处理，而图像处理主要目的是对图像的处理，比如平滑，缩放等进而为其他任务（比如“计算机视觉”）做好前期工作。</p>
+<h2 id="2">2.常见任务<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>根据上述对计算机视觉目标任务的分解，可将其分为三大经典任务：图像分类、目标检测、图像分割</p>
+<p><img alt="image-20201013161400022" src="assets/image-20201013161400022.png" /></p>
+<ul>
+<li>
+<p>图像分类（Classification）：即是将图像结构化为某一类别的信息，用事先确定好的类别(category)来描述图片。</p>
+</li>
+<li>
+<p>目标检测（Detection）：分类任务关心整体，给出的是整张图片的内容描述，而检测则关注特定的物体目标，要求同时获得这一目标的类别信息和位置信息（classification + localization）。</p>
+</li>
+<li>
+<p>图像分割（Segmentation）：分割是对图像的像素级描述，它赋予每个像素类别（实例）意义，适用于理解要求较高的场景，如无人驾驶中对道路和非道路的分割。</p>
+</li>
+</ul>
+<p>接下来的课程中我们将围绕前两个图像分类和目标检测两个任务对计算机视觉进行介绍。</p>
+<h2 id="3">3.应用场景<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>计算机视觉涉及的领域复杂，具有广泛的实际应用范围。总体而言，依赖于人工智能和机器学习，尤其是计算机视觉的创新的好处是，从电子商务行业到更经典的各种类型和规模的公司都可以利用其强大的功能，下图展示了相关的应用场景及相关的企业：</p>
+<p><img alt="image-20201013162540711" src="assets/image-20201013162540711.png" /></p>
+<h3 id="31">3.1 人脸识别<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>人脸识别技术目前已经广泛应用于金融、司法、军队、公安、边检、政府、航天、电力、工厂、教育、医疗等行业。据业内人士分析，我国的人脸识别产业的需求旺盛，需求推动导致企业敢于投入资金。</p>
+<p>代表企业：Face++旷视科技、依图科技、商汤科技、深醒科技、云从科技等。</p>
+<p><img alt="image-20201013163625245" src="assets/image-20201013163625245.png" /></p>
+<h3 id="32">3.2 视频监控<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>人工智能技术可以对结构化的人、车、物等视频内容信息进行快速检索、查询。这项应用使得让公安系统在繁杂的监控视频中搜寻到罪犯的有了可能。在大量人群流动的交通枢纽，该技术也被广泛用于人群分析、防控预警等。</p>
+<p>代表企业：SenseTime 商汤科技、DeepGlint 格灵深瞳、依图科技、云天励飞、深网视界等。</p>
+<p><img alt="image-20201013163106667" src="assets/image-20201013163106667.png" /></p>
+<h3 id="33">3.3 图片识别分析<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>代表企业：Face++旷视科技、图普科技、码隆科技、酒咔嚓、YI+陌上花科技等。</p>
+<p><img alt="image-20201013163309754" src="assets/image-20201013163309754.png" /></p>
+<h3 id="34">3.4 辅助驾驶<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>随着汽车的普及，汽车已经成为人工智能技术非常大的应用投放方向，但就目前来说，想要完全实现自动驾驶/无人驾驶，距离技术成熟还有一段路要走。不过利用人工智能技术，汽车的驾驶辅助的功能及应用越来越多，这些应用多半是基于计算机视觉和图像处理技术来实现。</p>
+<p>代表企业：纵目科技、TuSimple 图森科技、驭势科技、MINIEYE 佑驾创新、中天安驰等。</p>
+<p><img alt="image-20201013163435432" src="assets/image-20201013163435432.png" /></p>
+<p>除了上述这些，计算机视觉在三维视觉，三维重建，工业仿真，地理信息系统，工业视觉，医疗影像诊断，文字识别（OCR），图像及视频编辑等领域也有广泛的应用。</p>
+<h2 id="4">4.发展历史（了解）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>1963年，Larry Roberts发表了CV领域的第一篇专业论文，用以对简单几何体进行边缘提取和三维重建。</li>
+</ul>
+<p><img alt="image-20201013164341893" src="assets/image-20201013164341893.png" /></p>
+<ul>
+<li>
+<p>1966年，麻省理工学院(MIT)发起了一个夏季项目，目标是搭建一个机器视觉系统，完成模式识别(pattern recognition)等工作。虽然未成功，但是计算机视觉作为一个科学领域的正式诞生的标志。</p>
+</li>
+<li>
+<p>1982年，学者David Marr发表的著作《Vision》从严谨又长远的角度给出了CV的发展方向和一些基本算法，其中不乏现在为人熟知的“图层”的概念、边缘提取、三维重建等，标志着计算机视觉成为了一门独立学科。</p>
+</li>
+</ul>
+<p><img alt="image-20201013164610239" src="assets/image-20201013164610239.png" /></p>
+<ul>
+<li>1999年David Lowe提出了尺度不变特征变换（SIFT, Scale-invariant feature transform）目标检测算法，用于匹配不同拍摄方向、纵深、光线等图片中的相同元素。</li>
+</ul>
+<p><img alt="image-20201013164647298" src="assets/image-20201013164647298.png" /></p>
+<ul>
+<li>2009年，由Felzenszwalb教授在提出基于HOG的deformable parts model，可变形零件模型开发，它是深度学习之前最好的最成功的objectdetection &amp; recognition算法。</li>
+</ul>
+<p><img alt="image-20201013164931115" src="assets/image-20201013164931115.png" /></p>
+<ul>
+<li>
+<p>Everingham等人在2006年至2012年间搭建了一个大型图片数据库，供机器识别和训练，称为PASCAL Visual Object Challenge，该数据库中有20种类别的图片，每种图片数量在一千至一万张不等。</p>
+</li>
+<li>
+<p>2009年，李飞飞教授等在CVPR2009上发表了一篇名为《ImageNet: A Large-Scale Hierarchical Image Database》的论文，发布了ImageNet数据集，这是为了检测计算机视觉能否识别自然万物，回归机器学习，克服过拟合问题。</p>
+</li>
+</ul>
+<p><img alt="image-20201013165028416" src="assets/image-20201013165028416.png" /></p>
+<ul>
+<li>
+<p>2012 年，Alex Krizhevsky、Ilya Sutskever 和 Geoffrey Hinton 创造了一个“大型的深度卷积神经网络”，也即现在众所周知的 AlexNet，赢得了当年的 ILSVRC。这是史上第一次有模型在 ImageNet 数据集表现如此出色。自那时起，CNN 才成了家喻户晓的名字。</p>
+<p><img alt="image-20201013165127393" src="assets/image-20201013165127393.png" /></p>
+<ul>
+<li>2014年，蒙特利尔大学提出生成对抗网络（GAN）：拥有两个相互竞争的神经网络可以使机器学习得更快。一个网络尝试模仿真实数据生成假的数据，而另一个网络则试图将假数据区分出来。随着时间的推移，两个网络都会得到训练，生成对抗网络（GAN）被认为是计算机视觉领域的重大突破。</li>
+</ul>
+<p><img alt="image-20201013165341243" src="assets/image-20201013165341243.png" /></p>
+</li>
+<li>
+<p>2018年末，英伟达发布的视频到视频生成（Video-to-Video synthesis），它通过精心设计的发生器、鉴别器网络以及时空对抗物镜，合成高分辨率、照片级真实、时间一致的视频，实现了让AI更具物理意识，更强大，并能够推广到新的和看不见的更多场景。</p>
+</li>
+<li>2019，更强大的GAN，BigGAN，是拥有了更聪明的学习技巧的GAN，由它训练生成的图像连它自己都分辨不出真假，因为除非拿显微镜看，否则将无法判断该图像是否有任何问题，因而，它更被誉为史上最强的图像生成器.</li>
+</ul>
+<hr />
+<p><strong>总结</strong></p>
+<ul>
+<li>计算机视觉的定义</li>
+</ul>
+<p>让计算机理解图片或者视频中的内容</p>
+<ul>
+<li>计算机视觉的任务</li>
+</ul>
+<p>图像分类，目标检测，图像分割</p>
+<ul>
+<li>计算机视觉的应用场景</li>
+</ul>
+<p>人脸识别，视频监控，图片识别分析，辅助驾驶</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+      
+        
+        <a href="01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/01-overview/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1.1 图像分类简介" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              1.1 图像分类简介
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.a87c2adc.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

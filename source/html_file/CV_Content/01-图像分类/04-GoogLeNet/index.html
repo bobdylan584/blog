@@ -1,0 +1,1185 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
+    
+    
+      
+        <title>1.4 GoogLeNet - 计算机视觉基础CV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#14-googlenet" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="计算机视觉基础CV" class="md-header__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机视觉基础CV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.4 GoogLeNet
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="计算机视觉基础CV" class="md-nav__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    计算机视觉基础CV
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        课程介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第一章 图像分类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章 图像分类" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 图像分类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-overview/" class="md-nav__link">
+        1.1 图像分类简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-AlexNet/" class="md-nav__link">
+        1.2 AlexNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-VGGNet/" class="md-nav__link">
+        1.3 VGG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          1.4 GoogLeNet
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1.4 GoogLeNet
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1inception" class="md-nav__link">
+    1.Inception 块
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2googlenet" class="md-nav__link">
+    2.GoogLeNet模型
+  </a>
+  
+    <nav class="md-nav" aria-label="2.GoogLeNet模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-b1" class="md-nav__link">
+    2.1 B1模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-b2" class="md-nav__link">
+    2.2 B2模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-b3" class="md-nav__link">
+    2.3 B3模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-b4" class="md-nav__link">
+    2.4 B4模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-b5" class="md-nav__link">
+    2.5 B5模块
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.鲜花类别识别案例
+  </a>
+  
+    <nav class="md-nav" aria-label="3.鲜花类别识别案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 数据读取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 模型实例化和参数设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 模型评估方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 模型训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.延伸版本
+  </a>
+  
+    <nav class="md-nav" aria-label="4.延伸版本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-inceptionv2" class="md-nav__link">
+    4.1 InceptionV2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-inceptionv3" class="md-nav__link">
+    4.2 InceptionV3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-ResNet/" class="md-nav__link">
+        1.5 ResNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" class="md-nav__link">
+        1.6 图像增强
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="md-nav__link">
+        1.7 模型微调
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-%E6%B1%BD%E8%BD%A6%E8%BD%A6%E5%9E%8B%E5%88%86%E7%B1%BB%E6%A1%88%E4%BE%8B/" class="md-nav__link">
+        1.8 汽车车型分类案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第二章 目标检测
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章 目标检测" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 目标检测
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/00-overview/" class="md-nav__link">
+        2.1 目标检测概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/01-RCNN/" class="md-nav__link">
+        2.2 R-CNN网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/02-Faster-RCNN/" class="md-nav__link">
+        2.3 Faster-RCNN网络
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/03-wheat_detection_fasterRCNN/" class="md-nav__link">
+        2.4 麦穗检测案例-FasterRCNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/04-yolo/" class="md-nav__link">
+        2.5.yolo系列
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/05-yoloV4%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.6.yoloV4算法详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/06-yoloV5%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.7.yoloV5算法详解及案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1inception" class="md-nav__link">
+    1.Inception 块
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2googlenet" class="md-nav__link">
+    2.GoogLeNet模型
+  </a>
+  
+    <nav class="md-nav" aria-label="2.GoogLeNet模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-b1" class="md-nav__link">
+    2.1 B1模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-b2" class="md-nav__link">
+    2.2 B2模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-b3" class="md-nav__link">
+    2.3 B3模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-b4" class="md-nav__link">
+    2.4 B4模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-b5" class="md-nav__link">
+    2.5 B5模块
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.鲜花类别识别案例
+  </a>
+  
+    <nav class="md-nav" aria-label="3.鲜花类别识别案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 数据读取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 模型实例化和参数设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 模型评估方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 模型训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.延伸版本
+  </a>
+  
+    <nav class="md-nav" aria-label="4.延伸版本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-inceptionv2" class="md-nav__link">
+    4.1 InceptionV2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-inceptionv3" class="md-nav__link">
+    4.2 InceptionV3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="14-googlenet">1.4 GoogLeNet<a class="headerlink" href="#14-googlenet" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>知道GoogLeNet网络结构的特点</li>
+<li>能够利用GoogLeNet完成图像分类</li>
+</ul>
+<hr />
+<p><img alt="image-20200810100250755" src="../assets/image-20200810100250755.png" /></p>
+<p>GoogLeNet的名字不是GoogleNet，而是GoogLeNet，这是为了致敬LeNet。GoogLeNet和AlexNet/VGGNet这类依靠加深网络结构的深度的思想不完全一样。GoogLeNet在加深度的同时做了结构上的创新，引入了一个叫做Inception的结构来代替之前的卷积加激活的经典组件。GoogLeNet在ImageNet分类比赛上的Top-5错误率降低到了6.7%。。</p>
+<h2 id="1inception">1.Inception 块<a class="headerlink" href="#1inception" title="Permanent link">&para;</a></h2>
+<p>GoogLeNet中的基础卷积块叫作Inception块，得名于同名电影《盗梦空间》（Inception）。Inception块在结构比较复杂，如下图所示：</p>
+<p><img alt="image-20200810101055766" src="../assets/image-20200810101055766.png" /></p>
+<p>Inception块里有4条并行的线路。前3条线路使用窗口大小分别是<span class="arithmatex"><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>、<span class="arithmatex"><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>和<span class="arithmatex"><span class="MathJax_Preview">5\times 5</span><script type="math/tex">5\times 5</script></span>的卷积层来抽取不同空间尺寸下的信息，其中中间2个线路会对输入先做<span class="arithmatex"><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>卷积来减少输入通道数，以降低模型复杂度。第4条线路则使用<span class="arithmatex"><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>最大池化层，后接<span class="arithmatex"><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>卷积层来改变通道数。4条线路都使用了合适的填充来使输入与输出的高和宽一致。最后我们将每条线路的输出在通道维上连结,并向后进行传输。</p>
+<p><strong><span class="arithmatex"><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>卷积</strong>：</p>
+<p>它的计算方法和其他卷积核一样，唯一不同的是它的大小是<span class="arithmatex"><span class="MathJax_Preview">1\times1</span><script type="math/tex">1\times1</script></span>，没有考虑在特征图局部信息之间的关系。</p>
+<p><img alt="image-20200810103657759" src="../assets/image-20200810103657759.png" /></p>
+<p>它的作用主要是：</p>
+<ul>
+<li>
+<p>实现跨通道的交互和信息整合</p>
+</li>
+<li>
+<p>卷积核通道数的降维和升维，减少网络参数</p>
+</li>
+</ul>
+<h2 id="2googlenet">2.GoogLeNet模型<a class="headerlink" href="#2googlenet" title="Permanent link">&para;</a></h2>
+<p>GoogLeNet主要由Inception模块构成，如下图所示：</p>
+<p><img alt="image-20200810110148039" src="../assets/image-20200810110148039.png" /></p>
+<p>整个网络架构我们分为五个模块，每个模块之间使用步幅为2的<span class="arithmatex"><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>最大池化层来减小输出高宽。</p>
+<p><img alt="image-20200810112516071" src="../assets/image-20200810112516071.png" /></p>
+<ul>
+<li>B1模块：使用一个64通道的<span class="arithmatex"><span class="MathJax_Preview">7\times 7</span><script type="math/tex">7\times 7</script></span>卷积层</li>
+<li>B2模块：使用2个卷积层：首先是64通道的<span class="arithmatex"><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>卷积层，然后是将通道增大3倍的<span class="arithmatex"><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>卷积层。</li>
+<li>B3模块：串联2个完整的Inception块, 分别是Inception3a和Inception3b</li>
+<li>B4模块：串联了5个Inception块，分别是Inception4a，Inception4b，Inception4c,Inception4d和Inception4e,并且在4b和4e模块添加了辅助输出端，用于模型训练</li>
+<li>B5模块：串联了2个Inception块，分别是Inception5a，Inception5b，后面紧跟输出层，该模块使用全局平均池化层（GAP）来将每个通道的高和宽变成1。最后输出变成二维数组后接输出个数为标签类别数的全连接层。</li>
+</ul>
+<p>在这里构建模型我们依然使用pytorch中的封装的API来给大家构建网络：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入相关的工具包</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="k">as</span> <span class="nn">models</span>
+<span class="c1"># 模型实例化</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">googlenet</span><span class="p">()</span>
+</code></pre></div>
+<p>googLeNet的网络层数比较多，我们模块来看下它的网络结构（池化层没有展示出来）：</p>
+<h3 id="21-b1">2.1 B1模块<a class="headerlink" href="#21-b1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">conv1</span>
+<span class="n">model</span><span class="o">.</span><span class="n">maxpool1</span>
+</code></pre></div>
+<p>结构如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">BasicConv2d</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="p">(</span><span class="n">maxpool1</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="22-b2">2.2 B2模块<a class="headerlink" href="#22-b2" title="Permanent link">&para;</a></h3>
+<p>B2模块是使用2个卷积层+一个池化层</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">conv2</span>
+<span class="n">model</span><span class="o">.</span><span class="n">conv3</span>
+<span class="n">model</span><span class="o">.</span><span class="n">maxpool2</span>
+</code></pre></div>
+<p>模型结构如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">conv2</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">conv3</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">192</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">maxpool2</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="23-b3">2.3 B3模块<a class="headerlink" href="#23-b3" title="Permanent link">&para;</a></h3>
+<p>B3模块串联2个完整的Inception块，我们以其中Inception3a为例，给大家展示下结构：</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">inception3a</span>
+</code></pre></div>
+<p>模型结构如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Inception</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">branch1</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">192</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">branch2</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">192</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">branch3</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">192</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">branch4</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">192</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="24-b4">2.4 B4模块<a class="headerlink" href="#24-b4" title="Permanent link">&para;</a></h3>
+<p>B4模块串联了5个Inception块，与B3模块是类似的，在这里我们就不在赘述了。B4模块还有一个特点是在4b和4e模块添加了辅助输出端，用于模型训练，我们来给大家看下辅助输出端的结构：</p>
+<p><img alt="image-20200810140935549" src="../assets/image-20200810140935549.png" /></p>
+<p>我们以4b模块的辅助输出端为例:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">aux1</span>
+</code></pre></div>
+<p>输出端的结构如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">InceptionAux</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">BasicConv2d</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">conv</span><span class="p">):</span> <span class="n">Conv2d</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">bn</span><span class="p">):</span> <span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_running_stats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">fc1</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">fc2</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="25-b5">2.5 B5模块<a class="headerlink" href="#25-b5" title="Permanent link">&para;</a></h3>
+<p>B5串联了2个Inception块，后面紧跟输出层，该模块使用全局平均池化层（GAP）来将每个通道的高和宽变成1。最后输出变成二维数组后接输出个数为标签类别数的全连接层。其结构如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">avgpool</span><span class="p">):</span> <span class="n">AdaptiveAvgPool2d</span><span class="p">(</span><span class="n">output_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">fc</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="3">3.鲜花类别识别案例<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>因为ImageNet数据集较大训练时间较长，我们使用前面的介绍的鲜花分类数据集来演示GoogLeNet。读取数据的时将图像高和宽扩大到GoogLeNet使用的图像高和宽224。</p>
+<h3 id="21">2.1 数据读取<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>首先获取数据,为了适应GoogLeNet对输入数据尺寸的要求，将图像大小调整到224x224的大小，并使用DataLoader进行批次数据的读取：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchvision.datasets</span> <span class="kn">import</span> <span class="n">ImageFolder</span>
+<span class="c1"># 指定批次大小</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># 指定数据集路径</span>
+<span class="n">flower_train_path</span> <span class="o">=</span> <span class="s1">&#39;./dataset/flower_datas/train/&#39;</span>
+<span class="n">flower_test_path</span> <span class="o">=</span> <span class="s1">&#39;./dataset/flower_datas/val/&#39;</span>
+<span class="c1"># 先将数据转换为tensor类型，并调整数据的大小为224x224</span>
+<span class="n">dataset_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+     <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))])</span>
+<span class="c1"># 获取训练集数据和测试集数据</span>
+<span class="n">flower_train</span> <span class="o">=</span> <span class="n">ImageFolder</span><span class="p">(</span><span class="n">flower_train_path</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">dataset_transform</span><span class="p">)</span>
+<span class="n">flower_test</span> <span class="o">=</span> <span class="n">ImageFolder</span><span class="p">(</span><span class="n">flower_test_path</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">dataset_transform</span><span class="p">)</span>
+<span class="c1"># 获取数据的迭代</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">flower_train</span><span class="p">,</span>
+                          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">flower_test</span><span class="p">,</span>
+                         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                         <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>为了让大家更好的理解，我们将batch数据展示出来：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># 遍历每个迭代的数据，将其结果展示出来</span>
+<span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+    <span class="c1"># 获取第一个batch的图像</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># 将其进行展示</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 遍历batch中的每个图像</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+            <span class="c1"># 图像显示出来</span>
+            <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="c1"># 设置图像标题</span>
+            <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div>
+<p>结果为：</p>
+<p><img alt="image-20220701180006176" src="../assets/image-20220701180006176.png" /></p>
+<p>我们就使用上述创建的模型进行训练和评估。</p>
+<h3 id="22">2.2 模型实例化和参数设置<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 模型实例化:输入数据3通道，进行5类的分类处理</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">googlenet</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># 模型训练的参数设置</span>
+<span class="c1"># 学习率</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="c1"># 训练轮数</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># 优化算法Adam = RMSProp + Momentum</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+<span class="c1"># 交叉熵损失函数</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="23">2.3 模型评估方法<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>在这里我们定义一个方法对模型的效果进行评估，计算预测正确的样本数占总样本的比例：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 计算模型预测精度:测试集数据，模型</span>
+<span class="k">def</span> <span class="nf">evaluate_accuracy</span><span class="p">(</span><span class="n">data_iter</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># 不进行梯度计算</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="c1"># 模型是验证模式</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="c1"># 获取每一个batch的数据，进行预测</span>
+        <span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">data_iter</span><span class="p">:</span>
+            <span class="c1"># google进行模型预测时只返回最终的结果</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+            <span class="c1"># 获取预测结果</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">predicts</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># 预测的次数</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># 预测正确的个数</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicts</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">break</span>
+    <span class="c1"># 获取准确率</span>
+    <span class="k">return</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+</code></pre></div>
+<h3 id="24">2.4 模型训练<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p>定义模型训练方法，遍历每个轮次，每个batch的数据，进行模型训练，并评估模型的效果。与其他网络不同的是，GoogLeNet进行训练时其损失函数的需要将两个辅助输出的结果联合在一起，进行反向传播，更新参数，完成模型训练。具体实现如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## 定义模型训练过程:指定数据集，优化器，损失函数和轮次</span>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">data_loader</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span>
+          <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+          <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="c1"># 遍历每一个轮次进行训练</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;current epoch = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">))</span>
+        <span class="c1"># 每一个轮次的损失，预测个数和预测正确个数的初始化</span>
+        <span class="n">train_accuracy_total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">train_correct</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 迭代次数</span>
+        <span class="n">train_loss_sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_loader</span><span class="p">):</span>
+            <span class="c1"># 模型定义为训练模式</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+            <span class="c1"># 对数据进行预测</span>
+            <span class="n">outputs</span><span class="p">,</span><span class="n">aux2</span><span class="p">,</span><span class="n">aux1</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+            <span class="c1"># 各个输出端的损失</span>
+            <span class="n">loss0</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+            <span class="n">loss1</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">aux1</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
+            <span class="n">loss2</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">aux2</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
+            <span class="c1"># 计算模型的损失</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss0</span> <span class="o">+</span> <span class="mf">0.3</span><span class="o">*</span><span class="n">loss2</span><span class="o">+</span><span class="mf">0.2</span><span class="o">*</span><span class="n">loss2</span>
+            <span class="c1"># 在做反向传播前先清除网络状态</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span> 
+            <span class="c1"># 损失值进行反向传播</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>  
+            <span class="c1"># 参数迭代更新</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="c1"># 求损失的和</span>
+            <span class="n">train_loss_sum</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  
+            <span class="c1"># 输出模型预测结果</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">predicts</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  
+            <span class="c1"># 获取训练集预测正确的个数</span>
+            <span class="n">train_accuracy_total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">train_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicts</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="c1"># 迭代次数增1</span>
+            <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 测试集预测的准确率</span>
+        <span class="n">test_acc</span> <span class="o">=</span> <span class="n">evaluate_accuracy</span><span class="p">(</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s1">&#39;epoch:</span><span class="si">{0}</span><span class="s1">,   loss:</span><span class="si">{1:.4f}</span><span class="s1">,   train accuracy:</span><span class="si">{2:.3f}</span><span class="s1">,  test accuracy:</span><span class="si">{3:.3f}</span><span class="s1">&#39;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">train_loss_sum</span> <span class="o">/</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">),</span>
+                    <span class="n">train_correct</span> <span class="o">/</span> <span class="n">train_accuracy_total</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------finish training-------------&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>调用train方法便可完成网络的训练：</p>
+<div class="highlight"><pre><span></span><code><span class="n">train</span><span class="p">()</span>
+</code></pre></div>
+<p>训练过程如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">2.1413</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.376</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.464</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">4032.8075881004333</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.8748</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.516</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.527</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">3051.2406339645386</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.7072</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.567</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.602</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">3016.887406349182</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.6060</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.591</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.637</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">1945.9554996490479</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.5428</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.607</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.624</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">1256.7433443069458</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.4887</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.617</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.637</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">1256.3489837646484</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.4481</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.629</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.621</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">1246.721872329712</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.3597</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.662</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.629</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">439.1858534812927</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.3338</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.668</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.659</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">440.5386116504669</span>
+<span class="n">current</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">epoch</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span>   <span class="n">loss</span><span class="p">:</span><span class="mf">1.3054</span><span class="p">,</span>   <span class="n">train</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.669</span><span class="p">,</span>  <span class="n">test</span> <span class="n">accuracy</span><span class="p">:</span><span class="mf">0.687</span>
+<span class="n">time</span><span class="p">:</span><span class="mf">441.2357189655304</span>
+<span class="o">------------</span><span class="n">finish</span> <span class="n">training</span><span class="o">-------------</span>
+</code></pre></div>
+<p>我又设置训练轮次为100，batchsize设置为16对模型进行训练，训练结果如下所示：(左图是损失函数的变化曲线，右图是验证集准确率的变化曲线)</p>
+<p><img alt="image-20220706121329518" src="../assets/image-20220706121329518.png" /></p>
+<p>从图中可以看出，GoogleNet的拟合能力非常强，验证集的准确率能达到0.85以上。</p>
+<h2 id="4">4.延伸版本<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>GoogLeNet是以InceptionV1为基础进行构建的，所以GoogLeNet也叫做InceptionNet,在随后的⼏年⾥，研究⼈员对GoogLeNet进⾏了数次改进， 就又产生了InceptionV2，V3,V4等版本。</p>
+<h3 id="41-inceptionv2">4.1 InceptionV2<a class="headerlink" href="#41-inceptionv2" title="Permanent link">&para;</a></h3>
+<p>在InceptionV2中将大卷积核拆分为小卷积核，将V1中的<span class="arithmatex"><span class="MathJax_Preview">5\times 5</span><script type="math/tex">5\times 5</script></span>的卷积用两个<span class="arithmatex"><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>的卷积替代，从而增加网络的深度，减少了参数。</p>
+<p><img alt="image-20200810144356206" src="../assets/image-20200810144356206.png" /></p>
+<h3 id="42-inceptionv3">4.2 InceptionV3<a class="headerlink" href="#42-inceptionv3" title="Permanent link">&para;</a></h3>
+<p>将n×n卷积分割为1×n和n×1两个卷积，例如，一个的<span class="arithmatex"><span class="MathJax_Preview">3\times3</span><script type="math/tex">3\times3</script></span>卷积首先执行一个<span class="arithmatex"><span class="MathJax_Preview">1\times3</span><script type="math/tex">1\times3</script></span>的卷积，然后执行一个<span class="arithmatex"><span class="MathJax_Preview">3\times1</span><script type="math/tex">3\times1</script></span>的卷积,这种方法的参数量和计算量都比原来降低。</p>
+<p><img alt="image-20200810145542314" src="../assets/image-20200810145542314.png" /></p>
+<hr />
+<p><strong>总结</strong></p>
+<ul>
+<li>知道GoogLeNet的网络架构：有基础模块Inception构成</li>
+<li>能够利用GoogleNet完成图像分类</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../03-VGGNet/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1.3 VGG" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              1.3 VGG
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../05-ResNet/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1.5 ResNet" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              1.5 ResNet
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a87c2adc.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

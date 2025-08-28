@@ -1,0 +1,1318 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
+    
+    
+      
+        <title>2.7.yoloV5算法详解及案例 - 计算机视觉基础CV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#27yolov5" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="计算机视觉基础CV" class="md-header__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机视觉基础CV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.7.yoloV5算法详解及案例
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="计算机视觉基础CV" class="md-nav__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    计算机视觉基础CV
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        课程介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第一章 图像分类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章 图像分类" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 图像分类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/01-overview/" class="md-nav__link">
+        1.1 图像分类简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/02-AlexNet/" class="md-nav__link">
+        1.2 AlexNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/03-VGGNet/" class="md-nav__link">
+        1.3 VGG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/04-GoogLeNet/" class="md-nav__link">
+        1.4 GoogLeNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/05-ResNet/" class="md-nav__link">
+        1.5 ResNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/06-%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" class="md-nav__link">
+        1.6 图像增强
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/07-%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="md-nav__link">
+        1.7 模型微调
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/08-%E6%B1%BD%E8%BD%A6%E8%BD%A6%E5%9E%8B%E5%88%86%E7%B1%BB%E6%A1%88%E4%BE%8B/" class="md-nav__link">
+        1.8 汽车车型分类案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第二章 目标检测
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章 目标检测" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 目标检测
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-overview/" class="md-nav__link">
+        2.1 目标检测概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-RCNN/" class="md-nav__link">
+        2.2 R-CNN网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-Faster-RCNN/" class="md-nav__link">
+        2.3 Faster-RCNN网络
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-wheat_detection_fasterRCNN/" class="md-nav__link">
+        2.4 麦穗检测案例-FasterRCNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-yolo/" class="md-nav__link">
+        2.5.yolo系列
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-yoloV4%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.6.yoloV4算法详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.7.yoloV5算法详解及案例
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2.7.yoloV5算法详解及案例
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 算法简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.开源框架
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.模型详解
+  </a>
+  
+    <nav class="md-nav" aria-label="3.模型详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 模型结构
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 模型结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-input" class="md-nav__link">
+    3.1.1 输入（input）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-backbone" class="md-nav__link">
+    3.1.2 backbone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-neck" class="md-nav__link">
+    3.1.3 neck
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-output" class="md-nav__link">
+    3.1.4 输出（output）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 模型训练
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 模型训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-anchor" class="md-nav__link">
+    3.2.1 anchor的自动调整
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    3.2.2 正负样本的设计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.案例实现
+  </a>
+  
+    <nav class="md-nav" aria-label="4.案例实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1 数据构建
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 数据构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    4.1.1 标注方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    4.1.2 数据加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 模型选择（构建）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3 模型训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    4.4 模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 算法简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.开源框架
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.模型详解
+  </a>
+  
+    <nav class="md-nav" aria-label="3.模型详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 模型结构
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 模型结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-input" class="md-nav__link">
+    3.1.1 输入（input）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-backbone" class="md-nav__link">
+    3.1.2 backbone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-neck" class="md-nav__link">
+    3.1.3 neck
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-output" class="md-nav__link">
+    3.1.4 输出（output）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 模型训练
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 模型训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-anchor" class="md-nav__link">
+    3.2.1 anchor的自动调整
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    3.2.2 正负样本的设计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.案例实现
+  </a>
+  
+    <nav class="md-nav" aria-label="4.案例实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1 数据构建
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 数据构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    4.1.1 标注方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    4.1.2 数据加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 模型选择（构建）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3 模型训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    4.4 模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="27yolov5">2.7.yoloV5算法详解及案例<a class="headerlink" href="#27yolov5" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>了解yoloV5网络架构</li>
+<li>知道yoloV5中使用的策略</li>
+<li>能够使用yoloV5框架进行目标检测</li>
+</ul>
+<hr />
+<p><img alt="image-20220315092332025" src="../assets/image-20220315092332025-7307418.png" /></p>
+<p>**YOLO v5**是以一款叫做iDetection的APP进入人们视野的，该APP就是使用V5进行检测的。使用iOS系列的同学们，就可以立刻去下载这个app，试一下这个APP的检测效果和速度。app顶端有一系列的选项，来调节app使用的模型的大小，一般来说，较大的模型实时性差但精度高，较小的模型实时性好但精度差。另外也可以调节APP下端的置信度和IOU阈值来调整检测结果。</p>
+<hr />
+<h2 id="1">1. 算法简介<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>YOLO之父在2020年初宣布退出CV界，4月份YOLOv4横空出世，并收到原作者的认可。仅两个月之后，yoloV5的代码开源，自此YOLO系列进入到V5的时代。yoloV5相比于之前的yolo最大的好处是基于pytorch实现，很容易被算法工程师使用。到目前为止yoloV5已迭代了多个版本，2022年2月法发布了最新的6.1版本，接下来我们就以6.1版本为例，给大家介绍V5算法的网络结构，数据增强，后处理以及损失函数，对整个网络的基础知识进行分析：</p>
+<p><img alt="image-20220316143358609" src="../assets/image-20220316143358609.png" /></p>
+<p>yoloV5包含多种类型的网络结构，按模型大小从小到大是yoloV5n，yoloV5s，yoloV5m，yoloV5l，yoloV5x。其中YoloV5n网络是Yolov5系列中**深度最小**，特征图的**宽度最小**的网络。后面的4种都是在此基础上不断加深，不断加宽得到的网络结构，从图中可以看出较大模型实时性差但精度高，较小的模型实时性好但精度差。</p>
+<h2 id="2">2.开源框架<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>我们从yoloV5的github中将开源代码clone下来，其代码结构如下所示：包括网络结构，训练，预测的相关内容，</p>
+<p><img alt="image-20220316150830072" src="../assets/image-20220316150830072.png" /></p>
+<p>将代码获取到本地后，需要安装相应的工具包，cd到yoloV5-master的文件夹中，创建虚拟环境要求python&gt;3.7且torch&gt;1.7，执行：</p>
+<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+</code></pre></div>
+<p>安装完成之后即可运行代码。</p>
+<p>在介绍网络之前我们先来看下预测结果，使用预训练的yolov5s来进行预测，该部分代码在：yolov5-master/yolov5.ipynb文件中</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入预测工具</span>
+<span class="kn">import</span> <span class="nn">detect</span>
+<span class="c1"># 运行预测程序：指定要预测的图片，预训练好的模型及是否显示图片</span>
+<span class="n">detect</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;data/images/img3.jpg&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;yolov5s.pt&#39;</span><span class="p">,</span><span class="n">view_img</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>输出结果为：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Fusing</span> <span class="n">layers</span><span class="o">...</span> 
+<span class="n">Model</span> <span class="n">Summary</span><span class="p">:</span> <span class="mi">213</span> <span class="n">layers</span><span class="p">,</span> <span class="mi">7225885</span> <span class="n">parameters</span><span class="p">,</span> <span class="mi">0</span> <span class="n">gradients</span><span class="p">,</span> <span class="mf">16.5</span> <span class="n">GFLOPs</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="o">--</span><span class="n">img</span><span class="o">-</span><span class="n">size</span> <span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span> <span class="n">must</span> <span class="n">be</span> <span class="n">multiple</span> <span class="n">of</span> <span class="nb">max</span> <span class="n">stride</span> <span class="mi">32</span><span class="p">,</span> <span class="n">updating</span> <span class="n">to</span> <span class="p">[</span><span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">]</span>
+<span class="n">image</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">mac</span><span class="o">/</span><span class="n">Desktop</span><span class="o">/</span><span class="n">计算机视觉</span><span class="o">/</span><span class="n">yolov5</span><span class="o">-</span><span class="n">master</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">img3</span><span class="o">.</span><span class="n">jpg</span><span class="p">:</span> <span class="mi">480</span><span class="n">x640</span> <span class="mi">4</span> <span class="n">persons</span><span class="p">,</span> <span class="mi">1</span> <span class="n">chair</span><span class="p">,</span> <span class="n">Done</span><span class="o">.</span> <span class="p">(</span><span class="mf">0.233</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Speed</span><span class="p">:</span> <span class="mf">1.5</span><span class="n">ms</span> <span class="n">pre</span><span class="o">-</span><span class="n">process</span><span class="p">,</span> <span class="mf">232.8</span><span class="n">ms</span> <span class="n">inference</span><span class="p">,</span> <span class="mf">3.4</span><span class="n">ms</span> <span class="n">NMS</span> <span class="n">per</span> <span class="n">image</span> <span class="n">at</span> <span class="n">shape</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span>
+<span class="n">Results</span> <span class="n">saved</span> <span class="n">to</span> <span class="n">runs</span><span class="o">/</span><span class="n">detect</span><span class="o">/</span><span class="n">exp7</span>
+</code></pre></div>
+<p>从上述结果中可以看出，整个过程是加载模型，将图片调整为640*640的大小，进行预测并后处理，将结果保存在runs/detect/exp7文件夹中，检测结果如下图所示：</p>
+<p><img alt="img3" src="../assets/img3.jpg" /></p>
+<p>接下来我们给大家介绍下yoloV5具体是如何来完成目标检测的。</p>
+<h2 id="3">3.模型详解<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 模型结构<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>在这里我们首先来看下yoloV5的网络架构，我们依然把它分成输入，backbone,Neck和输出端四部分，如下所示：</p>
+<p><img alt="image-20220316163836896" src="../assets/image-20220316163836896.png" /></p>
+<p>Yolov5的整体架构与YoloV4是非常相似的，在V5中使用的是leaky_relu激活函数，没有使用mish激活函数.</p>
+<ul>
+<li>
+<p>基本组件：</p>
+</li>
+<li>
+<p>CBL：由Conv+Bn+Leaky_relu激活函数三者组成。</p>
+</li>
+<li>Res unit：借鉴Resnet网络中的残差结构，让网络可以构建的更深。</li>
+<li>CSP1_X：由三个卷积层和X个Res unint模块Concate组成，模型实现使用C3来完成，将shortcut设为True即可</li>
+<li>CSP2_X：这个在V4中没有使用，由三个卷积层和2X个Res unint模块Concate组成，模型实现使用C3来完成，将shortcut设为False即可</li>
+<li>
+<p>SPPF：V4中使用的SPP进行融合，在这里采用1x1卷积和3个串联的5x5的最大池化的方式，进行多尺度融合。</p>
+</li>
+<li>
+<p>其他基础操作：</p>
+</li>
+<li>
+<p>Concat：张量拼接，通道维度会扩充。</p>
+</li>
+<li>Add：张量相加，不会扩充维度。</li>
+</ul>
+<p>为了更好的理解模型每一部分的作用，接下来我们按照输入端（input）,backbone, neck, 输出端（output）四部分介绍yoloV4网络的内容。</p>
+<h4 id="311-input">3.1.1 输入（input）<a class="headerlink" href="#311-input" title="Permanent link">&para;</a></h4>
+<p>yoloV5网络的输入依然要求是32的倍数，但大小不是固定的，在yoloV5中默认是640×640，在实际项目中也可以根据需要进行调整。V5的预测阶段不要求送入网络中的图像是方形的，这要保证高宽都为32的倍数即可，调整策略我们介绍如下：</p>
+<p>在这里我们先回顾下V3V4中的做法，也是V5在训练时对输入图像大小的处理方法，例如：1200x800的原始图像直接缩放填充为640x640的大小，具体操作长边1200直接缩放为640比例为0.53，短边缩放为800x0.53=426,426不足640，则在短边的方向两侧分别填充（640-426）/2 =107个灰度像素（114，114，114），如下所示：</p>
+<p><img alt="image-20220318104958076" src="../assets/image-20220318104958076.png" /></p>
+<p>那这种方式使用时可以保证在每个batch进行训练时送入的图像大小是一样的。但是在预测时一般是送入一幅图像进行预测，而上述这种填充方式在短边填充了较多的背景像素，存在信息冗余，影响推理速度。所以在V5中进行预测时使用了自适应的填充方式，具体操作长边1200直接缩放为640比例为0.53，短边缩放为800x0.53=426,426不能被32整除所以需要在进行填充，这时我们需要找到离426最近的32的整数倍的值即426+（640-426）%32=448, 则在短边的方向两侧分别填充（448-426）/2 =11个灰度像素（114，114，114），如下所示：</p>
+<p><img alt="image-20220318110012757" src="../assets/image-20220318110012757.png" /></p>
+<p>从上图中可以看出短边的填充比原始的填充方式小了很多，在推理时，计算量也会减少，目标检测的速度会得到提升。</p>
+<p>其他的与yoloV4类似，V5在输入端采用反转、裁切、旋转，CutMix和马赛克数据增强（Mosaic data augmentation）等数据增强方式。</p>
+<h4 id="312-backbone">3.1.2 backbone<a class="headerlink" href="#312-backbone" title="Permanent link">&para;</a></h4>
+<p>yoloV5网络的backbone和yoloV4是类似的，都使用的是CSP结构，在yoloV5中都是使用的leakyrelu激活函数，没有使用mish，如下图所示：</p>
+<p><img alt="image-20220318115730550" src="../assets/image-20220318115730550.png" /></p>
+<p>yoloV4中一共有5个CSP，输入图像是608x608，所以特征图变化的规律是：608-&gt;304-&gt;152-&gt;76-&gt;38-&gt;19，经过5次CSP模块后得到19x19大小的特征图。</p>
+<p>而在V5中降采样通过CBL来完成，输入图像是640x640,所以特征图变化的规律是：640-&gt;320-&gt;160-&gt;80-&gt;40-&gt;20，经过5次CBL模块后得到20x20大小的特征图。</p>
+<p>另外将V4中使用的是SPP，而在V5中使用的是SPPF，如下所示：</p>
+<p><img alt="image-20220318115705544" src="../assets/image-20220318115705544.png" /></p>
+<p>SPP层使用5x5,9x9,13x13池化窗口对特征进行融合，在送入网络neck之前能够得到更多的信息。而在SPPF使用3个5×5的最大池化，代替原来的5×5、9×9、13×13最大池化，在保证准确率的情况下，提高了计算速度。</p>
+<h4 id="313-neck">3.1.3 neck<a class="headerlink" href="#313-neck" title="Permanent link">&para;</a></h4>
+<p>yolov5中的特征融合方式与V4的融合方式是一样的，只是将在V4中使用的部分CBL替换成了CSP2_X模块，增强了网络的特征融合能力。如下所示：</p>
+<p><img alt="image-20220318115433487" src="../assets/image-20220318115433487.png" /></p>
+<p>CSP2_X的模块结构如下所示：</p>
+<p><img alt="image-20220318140023664" src="../assets/image-20220318140023664.png" /></p>
+<h4 id="314-output">3.1.4 输出（output）<a class="headerlink" href="#314-output" title="Permanent link">&para;</a></h4>
+<p>V5的输出端与V4V3的输出端是一样的，都是输出3个尺度的结果，具体不再赘述。</p>
+<p><img alt="image-20220318140224253" src="../assets/image-20220318140224253.png" /></p>
+<h3 id="32">3.2 模型训练<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>yoloV5中的模型训练和YoloV4是类似的训练过程是一样的，损失函数使用GIOU损失，为了提高正样本的数量，只不过在进行正负样本设计时进行了调整。</p>
+<h4 id="321-anchor">3.2.1 anchor的自动调整<a class="headerlink" href="#321-anchor" title="Permanent link">&para;</a></h4>
+<p>yoloV3和V4中的anchor是预先使用kmeans定义好的，而yoloV5中的anchor是基于训练数据自动学习的。在Yolov3、Yolov4中，训练不同的数据集时，计算初始锚框的值是通过单独的程序运行的。但Yolov5中将此功能嵌入到代码中，每次训练时，自适应的计算不同训练集中的最佳锚框值。</p>
+<h4 id="322">3.2.2 正负样本的设计<a class="headerlink" href="#322" title="Permanent link">&para;</a></h4>
+<p>在yolo v3v4中，保证每个gt bbox有一个唯一的anchor进行对应，匹配规则就是IOU最大，并且某个gt不能在三个预测层的某几层上同时进行匹配。不考虑一个gt bbox对应多个anchor的场合，也不考虑anchor是否设置合理。</p>
+<p>而在yolov5采用了跨网格匹配规则，增加正样本anchor数目的做法：对于任何一个输出层，直接采用shape规则匹配，计算当前的目标框GT宽高和每一尺度的anchor宽高的比例，如果宽高比例小于设定阈值，则说明该bbox和anchor匹配度足够，将该anchor在该尺度中认为是正样本。然后计算GT落在哪个网格内，同时利用四舍五入规则，找出最近的两个网格，将这三个网格都认为是负责预测该bbox的，可以发现粗略估计正样本数相比前yolo系列，增加了三倍。如下图所示：</p>
+<p><img alt="image-20220318142709721" src="../assets/image-20220318142709721.png" /></p>
+<p>绿点表示该gt bbox中心，现在需要额外考虑其2个最近的邻域网格的anchor也作为该gt bbox的正样本，明显增加了正样本的数量。</p>
+<h3 id="33">3.3 模型预测<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>与yoloV4类似，模型训练好后，我们将图片resize后，送入到yoloV5网络中，输出3个尺度的预测结果，每个结果中包含边框坐标（4个数值），边框置信度（1个数值），对象类别的概率（对于COCO数据集，有80种对象）。我们筛选出置信度较高的检测结果（&gt;0.5），在采用NMS算法选出最有可能是目标的结果，就完成了目标的检测。</p>
+<h2 id="4">4.案例实现<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 数据构建<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<h4 id="411">4.1.1 标注方法<a class="headerlink" href="#411" title="Permanent link">&para;</a></h4>
+<p>根据要实现的业务场景，需要收集大量的图像数据，一般来说包含两大来源，一部分是网络数据，可以是开源数据，也可以通过百度、Google图片爬虫得到，另一部分是用户场景的视频录像，这一部分的数据量会更大。对于开源数据我们不需要进行标注，而爬取的数据和视频录像需要进行标注，这时我们可以使用开源工具labelImg进行标注，安装方法是：</p>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">labelImg</span>
+</code></pre></div>
+<p>安装完成后再终端使用：labelImg即可启动标注程序，如下所示：</p>
+<p><img alt="image-20220317121545233" src="../assets/image-20220317121545233.png" /></p>
+<p>标注好信息后点击保存即可将标注信息添加到对一个的txt文件中，主要是2个人和一个领带，另外还会生成以class.txt保存目标的类别信息。</p>
+<p><img alt="image-20220317121644986" src="../assets/image-20220317121644986.png" /></p>
+<p>标注信息：类别，中心点x,y坐标，宽高（归一化后的），如下图所示：</p>
+<p><img alt="image-20220317120952269" src="../assets/image-20220317120952269.png" /></p>
+<p>将标注好的数据集中的图片文件和文本标签分别存放在自己的文件夹中，我们以coco128数据为例：</p>
+<p><img alt="image-20220317143645782" src="../assets/image-20220317143645782.png" /></p>
+<p>images文件夹中存放图片文件，labels中存放标签文件txt。</p>
+<h4 id="412">4.1.2 数据加载<a class="headerlink" href="#412" title="Permanent link">&para;</a></h4>
+<p>在yoloV5的框架中我们进行数据加载时只需配置好yaml文件即可，我们以coco128为例，COCO128数据集是由COCO数据集的前128张图像组成的小数据集。这128张图像用于训练和验证。在这里创建coco128.yaml文件，需要配置的内容如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 数据存放路径的配置</span>
+<span class="n">path</span><span class="p">:</span> <span class="o">../</span><span class="n">datasets</span><span class="o">/</span><span class="n">coco128</span>  <span class="c1"># 根目录</span>
+<span class="n">train</span><span class="p">:</span> <span class="n">images</span><span class="o">/</span><span class="n">train2017</span>  <span class="c1"># 训练集数据的目录（根目录的相对路经）</span>
+<span class="n">val</span><span class="p">:</span> <span class="n">images</span><span class="o">/</span><span class="n">train2017</span>  <span class="c1"># 验证集数据的目录（根目录的相对路经），在这里验证集和训练集是同一个</span>
+<span class="n">test</span><span class="p">:</span>  <span class="c1"># 测试集，可选</span>
+
+<span class="c1"># 数据集的类型信息</span>
+<span class="n">nc</span><span class="p">:</span> <span class="mi">80</span>  <span class="c1"># 类别个数</span>
+<span class="n">names</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">,</span> <span class="s1">&#39;bicycle&#39;</span><span class="p">,</span> <span class="s1">&#39;car&#39;</span><span class="p">,</span> <span class="s1">&#39;motorcycle&#39;</span><span class="p">,</span> <span class="s1">&#39;airplane&#39;</span><span class="p">,</span> <span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;truck&#39;</span><span class="p">,</span> <span class="s1">&#39;boat&#39;</span><span class="p">,</span> <span class="s1">&#39;traffic light&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fire hydrant&#39;</span><span class="p">,</span> <span class="s1">&#39;stop sign&#39;</span><span class="p">,</span> <span class="s1">&#39;parking meter&#39;</span><span class="p">,</span> <span class="s1">&#39;bench&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;horse&#39;</span><span class="p">,</span> <span class="s1">&#39;sheep&#39;</span><span class="p">,</span> <span class="s1">&#39;cow&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;bear&#39;</span><span class="p">,</span> <span class="s1">&#39;zebra&#39;</span><span class="p">,</span> <span class="s1">&#39;giraffe&#39;</span><span class="p">,</span> <span class="s1">&#39;backpack&#39;</span><span class="p">,</span> <span class="s1">&#39;umbrella&#39;</span><span class="p">,</span> <span class="s1">&#39;handbag&#39;</span><span class="p">,</span> <span class="s1">&#39;tie&#39;</span><span class="p">,</span> <span class="s1">&#39;suitcase&#39;</span><span class="p">,</span> <span class="s1">&#39;frisbee&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skis&#39;</span><span class="p">,</span> <span class="s1">&#39;snowboard&#39;</span><span class="p">,</span> <span class="s1">&#39;sports ball&#39;</span><span class="p">,</span> <span class="s1">&#39;kite&#39;</span><span class="p">,</span> <span class="s1">&#39;baseball bat&#39;</span><span class="p">,</span> <span class="s1">&#39;baseball glove&#39;</span><span class="p">,</span> <span class="s1">&#39;skateboard&#39;</span><span class="p">,</span> <span class="s1">&#39;surfboard&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;tennis racket&#39;</span><span class="p">,</span> <span class="s1">&#39;bottle&#39;</span><span class="p">,</span> <span class="s1">&#39;wine glass&#39;</span><span class="p">,</span> <span class="s1">&#39;cup&#39;</span><span class="p">,</span> <span class="s1">&#39;fork&#39;</span><span class="p">,</span> <span class="s1">&#39;knife&#39;</span><span class="p">,</span> <span class="s1">&#39;spoon&#39;</span><span class="p">,</span> <span class="s1">&#39;bowl&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sandwich&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;broccoli&#39;</span><span class="p">,</span> <span class="s1">&#39;carrot&#39;</span><span class="p">,</span> <span class="s1">&#39;hot dog&#39;</span><span class="p">,</span> <span class="s1">&#39;pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;donut&#39;</span><span class="p">,</span> <span class="s1">&#39;cake&#39;</span><span class="p">,</span> <span class="s1">&#39;chair&#39;</span><span class="p">,</span> <span class="s1">&#39;couch&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;potted plant&#39;</span><span class="p">,</span> <span class="s1">&#39;bed&#39;</span><span class="p">,</span> <span class="s1">&#39;dining table&#39;</span><span class="p">,</span> <span class="s1">&#39;toilet&#39;</span><span class="p">,</span> <span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="s1">&#39;laptop&#39;</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;remote&#39;</span><span class="p">,</span> <span class="s1">&#39;keyboard&#39;</span><span class="p">,</span> <span class="s1">&#39;cell phone&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;microwave&#39;</span><span class="p">,</span> <span class="s1">&#39;oven&#39;</span><span class="p">,</span> <span class="s1">&#39;toaster&#39;</span><span class="p">,</span> <span class="s1">&#39;sink&#39;</span><span class="p">,</span> <span class="s1">&#39;refrigerator&#39;</span><span class="p">,</span> <span class="s1">&#39;book&#39;</span><span class="p">,</span> <span class="s1">&#39;clock&#39;</span><span class="p">,</span> <span class="s1">&#39;vase&#39;</span><span class="p">,</span> <span class="s1">&#39;scissors&#39;</span><span class="p">,</span> <span class="s1">&#39;teddy bear&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;hair drier&#39;</span><span class="p">,</span> <span class="s1">&#39;toothbrush&#39;</span><span class="p">]</span>  <span class="c1"># 类别名称</span>
+</code></pre></div>
+<p>数据集配置文件,定义了:</p>
+<ul>
+<li>
+<p>训练图像的路径</p>
+</li>
+<li>
+<p>验证图像的路径</p>
+</li>
+<li>
+<p>类的数量</p>
+</li>
+<li>
+<p>类名称的列表</p>
+</li>
+</ul>
+<p>配置好这些信息后yoloV5的框架会自动的加载这些数据进行训练。</p>
+<h3 id="42">4.2 模型选择（构建）<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>在yoloV5中构建网络时通过yaml文件进行配置，用来获取不同大小类型的模型，配置文件在文件夹yolov5-master/models文件夹中，如下所示：包含yoloV5n，yoloV5s，yoloV5m，yoloV5l，yoloV5x的配置信息：</p>
+<p><img alt="image-20220316173051203" src="../assets/image-20220316173051203.png" /></p>
+<p>在这里我们以yoloV5s为例，来分析下配置文件中的内容，主要包含三部分内容：</p>
+<ul>
+<li>模型参数</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 模型参数</span>
+<span class="n">nc</span><span class="p">:</span> <span class="mi">80</span>  <span class="c1"># 类别个数</span>
+<span class="c1"># 不同大小的模型只要配置这两个参数即可</span>
+<span class="n">depth_multiple</span><span class="p">:</span> <span class="mf">0.33</span>  <span class="c1"># 模型深度的比例，即网络层数的比例</span>
+<span class="n">width_multiple</span><span class="p">:</span> <span class="mf">0.50</span>  <span class="c1"># 模型宽度的比例，即网络每一层深度的比例</span>
+<span class="c1"># anchor的设置，与yoloV3是一样的</span>
+<span class="n">anchors</span><span class="p">:</span>
+  <span class="o">-</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span><span class="mi">23</span> <span class="p">]</span>  <span class="c1"># P3/8</span>
+  <span class="o">-</span> <span class="p">[</span> <span class="mi">30</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span><span class="mi">119</span> <span class="p">]</span>  <span class="c1"># P4/16</span>
+  <span class="o">-</span> <span class="p">[</span> <span class="mi">116</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span><span class="mi">198</span><span class="p">,</span> <span class="mi">373</span><span class="p">,</span><span class="mi">326</span> <span class="p">]</span>  <span class="c1"># P5/32</span>
+</code></pre></div>
+<p>不同大小模型的深度和宽度的比例如下图所示：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>yoloV5n</th>
+<th>yoloV5s</th>
+<th>yoloV5m</th>
+<th>yoloV5l</th>
+<th>yoloV5x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>深度比例</td>
+<td>0.33</td>
+<td>0.33</td>
+<td>0.67</td>
+<td>1</td>
+<td>1.33</td>
+</tr>
+<tr>
+<td>宽度比例</td>
+<td>0.25</td>
+<td>0.50</td>
+<td>0.75</td>
+<td>1</td>
+<td>1.25</td>
+</tr>
+</tbody>
+</table>
+<p>从上表中可以看出，从yoloV5n到yoloV5x是逐渐变大的。</p>
+<ul>
+<li>backbone的设置</li>
+</ul>
+<p><img alt="image-20220317142049338" src="../assets/image-20220317142049338.png" /></p>
+<p>backbone指特征提取部分，以列表的形式进行配置，每一部分以[from, number, module, args]的方式配置一个组件，其中：   </p>
+<ol>
+<li>
+<p>from 表示该层的输入从哪来。-1表示输入取自上一层，-2表示上两层，3表示第3层（从0开始数），[-1, 4]表示取自上一层和第4层，依次类推。。。从0开始，每一行表示一层，例如0-P&frac12;表示第0层，特征图尺寸为输入的&frac12;。</p>
+</li>
+<li>
+<p>number 表示该层模块堆叠的次数，最终的次数还要乘上depth_multiple系数</p>
+</li>
+<li>module 表示该层的模块。Conv表示卷积+BN+激活模块。C3表示csp1_x结构。</li>
+<li>args 表示输入到模块的参数。例如Conv：[128, 3, 2] 表示输出通道128，卷积核尺寸3，stride=2；C3模块：[1024],表示通道数为1024，最终的输出通道数还要乘上 width_multiple，</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在配置文件中将模型结果分为backbone和head两部分：</span>
+<span class="n">backbone</span><span class="p">:</span>
+  <span class="c1"># [from, number, module, args]</span>
+  <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 0-P1/2  [64, 6, 2, 2 ] 表示输出通道128，卷积核尺寸3，stride=2，padding=2</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 1-P2/4  [128, 3, 2] 表示输出通道128，卷积核尺寸3，stride=2</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">128</span> <span class="p">]</span> <span class="p">],</span> <span class="c1">#   指csp1_x组件,其中1024表示通道数为1024</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 3-P3/8</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">256</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 5-P4/16</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 7-P5/32</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1024</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">SPPF</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">5</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 9  [ 1024, 5 ]表示输出通道数为1025，池化窗口为5。</span>
+  <span class="p">]</span>
+</code></pre></div>
+<ul>
+<li>head的设置</li>
+</ul>
+<p><img alt="image-20220317142138778" src="../assets/image-20220317142138778.png" /></p>
+<p>Head指neck和output两部分，以列表的形式进行配置，每个模块的配置与backbone中是一样的。</p>
+<div class="highlight"><pre><span></span><code><span class="n">head</span><span class="p">:</span>
+   <span class="c1"># [from, number, module, args]</span>
+  <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">,</span> <span class="p">[</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span> <span class="p">]</span> <span class="p">],</span> <span class="c1"># nn.Upsample模块的参数[ None, 2, &#39;nearest&#39; ] None表示通道数与输入通道相同，2表示上采样倍数，&#39;nearest&#39;表示差值方法</span>
+    <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span> <span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Concat</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 表示上一层输出与第6层输出进行concat融合，最后[ 1 ]表示特征图的长宽不发生变化</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="kc">False</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 13</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">,</span> <span class="p">[</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Concat</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># cat backbone P3</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">256</span><span class="p">,</span> <span class="kc">False</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 17 (P3/8-small) 表示csp2_3, 256表示通道数，False表示不使用残差模块</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span> <span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Concat</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># cat head P4</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="kc">False</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 20 (P4/16-medium)</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span> <span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Concat</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># cat head P5</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1024</span><span class="p">,</span> <span class="kc">False</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># 23 (P5/32-large)</span>
+    <span class="p">[</span> <span class="p">[</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span> <span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Detect</span><span class="p">,</span> <span class="p">[</span> <span class="n">nc</span><span class="p">,</span> <span class="n">anchors</span> <span class="p">]</span> <span class="p">],</span>  <span class="c1"># Detect(P3, P4, P5) 输出层设置：【17，20，23】表示输入层，nc表示类别个数，anchors表示anchor的设置</span>
+  <span class="p">]</span>
+</code></pre></div>
+<p>上述就是我们在V5中构建模型的方式，构建好模型后我们就可以利用训练集数据对其进行训练</p>
+<h3 id="43">4.3 模型训练<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>数据集和模型准备好之后，我们就可以进行训练，训练的实现过程如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入模型训练</span>
+<span class="kn">import</span> <span class="nn">train</span>
+<span class="c1"># 模型训练：设置相应的参数：模型配置信息</span>
+<span class="n">train</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cfg</span><span class="o">=</span><span class="s1">&#39;models/yolov5s.yaml&#39;</span><span class="p">,</span> <span class="c1"># 模型结构的配置文件</span>
+          <span class="n">data</span><span class="o">=</span><span class="s1">&#39;data/coco128.yaml&#39;</span><span class="p">,</span>  <span class="c1"># 数据的配置文件</span>
+          <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>                 <span class="c1">#  图像大小</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>              <span class="c1"># 批次大小</span>
+          <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;yolov5s.pt&#39;</span><span class="p">,</span>      <span class="c1"># 预训练模型</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                  <span class="c1"># 训练轮次</span>
+          <span class="n">worker</span><span class="o">=</span><span class="mi">1</span>                   <span class="c1"># 数据加载的线程数，根据硬件资源进行设置</span>
+         <span class="p">)</span>
+</code></pre></div>
+<p>训练结果如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">train</span><span class="p">:</span> <span class="n">weights</span><span class="o">=</span><span class="n">yolov5s</span><span class="o">.</span><span class="n">pt</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="n">models</span><span class="o">/</span><span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">/</span><span class="n">coco128</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="n">hyp</span><span class="o">=</span><span class="n">data</span><span class="o">/</span><span class="n">hyps</span><span class="o">/</span><span class="n">hyp</span><span class="o">.</span><span class="n">scratch</span><span class="o">-</span><span class="n">low</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nosave</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">noval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">noautoanchor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">evolve</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_weights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="p">,</span> <span class="n">multi_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">single_cls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">SGD</span><span class="p">,</span> <span class="n">sync_bn</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">runs</span><span class="o">/</span><span class="n">train</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">exp</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cos_lr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label_smoothing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">save_period</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">local_rank</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">upload_dataset</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_interval</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">artifact_alias</span><span class="o">=</span><span class="n">latest</span><span class="p">,</span> <span class="n">worker</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span>
+
+<span class="n">hyperparameters</span><span class="p">:</span> <span class="n">lr0</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">lrf</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.937</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">,</span> <span class="n">warmup_epochs</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">warmup_momentum</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">warmup_bias_lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cls_pw</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">obj_pw</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">iou_t</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">anchor_t</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">fl_gamma</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">hsv_h</span><span class="o">=</span><span class="mf">0.015</span><span class="p">,</span> <span class="n">hsv_s</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">hsv_v</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">translate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">shear</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">perspective</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">flipud</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fliplr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">mosaic</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mixup</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">copy_paste</span><span class="o">=</span><span class="mf">0.0</span>
+
+<span class="err">。。。。</span>
+<span class="n">AutoAnchor</span><span class="p">:</span> <span class="mf">4.27</span> <span class="n">anchors</span><span class="o">/</span><span class="n">target</span><span class="p">,</span> <span class="mf">0.994</span> <span class="n">Best</span> <span class="n">Possible</span> <span class="n">Recall</span> <span class="p">(</span><span class="n">BPR</span><span class="p">)</span><span class="o">.</span> <span class="n">Current</span> <span class="n">anchors</span> <span class="n">are</span> <span class="n">a</span> <span class="n">good</span> <span class="n">fit</span> <span class="n">to</span> <span class="n">dataset</span> <span class="err">✅</span>
+<span class="n">Image</span> <span class="n">sizes</span> <span class="mi">640</span> <span class="n">train</span><span class="p">,</span> <span class="mi">640</span> <span class="n">val</span>
+<span class="n">Using</span> <span class="mi">2</span> <span class="n">dataloader</span> <span class="n">workers</span>
+<span class="n">Logging</span> <span class="n">results</span> <span class="n">to</span> <span class="n">runs</span><span class="o">/</span><span class="n">train</span><span class="o">/</span><span class="n">exp4</span>
+<span class="n">Starting</span> <span class="n">training</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">epochs</span><span class="o">...</span>
+
+     <span class="n">Epoch</span>   <span class="n">gpu_mem</span>       <span class="n">box</span>       <span class="n">obj</span>       <span class="bp">cls</span>    <span class="n">labels</span>  <span class="n">img_size</span>
+  <span class="mi">0</span><span class="o">%|</span>          <span class="o">|</span> <span class="mi">0</span><span class="o">/</span><span class="mi">64</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">13</span><span class="o">&lt;</span><span class="err">?</span><span class="p">,</span> <span class="err">?</span><span class="n">it</span><span class="o">/</span><span class="n">s</span><span class="p">]</span>                                          
+</code></pre></div>
+<p>在训练过程中会进行数据的增强，anchor的调整，训练信息的处理等，这些信息会被保存在run/train/expX中，如下所示：</p>
+<p><img alt="image-20220317171000455" src="../assets/image-20220317171000455.png" /></p>
+<p>接下来我们分析一下这些结果：</p>
+<ul>
+<li>opt.yaml中的超参数主要指学习率，优化器，阈值等一系列的参数，保存训练过程中的hyperparameters的参数。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 学习率设置</span>
+<span class="n">lr0</span><span class="p">:</span> <span class="mf">0.01</span>  
+<span class="n">lrf</span><span class="p">:</span> <span class="mf">0.2</span>   
+<span class="n">momentum</span><span class="p">:</span> <span class="mf">0.937</span>  
+<span class="c1"># 学习率预热</span>
+<span class="n">weight_decay</span><span class="p">:</span> <span class="mf">0.0005</span>  
+<span class="n">warmup_epochs</span><span class="p">:</span> <span class="mf">3.0</span>
+<span class="n">warmup_momentum</span><span class="p">:</span> <span class="mf">0.8</span>
+<span class="n">warmup_bias_lr</span><span class="p">:</span> <span class="mf">0.1</span>
+<span class="c1"># 损失函数的参数</span>
+<span class="n">box</span><span class="p">:</span> <span class="mf">0.05</span>
+<span class="bp">cls</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="n">cls_pw</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="n">obj</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="n">obj_pw</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="n">iou_t</span><span class="p">:</span> <span class="mf">0.2</span>
+<span class="n">anchor_t</span><span class="p">:</span> <span class="mf">4.0</span>
+<span class="n">fl_gamma</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="c1"># 数据增强的参数</span>
+<span class="n">hsv_h</span><span class="p">:</span> <span class="mf">0.015</span>
+<span class="n">hsv_s</span><span class="p">:</span> <span class="mf">0.7</span>
+<span class="n">hsv_v</span><span class="p">:</span> <span class="mf">0.4</span>
+<span class="n">degrees</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">translate</span><span class="p">:</span> <span class="mf">0.1</span>
+<span class="n">scale</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="n">shear</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">perspective</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">flipud</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="n">fliplr</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="n">mosaic</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="n">mixup</span><span class="p">:</span> <span class="mf">0.0</span>
+</code></pre></div>
+<ul>
+<li>opt.yaml中的配置信息包括批次大小，轮次等，在训练过程中train的参数信息，如下所示：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 模型配置信息</span>
+<span class="n">weights</span><span class="p">:</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">pt</span>
+<span class="n">cfg</span><span class="p">:</span> <span class="s1">&#39;yolov5s.yaml&#39;</span>
+<span class="c1"># 数据</span>
+<span class="n">data</span><span class="p">:</span> <span class="n">data</span><span class="o">/</span><span class="n">coco128</span><span class="o">.</span><span class="n">yaml</span>
+<span class="c1"># 训练参数</span>
+<span class="n">hyp</span><span class="p">:</span> <span class="n">data</span><span class="o">/</span><span class="n">hyp</span><span class="o">.</span><span class="n">scratch</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">epochs</span><span class="p">:</span> <span class="mi">20</span>
+<span class="n">batch_size</span><span class="p">:</span> <span class="mi">16</span>
+<span class="n">img_size</span><span class="p">:</span>
+<span class="o">-</span> <span class="mi">640</span>
+<span class="o">-</span> <span class="mi">640</span>
+<span class="err">。。。。</span>
+</code></pre></div>
+<ul>
+<li>数据分析的结果，在这里对标注框类别，中心点坐标及标注框宽高的分布进行了分析，如下所示：</li>
+</ul>
+<p><img alt="labels" src="../assets/labels.jpg" /></p>
+<ul>
+<li>送入网络中训练集数据如下所示：该图中显示了当前送入网络中16幅图像，从中可以看出进行了masic的增强处理</li>
+</ul>
+<p><img alt="train_batch0" src="../assets/train_batch0.jpg" /></p>
+<ul>
+<li>在训练过程中对验证集数据预测结果，来对比下预测和真实值结果：</li>
+</ul>
+<p>真实标注的结果：</p>
+<p><img alt="test_batch0_labels" src="../assets/test_batch0_labels.jpg" /></p>
+<p>网络预测结果：</p>
+<p><img alt="test_batch0_pred" src="../assets/test_batch0_pred.jpg" /></p>
+<p>对比两幅图像可以发现，虽然有些目标没有被检测到，但是大部分目标模型都检测出来了</p>
+<ul>
+<li>训练过程中损失函数，准确率的变化情况如下所示：</li>
+</ul>
+<p><img alt="results" src="../assets/results.png" /></p>
+<p>在这里是训练了20个轮次的结果，从这个结果中可以看出，随着训练的进行损失是在不断下降的，而准确率是在不断提升的。由于在这个例子中验证集和训练集使用的是相同的数据，所以验证集的曲线变化更平滑一些。</p>
+<ul>
+<li>模型训练权重的保存结果，在weights文件夹中保存了最后一个轮次的训练结果last.pt和验证集精度最高的结果best.pt,如下所示：</li>
+</ul>
+<p><img alt="image-20220317173846365" src="../assets/image-20220317173846365.png" /></p>
+<p>到这里模型就被我们训练好了，就可以使用权重参数进行预测了。</p>
+<h3 id="44">4.4 模型预测<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p>模型预测的方法与本章开头是一样的，使用detect来进行预测，加载刚训练好的模型参数如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入预测工具</span>
+<span class="kn">import</span> <span class="nn">detect</span>
+<span class="c1"># 运行预测程序：指定要预测的图片，预训练好的模型及是否显示图片</span>
+<span class="n">detect</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;data/images/img3.jpg&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;runs/train/exp3/weights/best.pt&#39;</span><span class="p">,</span><span class="n">view_img</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>我们依然对前面图像进行预测，结果为：</p>
+<p><img alt="img3" src="../assets/img3-7510321.jpg" /></p>
+<p>在这里我们依然可以将图像中的目标检测出来。</p>
+<hr />
+<p><strong>总结</strong></p>
+<ul>
+<li>了解yoloV5网络架构</li>
+</ul>
+<p>输入，backbone，neck，output</p>
+<ul>
+<li>知道yoloV5中使用的策略</li>
+</ul>
+<p>图像尺寸的调整，图像增强方法，正负样本的设置等。</p>
+<ul>
+<li>能够使用yoloV5框架进行目标检测</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../05-yoloV4%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 2.6.yoloV4算法详解" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              2.6.yoloV4算法详解
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a87c2adc.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

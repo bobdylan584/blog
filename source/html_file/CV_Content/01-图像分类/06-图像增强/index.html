@@ -1,0 +1,791 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
+    
+    
+      
+        <title>1.6 图像增强 - 计算机视觉基础CV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#16" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="计算机视觉基础CV" class="md-header__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计算机视觉基础CV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.6 图像增强
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="计算机视觉基础CV" class="md-nav__button md-logo" aria-label="计算机视觉基础CV" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    计算机视觉基础CV
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        课程介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第一章 图像分类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章 图像分类" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 图像分类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-overview/" class="md-nav__link">
+        1.1 图像分类简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-AlexNet/" class="md-nav__link">
+        1.2 AlexNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-VGGNet/" class="md-nav__link">
+        1.3 VGG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-GoogLeNet/" class="md-nav__link">
+        1.4 GoogLeNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-ResNet/" class="md-nav__link">
+        1.5 ResNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          1.6 图像增强
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1.6 图像增强
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.常用的图像增强方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2torchvisiontransforms" class="md-nav__link">
+    2.torchvision.transforms进行图像增强
+  </a>
+  
+    <nav class="md-nav" aria-label="2.torchvision.transforms进行图像增强">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 几何变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 颜色变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 增强方法的组合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="md-nav__link">
+        1.7 模型微调
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-%E6%B1%BD%E8%BD%A6%E8%BD%A6%E5%9E%8B%E5%88%86%E7%B1%BB%E6%A1%88%E4%BE%8B/" class="md-nav__link">
+        1.8 汽车车型分类案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第二章 目标检测
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章 目标检测" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 目标检测
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/00-overview/" class="md-nav__link">
+        2.1 目标检测概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/01-RCNN/" class="md-nav__link">
+        2.2 R-CNN网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/02-Faster-RCNN/" class="md-nav__link">
+        2.3 Faster-RCNN网络
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/03-wheat_detection_fasterRCNN/" class="md-nav__link">
+        2.4 麦穗检测案例-FasterRCNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/04-yolo/" class="md-nav__link">
+        2.5.yolo系列
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/05-yoloV4%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.6.yoloV4算法详解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/06-yoloV5%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        2.7.yoloV5算法详解及案例
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.常用的图像增强方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2torchvisiontransforms" class="md-nav__link">
+    2.torchvision.transforms进行图像增强
+  </a>
+  
+    <nav class="md-nav" aria-label="2.torchvision.transforms进行图像增强">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 几何变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 颜色变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 增强方法的组合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="16">1.6 图像增强<a class="headerlink" href="#16" title="Permanent link">&para;</a></h1>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>知道图像增强的常用方法</li>
+<li>能够利用torchvision来完成图像增强</li>
+</ul>
+<hr />
+<p><img alt="image-20200810165426167" src="../assets/image-20200810165426167.png" /></p>
+<p>大规模数据集是成功应用深度神经网络的前提。例如，我们可以对图像进行不同方式的裁剪，使感兴趣的物体出现在不同位置，从而减轻模型对物体出现位置的依赖性。我们也可以调整亮度、色彩等因素来降低模型对色彩的敏感度。可以说，在当年AlexNet的成功中，图像增强技术功不可没</p>
+<h2 id="1">1.常用的图像增强方法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>图像增强（image augmentation）指通过剪切、旋转/反射/翻转变换、缩放变换、平移变换、尺度变换、对比度变换、噪声扰动、颜色变换等一种或多种组合数据增强变换的方式来增加数据集的大小。图像增强的意义是通过对训练图像做一系列随机改变，来产生相似但又不同的训练样本，从而扩大训练数据集的规模，而且随机改变训练样本可以降低模型对某些属性的依赖，从而提高模型的泛化能力。</p>
+<p>常见的图像增强方式可以分为两类：几何变换类和颜色变换类</p>
+<ul>
+<li>几何变换类，主要是对图像进行几何变换操作，包括**翻转，旋转，裁剪，变形，缩放**等。</li>
+</ul>
+<p><img alt="image-20200810171853023" src="../assets/image-20200810171853023.png" /></p>
+<ul>
+<li>颜色变换类，指通过模糊、颜色变换、擦除、填充等方式对图像进行处理</li>
+</ul>
+<p><img alt="image-20200810172119008" src="../assets/image-20200810172119008.png" /></p>
+<p>实现图像增强可以通过torchvision.transforms来完成。</p>
+<h2 id="2torchvisiontransforms">2.torchvision.transforms进行图像增强<a class="headerlink" href="#2torchvisiontransforms" title="Permanent link">&para;</a></h2>
+<p>torchvision中的图像增强方法主要是针对 PIL.Image 对象和 torch.Tensor 对象。在这里我们使用pillow读取图像进行增强，pillow读取的图像数据是PIL.Image 对象，经transforms增强后仍然是 PIL.Image 对象。首先我们导入所需的工具包并读取要处理的图像：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的工具包：图像读取，图像增强和绘制图像的</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># 读取图像并进行显示</span>
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./dog.jpg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+</code></pre></div>
+<p>图像的展示结果如下所示：</p>
+<p><img alt="image-20220704180129983" src="../assets/image-20220704180129983.png" /></p>
+<h3 id="21">2.1 几何变换<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>左右翻转图像是最早也是最广泛使用的一种图像增广方法。可以通过transforms.RandomHorizontalFlip(p=0.5)来实现图像左右翻转，参数P表示水平翻转的概率。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 水平翻转：以0.5的概率进行水平翻转</span>
+<span class="n">transforms_HF</span> <span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">dog_HF</span> <span class="o">=</span> <span class="n">transforms_HF</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_HF</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="image-20220704181533773" src="../assets/image-20220704181533773.png" /></p>
+<p>创建transforms.RandomVerticalFlip(p=0.5)实例来实现图像的上下翻转，上下翻转使用的较少。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 垂直上下翻转：以0.5的概率进行翻转</span>
+<span class="n">transforms_VF</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomVerticalFlip</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">dog_VF</span> <span class="o">=</span> <span class="n">transforms_VF</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_VF</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="image-20220704181500367" src="../assets/image-20220704181500367.png" /></p>
+<p>随机裁剪是从原始图像中裁剪出一部分区域，并且要对宽高进行设置，使用的方法是transforms.RandomCrop(size=(H, W))，H和W要小于图像的高和图像的宽。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 随机裁剪：宽高要小于原始图像的宽高</span>
+<span class="n">transforms_RC</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomCrop</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+<span class="n">dog_RC</span> <span class="o">=</span> <span class="n">transforms_RC</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_RC</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="image-20220704182736653" src="../assets/image-20220704182736653.png" /></p>
+<p>图像尺寸的调整，这个方法我们在前面已经多次使用过，即完成图像尺寸大小的调整。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 尺寸调整</span>
+<span class="n">transforms_RS</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
+<span class="n">dog_RS</span> <span class="o">=</span> <span class="n">transforms_RS</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_RS</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="image-20220704183922522" src="../assets/image-20220704183922522.png" /></p>
+<h3 id="22">2.2 颜色变换<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>另一类增强方法是颜色变换。我们可以从4个方面改变图像的颜色：亮度、对比度、饱和度和色调。使用的API是transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)：</p>
+<ul>
+<li>brightness:亮度，取值范围为 [0.0, 1.0], 当取值为0.5时，表示将图像的亮度随机变化为原图亮度的<span class="arithmatex"><span class="MathJax_Preview">50\%</span><script type="math/tex">50\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1-0.5</span><script type="math/tex">1-0.5</script></span>）<span class="arithmatex"><span class="MathJax_Preview">\sim 150\%</span><script type="math/tex">\sim 150\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1+0.5</span><script type="math/tex">1+0.5</script></span>）之间。</li>
+<li>contrast：对比度,取值范围为 [0.0, 1.0], 当取值为0.5时，表示将图像的对比度随机变化为原图对比度的<span class="arithmatex"><span class="MathJax_Preview">50\%</span><script type="math/tex">50\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1-0.5</span><script type="math/tex">1-0.5</script></span>）<span class="arithmatex"><span class="MathJax_Preview">\sim 150\%</span><script type="math/tex">\sim 150\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1+0.5</span><script type="math/tex">1+0.5</script></span>）之间。</li>
+<li>saturation：饱和度,取值范围为 [0.0, 1.0], 当取值为0.5时，表示将图像的饱和度随机变化为原图饱和度的<span class="arithmatex"><span class="MathJax_Preview">50\%</span><script type="math/tex">50\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1-0.5</span><script type="math/tex">1-0.5</script></span>）<span class="arithmatex"><span class="MathJax_Preview">\sim 150\%</span><script type="math/tex">\sim 150\%</script></span>（即<span class="arithmatex"><span class="MathJax_Preview">1+0.5</span><script type="math/tex">1+0.5</script></span>）之间。</li>
+<li>hue：色调，取值范围为 [-0.5, 0.5]，当取值为0.2时，表示将图像的色调就在[-0.2,0.2]之间取值。</li>
+</ul>
+<p>接下来我们将亮度，对比度和饱和度设置为0.5，色调设置为0.2，对图像进行增强实现如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 颜色调整</span>
+<span class="n">transforms_color</span> <span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">ColorJitter</span><span class="p">(</span><span class="n">brightness</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">contrast</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">dog_color</span> <span class="o">=</span> <span class="n">transforms_color</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_color</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="image-20220704190327999" src="../assets/image-20220704190327999.png" /></p>
+<h3 id="23">2.3 增强方法的组合<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>我们可以将几何增强和颜色增强组合在一起对图像进行增强，使用的方法是transforms.Compose(transforms) 。我们将颜色增强和尺寸变换组合在一起，具体使用如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 将几何变换和颜色变换组合在一起</span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms_RS</span><span class="p">,</span><span class="n">transforms_color</span><span class="p">])</span>
+<span class="n">dog_</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dog_</span><span class="p">)</span>
+</code></pre></div>
+<p>增强后的结果如下所示：（图像的尺寸进行了增强+颜色也进行了增强）</p>
+<p><img alt="image-20220704191226702" src="../assets/image-20220704191226702.png" /></p>
+<hr />
+<p><strong>总结</strong></p>
+<ul>
+<li>常用的图像增强方法：几何和颜色</li>
+<li>使用torchvision.transforms完成图像增强</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../05-ResNet/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1.5 ResNet" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              1.5 ResNet
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../07-%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1.7 模型微调" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              1.7 模型微调
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a87c2adc.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
