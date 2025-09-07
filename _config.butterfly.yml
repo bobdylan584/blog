@@ -63,10 +63,10 @@ avatar:
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img:
+default_top_img: https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg
 
 # The banner image of index page
-index_img:
+index_img: https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg
 
 # The banner image of archive page
 archive_img:
@@ -1054,6 +1054,26 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
+    - |
+      <style>
+        #page-header {
+          background-size: cover !important;
+          background-position: center !important;
+        }
+        /* 确保标题文字可见 */
+        #page-header .post-title,
+        #page-header #site-title {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+          color: white !important;
+        }
+      </style>
+# 以下是用来改章节背景的
+#    - |
+#      <style>
+#        body {
+#          background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
+#        }
+#      </style>
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     # - <script src="xxxx"></script>
