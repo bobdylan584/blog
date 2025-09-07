@@ -93,18 +93,12 @@ footer_img: false
 # Website Background
 # Can set it to color or image url
 background:
-  # 启用背景图片
-  enable: true
-  # 填写您从阿里云图床获取的图片URL
-  url: https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg
-  # 背景显示方式：覆盖整个屏幕
-  size: cover
-  # 背景不重复
-  repeat: no-repeat
-  # 背景位置：居中
-  position: center
-  # 背景是否随页面滚动（fixed为固定，scroll为滚动）
-  attachment: fixed
+  enable: true # 是否启用背景图片
+  url: https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg # 图片URL
+  size: cover # 背景显示方式：覆盖整个屏幕
+  repeat: no-repeat # 背景不重复
+  position: center # 背景位置：居中
+  attachment: fixed # 背景是否随页面滚动 (fixed为固定，scroll为滚动)
 
 cover:
   # Disable the cover or not
@@ -1052,31 +1046,130 @@ css_prefix: true
 
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
+
+
 inject:
   head:
     - |
       <style>
-        #page-header {
-          background-size: cover !important;
-          background-position: center !important;
+        /* 强制设置全局背景 */
+        #web_bg {
+          background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
         }
-        /* 确保标题文字可见 */
-        #page-header .post-title,
-        #page-header #site-title {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-          color: white !important;
+        /* 确保背景显示 */
+        #web_bg:before {
+          content: none !important;
+        }
+
+        /* 【核心】隐藏头部原有的背景图片，为视频腾出空间 */
+        #page-header {
+          background: none !important;
+        }
+        #page-header:before {
+          display: none !important;
+        }
+        #page-header.post-bg, #page-header.not-home-page {
+          background: none !important;
+        }
+
+        /* 视频容器样式 - 绝对定位，覆盖整个头部区域 */
+        .header-video-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: -1;
+        }
+        /* 视频元素样式 */
+        .header-video {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          min-width: 100%;
+          min-height: 100%;
+          width: auto;
+          height: auto;
+          transform: translate(-50%, -50%);
+          object-fit: cover;
+        }
+        /* 确保头部内的文字等内容显示在视频之上 */
+        #page-header > * {
+          position: relative;
+          z-index: 2;
+        }
+        /* 为头部添加一个深色遮罩，增强文字可读性 */
+        #page-header:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: 1;
+        }
+        /* 移动端优化：在移动端隐藏视频，回退到您原来的背景图片 */
+        @media (max-width: 768px) {
+          .header-video-container {
+            display: none;
+          }
+          #page-header {
+            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat !important;
+          }
+          #page-header:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+          }
         }
       </style>
-# 以下是用来改章节背景的
-#    - |
-#      <style>
-#        body {
-#          background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
-#        }
-#      </style>
-    # - <link rel="stylesheet" href="/xxx.css">
   bottom:
-    # - <script src="xxxx"></script>
+    - |
+      <script>
+        // 等待DOM加载完毕
+        document.addEventListener('DOMContentLoaded', function() {
+          // 找到页面头部
+          const pageHeader = document.getElementById('page-header');
+          if (pageHeader) {
+            // 创建视频容器
+            const videoContainer = document.createElement('div');
+            videoContainer.className = 'header-video-container';
+
+            // 创建视频元素
+            const video = document.createElement('video');
+            video.className = 'header-video';
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+
+            // 添加视频源
+            const source = document.createElement('source');
+            source.src = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core.mp4';
+            source.type = 'video/mp4';
+            video.appendChild(source);
+
+            // 将视频元素添加到容器
+            videoContainer.appendChild(video);
+            // 将视频容器插入到页头的最前面
+            pageHeader.prepend(videoContainer);
+          }
+        });
+      </script>
+
+
+
+
+
+
+
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
