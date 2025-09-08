@@ -1060,16 +1060,8 @@ inject:
         /* 移动端背景优化 */
         @media (max-width: 768px) {
           #web_bg {
-            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/contain no-repeat fixed !important;
-            background-color: #f8f9fa !important; /* 添加背景色填充空白区域 */
-          }
-        }
-        
-        /* 小屏手机进一步优化 */
-        @media (max-width: 480px) {
-          #web_bg {
-            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/contain no-repeat fixed !important;
-            background-color: #e9ecef !important; /* 更深的背景色 */
+            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
+            background-color: #f8f9fa !important;
           }
         }
 
@@ -1129,16 +1121,16 @@ inject:
         }
         /* 移动端优化：调整视频显示方式 */
         @media (max-width: 768px) {
-        #web_bg {
-        /* 使用专门为移动端优化裁剪的图片版本 */
-          background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest-mobile.jpg') center/cover no-repeat fixed !important;
+          /* 确保在移动端头部不会重复显示全局背景图 */
+          #page-header {
+            background: none !important;
+          }
+          /* 调整移动端遮罩透明度，确保文字清晰 */
+          #page-header:after {
+            background: rgba(0, 0, 0, 0.5);
           }
         }
       </style>
-      
-      
-      
-      
   bottom:
     - |
       <script>
@@ -1172,8 +1164,6 @@ inject:
           }
         });
       </script>
-
-
 
 
 
