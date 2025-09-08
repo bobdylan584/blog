@@ -977,11 +977,13 @@ note:
 # --------------------------------------
 
 # https://github.com/MoOx/pjax
+# https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   # Exclude the specified pages from pjax, such as '/music/'
-  exclude:
-    # - /xxxxxx/
+  exclude: []
+  preload:
+    enable: true
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
