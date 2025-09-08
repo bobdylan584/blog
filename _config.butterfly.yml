@@ -1057,8 +1057,6 @@ inject:
           background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
         }
         
-        
-        
         /* 移动端背景优化 - 清晰版 */
         @media (max-width: 768px) {
           #web_bg {
@@ -1066,12 +1064,6 @@ inject:
             background-color: #f0f4f8 !important;
           }
         }
-        
-        
-        
-        
-        
-     
 
         /* 确保背景显示 */
         #web_bg:before {
@@ -1138,11 +1130,16 @@ inject:
             background: rgba(0, 0, 0, 0.5);
           }
         }
+
+        /* 视频加载过渡效果 */
+        .header-video {
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+        }
+        .header-video.loaded {
+          opacity: 1;
+        }
       </style>
-
-
-# 在 inject -> bottom 部分替换视频链接为优化后的版本
-
   bottom:
     - |
       <script>
@@ -1163,9 +1160,37 @@ inject:
             video.loop = true;
             video.playsInline = true;
 
+            // 智能视频源选择
+            function getOptimalVideoSource() {
+              const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              
+              // 检测网络状况
+              if (navigator.connection) {
+                const connection = navigator.connection;
+                const isSlowNetwork = connection.saveData || 
+                                     connection.effectiveType === 'slow-2g' || 
+                                     connection.effectiveType === '2g' ||
+                                     connection.downlink < 1; // 小于 1Mbps
+
+                if (isSlowNetwork) {
+                  console.log('慢速网络，使用超压缩版本');
+                  return 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-ultra-compressed.mp4';
+                }
+              }
+
+              // 根据设备类型选择视频
+              if (isMobile) {
+                console.log('移动设备，使用移动优化版本');
+                return 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-mobile.mp4';
+              } else {
+                console.log('PC设备，使用高清版本');
+                return 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-pc.mp4';
+              }
+            }
+
             // 添加视频源
             const source = document.createElement('source');
-            source.src = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-ultra-compressed.mp4';
+            source.src = getOptimalVideoSource();
             source.type = 'video/mp4';
             video.appendChild(source);
 
@@ -1173,8 +1198,71 @@ inject:
             videoContainer.appendChild(video);
             // 将视频容器插入到页头的最前面
             pageHeader.prepend(videoContainer);
+
+            // 视频加载事件处理
+            video.addEventListener('loadeddata', function() {
+              console.log('视频加载完成');
+              video.classList.add('loaded');
+              
+              // 发送性能数据到统计（可选）
+              const loadTime = performance.now();
+              console.log(`视频加载耗时: ${loadTime.toFixed(2)}ms`);
+            });
+
+            video.addEventListener('canplay', function() {
+              console.log('视频可以播放');
+              video.play().catch(e => console.log('自动播放被阻止:', e));
+            });
+
+            video.addEventListener('error', function(e) {
+              console.error('视频加载失败:', e);
+              
+              // 备用方案：如果指定视频加载失败，尝试使用移动版
+              if (!source.src.includes('mobile')) {
+                console.log('尝试使用移动版作为备用');
+                source.src = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-mobile.mp4';
+                video.load();
+              }
+            });
+
+            // 添加网络变化监听
+            if (navigator.connection) {
+              navigator.connection.addEventListener('change', function() {
+                console.log('网络状态变化，重新选择视频源');
+                const newSource = getOptimalVideoSource();
+                if (newSource !== source.src) {
+                  source.src = newSource;
+                  video.load();
+                }
+              });
+            }
           }
         });
+
+        // 添加视频预加载提示（可选）
+        function addVideoLoadingIndicator() {
+          const style = document.createElement('style');
+          style.textContent = `
+            .video-loading-indicator {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              color: white;
+              font-size: 14px;
+              z-index: 10;
+              background: rgba(0,0,0,0.7);
+              padding: 8px 16px;
+              border-radius: 20px;
+              display: none;
+            }
+            .video-loading .video-loading-indicator {
+              display: block;
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        addVideoLoadingIndicator();
       </script>
 
 
