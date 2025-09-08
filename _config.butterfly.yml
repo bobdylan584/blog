@@ -1057,13 +1057,21 @@ inject:
           background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
         }
         
-        /* 移动端背景优化 */
+        
+        
+        /* 移动端背景优化 - 清晰版 */
         @media (max-width: 768px) {
           #web_bg {
-            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
-            background-color: #f8f9fa !important;
+            background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1)), url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
+            background-color: #f0f4f8 !important;
           }
         }
+        
+        
+        
+        
+        
+     
 
         /* 确保背景显示 */
         #web_bg:before {
