@@ -1052,10 +1052,27 @@ inject:
   head:
     - |
       <style>
-        /* 强制设置全局背景 */
+        /* 强制设置全局背景 - PC端 */
         #web_bg {
           background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/cover no-repeat fixed !important;
         }
+        
+        /* 移动端背景优化 */
+        @media (max-width: 768px) {
+          #web_bg {
+            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/contain no-repeat fixed !important;
+            background-color: #f8f9fa !important; /* 添加背景色填充空白区域 */
+          }
+        }
+        
+        /* 小屏手机进一步优化 */
+        @media (max-width: 480px) {
+          #web_bg {
+            background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest.jpg') center/contain no-repeat fixed !important;
+            background-color: #e9ecef !important; /* 更深的背景色 */
+          }
+        }
+
         /* 确保背景显示 */
         #web_bg:before {
           content: none !important;
@@ -1110,12 +1127,8 @@ inject:
           background: rgba(0, 0, 0, 0.4);
           z-index: 1;
         }
-        /* 移动端优化：调整视频显示方式，避免性能问题但保持视频背景 */
+        /* 移动端优化：调整视频显示方式 */
         @media (max-width: 768px) {
-          .header-video {
-            /* 在移动端可以适当降低视频质量或调整显示方式 */
-            /* 保持视频显示，但确保不会影响性能 */
-          }
           /* 确保在移动端头部不会重复显示全局背景图 */
           #page-header {
             background: none !important;
@@ -1124,11 +1137,6 @@ inject:
           #page-header:after {
             background: rgba(0, 0, 0, 0.5);
           }
-        }
-        /* 极端情况下，如果某些移动设备真的无法播放视频，提供备选方案 */
-        @media (max-width: 768px) and (max-device-width: 1024px) {
-          /* 如果检测到是性能较低的移动设备，可以回退到图片 */
-          /* 但这个规则优先级较低，正常情况下不会触发 */
         }
       </style>
       
