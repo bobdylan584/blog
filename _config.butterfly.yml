@@ -1131,7 +1131,7 @@ inject:
         @media (max-width: 768px) {
         #web_bg {
         /* 使用专门为移动端优化裁剪的图片版本 */
-        background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest-mobile.jpg') center/cover no-repeat fixed !important;
+          background: url('https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/canyon_forrest-mobile.jpg') center/cover no-repeat fixed !important;
           }
         }
       </style>
