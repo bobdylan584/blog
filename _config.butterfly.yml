@@ -1139,6 +1139,10 @@ inject:
           }
         }
       </style>
+
+
+# 在 inject -> bottom 部分替换视频链接为优化后的版本
+
   bottom:
     - |
       <script>
@@ -1161,7 +1165,7 @@ inject:
 
             // 添加视频源
             const source = document.createElement('source');
-            source.src = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core.mp4';
+            source.src = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/AI_core-ultra-compressed.mp4';
             source.type = 'video/mp4';
             video.appendChild(source);
 
@@ -1172,9 +1176,6 @@ inject:
           }
         });
       </script>
-
-
-
 
 
 
