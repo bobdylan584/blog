@@ -445,11 +445,53 @@ Milvus会高效地计算查询向量与所有文档向量的点积（实际上�
 
 **总结**
 
-1. **Redis中存储的是字符串**：无论是简单的answer文本还是复杂的结构化数据，最终在Redis中都存储为字符串
-2. **Answer字段通常是字符串**：可以是纯文本或JSON序列化的结构化数据
-3. **推荐使用JSON序列化**：便于存储复杂结构和元数据
+1. **Redis中存储的是字符串**：无论是键值对的key还是value，最终在Redis中都只能存储为字符串
+2. **Answer字段通常是字符串**：可以是纯文本或JSON格式下的字符串形式字典
+3. **推荐使用JSON序列化**：可以把字典、列表、元组等python复杂数据类型转化为client.set(key, value)可识别的json格式的字符串类型或者转成redis的数据类型：比如python的字典=redis的Hash，python的列表=redis的List，set=Set。但是它们通通可以转为redis可识别的json格式的字符串。
 4. **Query哈希作为key**：确保唯一性和快速查找
 5. **包含元数据字段**：便于缓存管理和质量评估
+
+**redis数据库不存在表这一说。相当于mysql中的一个数据库，一张表。表中有两个字段，一个是hash(query)字段，一个是answer字符串字段。不过是json格式的，表现为字典字样。查询时load还原成字典，即可返回查询。**
+
+**操作有：**
+
+增（client.set()）
+
+删( client.delete() )
+
+查( client.get() )、（ client.keys()）
+
+## 终端运行也能成功，导包必须注意
+
+在当前要运行的py文件中，告诉你要导包所在的路径即可（也就是把你要导的包的路径加到sys系统路径变量里）。
+
+相当于安装一个软件，然后给他配一个系统环境path变量
+
+```python3
+integrated_qa_system\mysql_qa\db\mysql_client.py
+
+import os
+import sys
+
+# 找到根路径path3
+path_0 = os.path.abspath(__file__)
+path_1 = os.path.dirname(path_0)
+path_2 = os.path.dirname(path_1)
+path_3 = os.path.dirname(path_2)
+
+# 把根目录名和config、logger两个py文件所在的文件夹路径名base拼接起来
+base_path = os.path.join(path_3,"base")
+# 得到base_path,插入到sys.path里面，让mysql_client.py找的到config和logger
+sys.path.insert(0, base_path)
+
+# 导包
+from config import Config
+from logger import logger
+```
+
+
+
+
 
 
 
