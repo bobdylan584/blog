@@ -257,6 +257,26 @@ RAG系统中，mysql系统检索，需要将query文档分词，做关键字检�
 
 所以client.set( key,json.dump(value) )；必须要把value转成字符串。
 
+## MYSQL-QA总结
+
+定义好mysql、redis的增删改查（set_data、get_answer、insert_data、fetch_answer）。检索时用户query先去bm25(query, threshold=0.85)做相似度匹配。
+
+**step1：定义方法      _load_data()**
+
+先把mysql中加载的所有的原始问题和分词后的问题存到redis当中。如果mysql中有更新answer的话，需要把redis的qa_original_questions和qa_tokenized_questions；清除，然后从mysql中从新加载一遍。从而给bm25(tokenized_question),备下比较文档tokenized_question。上述的两个qa_original_questions和qa_tokenized_questions只是用来备料而已，没有别的作用。redis中的高频问答对，是从mysql中检索出来后加进来的。
+
+**step2：定义方法      search()**
+
+先检查redis数据库中有没有添加过的问答对，没有才走mysql检索。有的话就return answer；return是方法的出口，执行完就代表方法执行结束，下面的检索mysql就不会执行了。
+
+如果redis数据库中没有answer，就去mysql数据库中bm25检索，检索到最匹配的答案。连同query和answer，一并存入redis    方法：set_data。
+
+相同问题再进来，直接进入redis中，进行匹配返回。
+
+
+
+
+
 
 
 # 模块二、自问自答
@@ -491,7 +511,326 @@ from logger import logger
 
 
 
+# 模块三 milvus检索
 
+## milvus检索，整体架构与工程流程
+
+### 代码目录结构
+
+prompts.py		提示词模版
+
+query_classifier.py		查询分类器
+
+strategy_selector.py		检索策略选择器
+
+vector_store.py		向量储存与检索
+
+rag_system.py 		rag系统核心逻辑
+
+### milvus系统基本工作流程
+
+#### note1：查询分类
+
+意图识别（调用二分类模型，区分是通用知识还是专业查询？通用知识直接调用大模型回答，专业知识就需要经过Milvus检索。因为milvus检索非常慢，是最后一步）；
+
+e.g.通用知识：华为手机在哪个平台购买，最可靠？；领域知识：我货号为xxx的手机现在到哪里了？
+
+![1757755008895](C:\Users\gan\AppData\Roaming\Typora\typora-user-images\1757755008895.png)
+
+#### note2：选择检索策略”、“文档检索”
+
+优化部分，一开始是直接进入milvus系统进行检索，但后续项目迭代优化，做了“选择检索策略”、“文档检索”等一系列优化。
+
+主要原因是用户的query，比较抽象和复杂，导致检索效果不佳
+
+**选择检索策略：**
+
+根据查询特点选择检索策略：本质上是为了更精确的检索到query相似度最高的上下文。
+
+​	直接检索：适用于明确查询
+
+​	HyDE检索：适用于抽象问题，生成假设答案后检索。
+
+实现流程：先将query送入大模型，大模型理解后得到一个答案，基于这个答案再去检索，检索到的上下文和用户的query做一个拼接。一并送入大模型做理解式生成最终答案。
+
+​	子查询检索：分解复杂查询。主要场景是，用户query中涉及多个实体，需要拆解成多个子问题进行查询，比如mate70对比mate60，有哪些优化？需要拆分成mate70的功能点是什么？mate70的功能点有什么？
+
+​	回溯检索：简化复杂问题后检索
+
+## 项目迭代
+
+### 	V1: 基础的RAG系统（无任何优化）
+
+实现流程：
+
+**加载与切分文档**：从多种类文档（txt、pdf）加载并切分成块
+
+**向量存储**：embedding模型转化文档为稠密向量储存
+
+**答案生成：**基于检索到的上下文送给大模型进行生成回答
+
+###		V2: 对查询做一个增强（检索策略），增强检索精度
+
+实现流程：
+
+**假设文档嵌入：**当用户的query检索不到数据时，就用大模型针对用户query做一个假设性回答，基于这个回答，再去检索答案文档。最后把检索到的文档+用户query一并送给大模型生成答案返回。
+
+**子查询：**当用户的查询涉及多个实体时，分解成多个实体去查，也就是分成多个query。
+
+**回溯提示**：把用户的query做一个意图提炼和查询重写，就是把用户的query的中心思想用另一句话表达出来。
+
+### 		V3: 增强索引 （加快检索速度）
+
+实现流程：
+
+**多粒度切块：** 存数据时，是一块一块的存，现在把 “块” 分成子块和父块两种粒度：子块和对应的父块。检索时，先搜索子块，如果检索出的topk个子块中，有特定n个子块属于同一个父块，就把这个父块作为上下文信息，提供给LLM。
+
+这是因为用户的query往往比较短，小的可能只有4个token。但是我们切块一般是按照200到500 个token的数量去切，如果用4个token去和500个token的文档做相似度计算，效果会很差。但是如果把500个token的父块，拆成10(超参数)个子块，也就是50个token。相似度计算精度就会提升很多。
+
+**混合检索：**把文档转成向量时，有两种方法，一个是embedding模型转化的dense vector，稠密向量。一个是关键字算法bm25，得到的每一个关键字的bm25分数，这是稀疏向量（query中的分词都做bm25计算，子块向量也根据query的分词，做bm25计算）。最后用重排RRF对稀疏和稠密检索到的上下文进行一个排序，让大模型根据顺序进行权重分配，生成最终的答案。
+
+### 		V4: 改进检索器
+
+核心功能：
+
+**元数据过滤：**比如milvus数据库做增删改查操作的时候，可以加一个filter字段，也就是条件查询，比如设置schema时的动态字段：{"color":"pink_8682"}。filter = color=pink。这可以减少不必要的检索。相当于按照部门来区分，比如功耗类，性能类
+
+**查询场景：**我们是海思下面的kirin产品线，专做kirin知识检索。专门给用户一个提示词，把用户的问题从源头做一个分类：
+
+按按研发阶段分类
+
+按知识领域分类、
+
+按知识类型分类
+
+### **Kirin产品线RAG系统知识分类体系**
+
+我们将采用 **“研发阶段 + 知识领域 + 知识类型”** 的三维过滤体系，这是最符合芯片开发流程的方式。
+
+#### **第一级：按研发阶段分类 (Development Phase)**
+
+这是芯片开发的核心脉络，工程师通常很清楚自己当前所处的阶段。**（这是最高效的一级过滤器）**
+
+| 分类标签                           | 说明                                                         | 典型查询示例                            |
+| ---------------------------------- | ------------------------------------------------------------ | --------------------------------------- |
+| **architecture** (架构设计)        | 芯片spec定义、IP选型、性能功耗面积（PPA）目标设定、系统框图。 | “Kirin 9000的CPU集群架构是怎样的？”     |
+| **frontend_design** (前端设计)     | RTL编码、IP集成、低功耗设计（UPF）、功能仿真。               | “如何为GPU模块编写UPF文件？”            |
+| **verification** (功能验证)        | 模块级/芯片级验证、UVM、形式验证、功耗感知验证、代码覆盖率。 | “如何为DPU模块生成随机测试向量？”       |
+| **physical_design** (物理实现)     | 逻辑综合、布局布线、时钟树综合、时序签核、物理签核（DRC/LVS）。 | “Innovus中修复建立时间违例的常用命令？” |
+| **analog_rf_design** (模拟/RF设计) | 特定于Kirin的PMIC、音频编解码器、射频收发器等模拟IP设计。    | “LPDDR5 PHY的阻抗校准流程？”            |
+| **sdk_development** (SDK开发)      | 芯片底层驱动、Bootloader、固件、Hal层开发。                  | “如何配置NPU的中断寄存器？”             |
+| **post_silicon** (硅后测试)        | **（你的主场）** CP/FT测试、系统级功能/性能/功耗/可靠性测试、故障诊断。 | “游戏场景下GPU功耗超标的排查步骤？”     |
+| **customer_support** (客户支持)    | 面向手机厂商（如华为终端）的参考设计、问题排查、调试支持。   | “某型号手机摄像头启动慢如何定位？”      |
+
+#### **第二级：按知识领域分类 (Knowledge Domain)**
+
+这是在“研发阶段”下的二次细分，指向具体的技术模块。
+
+| 分类标签                         | 说明                                     | 通常从属于哪个阶段                              |
+| -------------------------------- | ---------------------------------------- | ----------------------------------------------- |
+| **cpu** (CPU)                    | ARM核、微架构、调度                      | architecture, verification, post_silicon        |
+| **gpu** (GPU)                    | Mali/自研GPU、图形驱动                   | architecture, verification, sdk_development     |
+| **npu** (NPU)                    | AI处理器、算子库                         | architecture, sdk_development, post_silicon     |
+| **isp** (ISP)                    | 图像信号处理器、图像调优                 | verification, sdk_development, customer_support |
+| **modem** (通信基带)             | 5G/4G协议、射频校准                      | analog_rf_design, post_silicon                  |
+| **mm** (多媒体)                  | 视频编解码（VDE）、显示处理（DPU）       | verification, sdk_development                   |
+| **connectivity** (连接性)        | Wi-Fi 7、蓝牙、GPS                       | analog_rf_design, post_silicon                  |
+| **power_thermal** (功耗与热管理) | **你的核心领域**：DVFS、电源域、温控策略 | architecture, physical_design, **post_silicon** |
+| **memory** (存储子系统)          | LPDDR5、UFS、缓存一致性                  | physical_design, verification                   |
+| **security** (安全)              | TrustZone、加密引擎、安全启动            | architecture, sdk_development                   |
+| **dfx** (可测试性设计)           | DFT、DFD（可调试性设计）                 | frontend_design, post_silicon                   |
+
+#### **第三级：按知识类型分类 (Knowledge Type)**
+
+定义知识的形态和权威性，用于筛选信息的“原材料”。
+
+| 分类标签                         | 说明                                                     |
+| -------------------------------- | -------------------------------------------------------- |
+| **design_spec** (设计规范)       | 最权威的需求文档，如《Kirin XYZ CPU子系统设计规范》      |
+| **test_spec** (测试规范)         | 《Kirin XYZ 硅后功耗测试规范》                           |
+| **verification_plan** (验证计划) | 《ISP模块验证计划》                                      |
+| **rca_report** (问题案例)        | **最宝贵！** 《20240501_某游戏闪退_GPU功耗毛刺_RCA报告》 |
+| **application_note** (应用笔记)  | 《如何调试NPU模型精度损失问题》                          |
+| **tool_manual** (工具手册)       | 内部功耗分析平台、示波器、ATE机台的使用指南              |
+| **review_material** (评审材料)   | TR4/TR5评审会议纪要，记录关键决策和风险点                |
+| **standard** (行业标准)          | 3GPP、JEDEC、MIPI等标准协议                              |
+
+------
+
+###		V5 自我反思
+
+用大模型评估我检索出的结果和query的相关性，如果达不到我要的指标，就让RAG再次进行检索。
+
+### 		V6路由选择：为了提升时间效率
+
+做了一个二分类，意图识别。考虑到通用知识也进入RAG检索的话，就时间效率太低了。
+
+# RAG系统评估
+
+## 定义
+
+全称是：retrieval augmented generation assessment。即检索增强生成的自动评估。评估主要基于两个方面：检索retrieval和生成generation。生成好坏决定是否要更换模型，更换成参数量更大的模型，检索效果好坏决定是否要改retrieval相关代码和超参数。例如切块的大小等等
+
+评估所需数据集：
+
+query：作为RAG管道输入的用户查询，输入。
+
+answer：从RAG管道生成的答案，输出。（predict）rag系统获取，写到数据集里
+
+contexts：从用于回答question外部知识源中检索的上下文。rag系统获取，写到数据集里
+
+ground_truths：question的基本事实答案，这是唯一人工注释的信息。（label）
+
+### 指标：
+
+**1、answer relevancy：**（这属于**“生成”**生成效果的评估，锚点是大模型的**“回答”**）
+
+代表**query**和**answer**之间的关系。
+
+```
+原理：
+基于生成的答案；用大模型对其生成n个question。再用余弦相似度计算question和用户query的相似度。分数越高，相关性越好。
+
+实现方式：
+为了估计答案的相关性，提示大模型根据给定的答案生成N个潜在问题Qi；编写如下提示词：
+为给定答案生成一个问题
+答案：[答案]
+
+具体步骤：（生成一个question足以）
+1、对给定答案，提示大模型(LLM)生成基于该答案可能得n个问题Qi
+2、使用embedding模型获取所有问题的向量。
+3、对question，计算它与用户query之间的相似度，也就是query向量和question向量的余弦相似度计算
+4、答案相关性分数=N个 余弦计算(question1，query1) 之和；最后除以N
+```
+
+**2、faithfulness：**（这属于**“生成”**生成效果的评估，锚点是大模型的**“回答”**）
+
+代表**answer**和**context**之间的关系
+
+```
+定义：
+忠实度是指答案是根据给定的上下文得到，这对于避免错觉，并确保检索到的上下文可以用作生成答案的依据非常重要。
+如果分数低，表明大模型的回应没有遵循检索到的知识，提供幻觉式答案的可能性增加。
+实现方式：
+提示词1：
+给定一个问题和答案，从给定答案的每个句子中创建一个或多个陈述。
+问题：[问题]
+答案：[答案]
+
+生成从答案中推断出的陈述后，LLM 判断每个陈述 Si 是否可以从 上下文 中推断出来。这个验证步骤使用以下提示进行：
+提示词2：
+考虑给定的上下文和以下陈述，然后确定它们是否由上下文中的信息支持。在得出结论（是/否）之前，为每个陈述提供简要解释。在最后以给定格式为每个陈述提供最终结论。不要偏离指定的格式。
+陈述：[陈述 1]
+...
+陈述：[陈述 n]
+
+计算公式：F=V / S；其中V等于大模型支持的陈述数量， S表示陈述的总数。
+注释：大模型基于生成的答案的每一个句子，生成一段描述的句子，共有S个句子。这些句子可以根据上下文推断出来的有V=(S-M)个。
+```
+
+**3、context precision：**（这属于**“检索”**效果的评估，中心点是你检索出来的**“上下文”**）
+
+代表**query**和**context**之间的关系
+
+```
+定义：
+context precision也就是context应该只包含回答问题所需的信息，惩罚包含冗余信息的情况。
+也就是说检索到的上下文中的废话越多，就代表，检索效果越差，把无用的信息检索出来了。
+比率越高，表示检索到的上下文与问题的相关性越强。
+
+实现方式：
+为了估算 上下文 和大模型的 回答 的相关性，可以借助提示词的形式让大模型帮我们找出来，上下文中抽取出对回答问题query至关重要的句子S
+
+prompt：
+请从提供的{上下文}中提取可能有助于回答以下{问题}的相关句子，
+如果没有找到想相关句子，或者你认为问题无法从给定上下文中得到回答，
+则返回短语“信息不足”
+在提取候选句子时，你不得更改给定上下文中的句子
+
+计算公式 = 上下文中提取的有助于回答query的句子数量num \ 上下文中的句子总数
+e.g. 上下文中提取的有助于回答query的句子数为 5；上下文中句子数一共有10句
+则上下文精确率=5\10=0.5
+```
+
+**4、context recall：**（这属于**“检索”**效果的评估，中心点是你检索出来的**“上下文”**）
+
+代表**context**和**ground truths**之间的关系
+
+```
+原理：
+衡量检索到的上下文context和真实答案ground truths的匹配程度
+该指标通过 标注答案和检索到的上下文计算，分数范围在0到1之间，得分越高表示性能越好。
+
+要从真实答案中估计上下文召回率，需要分析真实答案中的每个句子，以确定它是否可以归因于检索到的上下文。如果召回率为100%，则真实答案中每个句子，大模型都能在检索到的上下文中，找到相同的句子。
+
+计算公式：context recall = （真实答案句子=上下文句子）的句子个数 \ 真实答案的句子数
+
+分子：表示在真实答案（GT）中的论断中，有多少是可以归因于检索到的上下文的。换句话说，这些论断在检索到的上下文中找到了支持或者依据。也就是说：哪些真实答案的句子是可以在上下文中被检索到的
+分母：表示真实答案中论断的总数量，也就是句子的数量。
+
+```
+
+### 总结：
+
+faithfulness忠实度：答案是否忠于上下文。答案的句子能不能在上下文中找到
+
+answer relevancy：基于答案生成question。question和query是否相似
+
+context precision：上下文的句子中，有多少句子，对回答用户query是有帮助的？
+
+context recall：人工写的答案，在上下文中找到多少？
+
+### 最重要的两个指标：以生成为优先级最高的依据
+
+faithfulness：值越高，说明答案幻觉越少
+
+answer relevancy：值越高，说明答案和用户query的相关性越强。（这个是最重要的）
+
+还可以人工去评估。给rag一个query，生成一个答案。人为评估，结果怎么样。
+
+RAG AS+人工评估
+
+也就是faithfulness + answer relevancy + 人工评估
+
+为避免调用本地模型api调用超时，可以买评估模型的api key。
+
+# 基于milvus构建RAG系统
+
+## 文档处理模块    process_documents
+
+定义document_loaders()，里面元素是字典格式{key=后缀，value=加载器名称}
+
+## query意图识别
+
+### 导包
+
+**1、从transformer库导入  分词器和分类方法**
+
+from transformers import BertTokenizer, BertForSequenceClassification
+
+**2、训练库trainer和导入训练参数的方法TrainingArguments**
+
+from transformers import Trainer, TrainingArguments
+
+**3、训练和验证集的划分**
+
+from sklearn.model_selection import train_test_split
+
+**4、评估分数，主要以F1值为主**
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+### trainer和training arguments的使用
+
+
+
+## 初始化方法
+
+### 初始化milvus客户端的，一系列参数，包括collection name、host、port、database等；以及日志记录器、BGE-Reranker模型、BGE-M3这个稠密向量的embedding函数。
+
+### def _create_or_load_collection(self) 创建或加载milvus集合，定义字段、schema和索引参数。为稠密和稀疏向量添加索引。
+
+### add_documents(self, documents)；BGE-M3的embedding模型，为文档转化出稠密向量，
 
 
 
