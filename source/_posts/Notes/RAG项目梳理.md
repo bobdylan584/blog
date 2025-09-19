@@ -681,6 +681,8 @@ contexts：从用于回答question外部知识源中检索的上下文。rag系�
 
 ground_truths：question的基本事实答案，这是唯一人工注释的信息。（label）
 
+
+
 ### 指标：
 
 **1、answer relevancy：**（这属于**“生成”**生成效果的评估，锚点是大模型的**“回答”**）
@@ -794,6 +796,59 @@ RAG AS+人工评估
 
 为避免调用本地模型api调用超时，可以买评估模型的api key。
 
+### 项目版本迭代的原因：
+
+#### answer relevancy   代表**query**和**answer**之间的关系
+
+问题原因：如果答案相关性低，说明大模型生成的答案偏离了用户意图。
+
+1、提示词工程：在提示词中明确要求模型“严格基于用户问题回答”，避免冗余或泛化。
+
+2、查询处理：对用户查询进行重写（query rewriting）、扩展（query expansion）或意图识别（intent detection），以更精准地表达用户需求。
+
+#### faithfulness：代表**answer**和**context**之间的关系
+
+如果忠诚度低，说明模型产生了“幻觉”（hallucination），即生成了context中不存在的内容。
+
+提示词约束：在提示词中强调“仅基于提供的上下文回答”，并设置安全回复（如“未在知识库中查询到相关信息”）。
+
+检索增强：确保检索到的context质量高（如提高检索精度），减少模型依赖自身知识的可能性。
+
+####  context precision：代表query和context之间的关系
+
+上下文精确率低，代表RAG检索效率低。加入细粒度划分，也就是切分子父块。以及混合检索模块，加强对query的精细化操作
+
+1、使用混合检索（结合关键词检索与向量检索）提升查全率和查准率。
+
+2、对文档进行细粒度分块（如父-子块结构），并优化块大小和重叠度。
+
+3、添加元数据过滤（按来源、日期等筛选）。
+
+4、对查询进行嵌入优化（embedding optimization）或使用RAG-Fusion等重排序技术。
+
+#### context recall：代表context和ground truths之间的关系。
+
+**问题分析**：检索系统未能充分召回知识库中的相关信息。
+
+**优化方案**：
+
+1、**扩大检索范围**（如增加top-k检索数量）
+
+2、**智能检索策略**
+
+- **子查询分解**：针对复杂长查询，拆解为多个子查询并行处理
+- **假设问题生成**：为模糊查询自动生成多个假设性问题
+- **直接查询优化**：完善简单问题的快速检索通道
+- **回溯检索**：针对大数据量查询建立回溯检索机制
+
+#### **响应速度慢，就改变索引和分类查询模块**
+
+1、缓存机制：对常见查询及答案进行缓存。
+
+2、并行处理：并行执行检索与生成步骤（如异步调用）。
+
+3、模型轻量化：使用蒸馏模型、量化或更小的生成模型。
+
 # 基于milvus构建RAG系统
 
 ## 文档处理模块    process_documents
@@ -831,6 +886,296 @@ from sklearn.metrics import classification_report, confusion_matrix
 ### def _create_or_load_collection(self) 创建或加载milvus集合，定义字段、schema和索引参数。为稠密和稀疏向量添加索引。
 
 ### add_documents(self, documents)；BGE-M3的embedding模型，为文档转化出稠密向量，
+
+## 系统API接口开发和web UI应用
+
+### FastAPI部署的作用
+
+FastAPI 的强大之处就在于，它同时完美支持了构建传统的 RESTful HTTP API **和** 现代的 WebSocket 功能，让你在一个框架内就能解决大多数前后端通信的需求。
+
+### 在py程序里面启动FastAPI
+
+```
+# main.py
+
+from fastapi import FastAPI，WebSocket
+import os
+
+# 创建 FastAPI 应用实例，
+# 设置标题和描述
+app = FastAPI(title="问答系统API", description="集成MySQL和RAG的智能问答系统")
+
+@app.get("/") # 函数装饰器（有调用、有返回、有增强、有嵌套），一般用于home界面的接口。
+async def root():
+	import uvicorn
+	return {"message":"Hello World"}
+		
+if __name__ == "__main__":
+    import uvicorn
+    # 可以从环境变量获取端口，如果获取不到则使用默认值 8000
+    port = int(os.getenv("PORT", 8000))
+    # 以编程方式启动，参数是字符串 "main:app"，# 运行 FastAPI 应用，监听 0.0.0.0:8000
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+```
+
+### 在终端cmd中启动FastAPI（推荐）
+
+```
+解释：
+unicorn是用来启动FastAPI的；FastAPI启动之后，表示它修饰的函数作为一个应用，被分配了默认的端口号8000；也就是说网页上输入：server ip：8000就可以定位到这个函数，在客户端发出请求，app.get()监听到来自客户端的请求，就会把函数的结果返回给客户端，继而得以显示。
+
+注意：（先进入conda指定环境，因为unicorn被install在里面）
+
+e.g. 核心主程序是main.py ；启动命令就是：
+unicorn {入口文件名} ：{FastAPI()的实例化对象名} --reload
+unicorn main:app --host 0.0.0.0  --port 8000 --reload
+
+开发阶段：强烈推荐使用命令行方式	uvicorn main:app --reload
+因为 --reload 参数极其方便，你不需要每次修改代码后都手动重启服务器。
+```
+
+### 实现FastAPI，函数接口的简单调用的代码如下：
+
+```
+from fastapi import FastAPI，WebSocket
+# 创建 FastAPI 应用实例，
+# 设置标题和描述
+app = FastAPI(title="问答系统API", description="集成MySQL和RAG的智能问答系统")
+@app.get("/") # 函数装饰器（有调用、有返回、有增强、有嵌套）
+async def root():
+	return {"message":"Hello World"}
+```
+
+
+
+### 代码解释
+
+**1、from fastapi import FastAPI，WebSocket**
+
+```
+
+from fastapi import FastAPI #  是导入创建主应用和定义普通 HTTP API 接口的类。
+from fastapi import WebSocket # 是导入专门用于处理 WebSocket 连接的类，让你能够创建那些需要实时、双向通信功能的接口。
+
+app = FastAPI() 实例化这个库
+```
+
+总结对比：
+
+| 特性         | HTTP (FastAPI 常规路由)           | WebSocket                       |
+| ------------ | --------------------------------- | ------------------------------- |
+| **通信模式** | **请求-响应** (客户端主导)        | **全双工双向通信** (双方平等)   |
+| **连接状态** | **无状态** (每次请求后连接可关闭) | **持久化** (一旦建立，长期保持) |
+| **数据流向** | 单向 (客户端请求 -> 服务器响应)   | 双向 (客户端或服务器可随时发送) |
+| **实时性**   | 较低 (依赖客户端轮询)             | **非常高** (服务器可主动推送)   |
+| **开销**     | 每次请求都有HTTP头信息，较大      | 建立连接后开销很小，只有数据帧  |
+
+2、@app.get("/") 
+
+```
+@，这个符号是装饰器的格式；
+app是FastAPI的实例化对象
+get是http协议的监听方法，监听客户端的GET请求，返回所装饰的函数的运行后的到的结果
+("/") 这是路由；由路寻函。写/，代表根路径，至少要写一个路径名。目的是为了区别调用的函数。
+e.g.https://www.ai-engineer.top/search/
+https://www.ai-engineer.top；这个相当于目标服务器所在地址，
+/search/相当于@app.get("/search")；专门顺着这个路径找到 搜索 这个函数，并返回执行结果。
+https://www.ai-engineer.top/about；就是点击“关于”，然后返回这个函数的信息给请求端。
+
+类比：
+https://129.80.32.33：8000/search？什么是快乐星球：就相当于你在129.80.32.33这台电脑上，打开了一个应用（名叫FastAPI）,你在这个应用里面点击搜索，并输入查询了“什么是快乐星球？”。
+而客户端监听到你的请求，会去找search这个函数，把根据query检索到答案给你传回去。由此完成了一次简单的http协议的post(上传)和get请求。完成了数据在客户端和服务器端的数据交互和传递。
+
+
+
+那些应用里的功能，其实就是一个一个函数。上述只是以及目录。二级目录则相当于：银行app的-账户余额-消费记录；就相当于@app.get("/home/Account_left/records/")
+
+```
+
+大模型纠正：
+
+```
+这个比喻可以更精确一点：
+FastAPI 应用本身不提供前端界面（那些按钮和输入框）。它只是一个提供数据接口（API） 的后端程序。
+
+更准确的比喻是：
+你打开一个浏览器（或其他客户端），在地址栏里手动输入了 https://129.80.32.33:8000/search?q=什么是快乐星球 并回车。
+
+你的浏览器（客户端）向服务器发起了一个 GET 请求。
+
+服务器上的 FastAPI “接线员”看到路径是 /home，就把这个请求转给了 search 函数。
+
+search 函数拿到参数 什么是快乐星球，执行检索逻辑，然后把结果数据（通常是JSON格式） 返回给你的浏览器。
+
+你的浏览器再以某种形式（可能是另一个前端页面）把这些数据展示给你看。
+
+为什么这个区别重要？ 因为 FastAPI 的强大之处在于它是“前后端分离”的典范。它的后端只负责处理数据和逻辑，而“点击”按钮这个动作和漂亮的页面，是由另一个前端程序（如 React, Vue.js 开发的网页）来负责的。
+```
+
+大模型精修答案：
+
+```
+“@app.get("/") 中，
+@是装饰器，
+app是FastAPI实例。
+get用于监听GET请求，并将返回值发给客户端
+。("/")是路由，其核心原理是‘由路寻函’，
+通过不同的路径（如/search、/about）来区分并调用不同的函数。
+
+例如，访问 https://www.ai-engineer.top/search?q=什么是快乐星球 时，
+www.ai-engineer.top 找到了服务器，
+路径 /search 让服务器上的FastAPI应用找到了对应的搜索函数，
+查询参数 q=什么是快乐星球 作为输入传递给函数，函数执行后的结果再通过HTTP GET 请求的响应返回给客户端，完成了一次完整的数据交互。”
+```
+
+注释：
+
+当配置了app最基础的部分后，可以通过访问服务器根路由"/"，来得到函数返回的东西，也就是{"message":"Hello World"}；这是FastAPI开发的最简单的基于http协议的后端服务（server）应用。
+
+### async异步和sync同步的区别
+
+| 特性         | 异步 (`async def`)                            | 同步 (`def`)                        |
+| ------------ | --------------------------------------------- | ----------------------------------- |
+| **核心思想** | 非阻塞，等待时让出资源                        | 阻塞，等待时占用资源                |
+| **关键字**   | `async`, `await`                              | 无                                  |
+| **适用场景** | **I/O 密集型** (数据库、网络请求)             | **CPU 密集型** (复杂计算、数据处理) |
+| **性能**     | 高并发、高吞吐量                              | 受限于线程池大小                    |
+| **库依赖**   | 必须使用支持异步的库（如 `asyncpg`, `httpx`） | 可以使用任何普通的同步库            |
+
+### 接口个数
+
+```
+# 1、创建新会话接口
+@app.post("/api/create_session")
+
+# 2、查询历史消息接口	# 返回会话 ID 和历史记录  #{session_id}这是动态路由
+@app.get("/api/history/{session_id}")
+
+# 3、清除历史消息接口	# 根据对话id 清除指定会话的历史记录
+@app.delete("/api/history/{session_id}")
+
+# 4、非流式查询接口		# 返回 JSON 格式响应答案和，记录处理时间。
+@app.post("/api/query")
+
+# 5、流式查询WebSocket接口	 #发送start、token、end或error类型的 JSON 消息，异步处理确保实时性
+@app.websocket("/api/stream")
+
+# 6、健康检查接口	# 返回健康状态
+@app.get("/health")
+
+# 7、获取问题类别接口	# 返回系统支持的问题类别。，便于前端动态展示过滤选项。
+@app.get("/api/sources")
+https://www.zhipin.com/job_detail/09538e53edbfb5dc03N52N2_FFVU.html?securityId=FBEIjlGtLLxzu-K195XTu_XEFEsH__wq-xpkwK_xtfrYzMT7HiP1ENycB1cahFV8ie8sEWpyjGO_zyyQj1ivYF7OL-DqAHOPH9TST6e08d5BYnw49nkh6yMiNQ~~
+```
+
+### 前端是怎么接收后端函数返回的json数据的？
+
+```
+按下F12，进入dev tool开发工具页面，里面有sources，下面有很多js文件，里面可能定义一些方法：
+比如：
+// 这是一个异步函数，用于获取用户数据
+async function getUserInfo(userId) {
+  try {
+    // 1. 前端使用 fetch 向后端API地址发送GET请求
+    const response = await fetch(`https://www.zhipin.com/beijing/web/common/getUserInfo?id=${userId}`);
+
+    // 2. 解析后端返回的JSON数据
+    const userData = await response.json();
+
+    // 3. 将数据更新到网页上
+    console.log('获取到的用户数据:', userData);
+     // 假设这是一个更新页面的函数
+    updateUserProfileOnPage(userData);
+
+  } catch (error) {
+    // 如果请求失败（如网络错误、API报错等）
+    console.error('获取用户信息失败:', error);
+  }
+}
+
+// 在某个时机（如页面加载、按钮点击时）调用这个函数
+getUserInfo(123456);
+```
+
+### 装饰器中post请求和get请求的区别
+
+#### POST和GET在URL上的唯一区别是：
+
+ POST请求不会把主要的、要提交的数据放在URL的查询参数里。也就是登录时：
+
+get请求时这样：  https:/129.80.32.33:8000/login?name="甘虎文"&password=1234。
+
+post请求时这样：https:/129.80.32.33:8000/login。参数是隐形的，但它依然有一个清晰可见的URL。
+
+```
+1. 为什么要分POST和GET？
+这主要是基于HTTP协议的设计哲学和语义。它们被设计用来做不同的事情：
+
+GET：语义是 “获取” 数据。它应该是幂等的（多次执行效果相同）和安全的（不改变服务器状态）。因为它主要用于请求，所以参数放在URL里是合理的，方便缓存、收藏和分享链接。它的主要特点是“读操作”。
+
+POST：语义是 “提交/创建” 数据。它通常不是幂等的，也不安全，因为它会改变服务器上的状态（比如创建新用户、下订单、发消息）。它的主要特点是“写操作”。
+
+简单比喻：
+
+GET 就像你在浏览器地址栏输入一个网址去查看一个网页。
+
+POST 就像你填好一个表单，点击“提交”按钮去完成一个操作（如注册）。
+
+将它们分开，符合“语义化”的设计原则，让网络请求的目的更清晰。
+
+
+```
+
+#### POST装饰器请求后的URL显示是怎样的？
+
+假设我们有一个后端Flask路由：
+
+```
+@app.post('/api/user/login')  # 使用POST方法装饰器
+def login():
+    # 处理登录逻辑
+    return {'success': True}
+```
+
+当你用前端代码（或Postman等工具）向这个接口发送一个POST请求时，你**仍然会看到这个URL**：
+https://网站.com/api/user/login
+
+**关键区别在于：**
+
+- 如果是**GET**请求，你的用户名和密码可能会这样传递，**完全暴露在URL中**：
+  `https://我的网站.com/api/user/login?username=甘虎文&password=123456` **(非常不安全！)**
+- 而**POST**请求，URL依然是干净的 `https://你的网站.com/api/user/login`，但用户名和密码这些**敏感信息被放到了请求体（Body）里**，在标准的浏览器地址栏**是不可见的**。它们在网络传输中依然是明文（除非使用HTTPS加密），但不会出现在历史记录、服务器日志的URL部分等容易被看到的地方。
+
+### 总结：
+
+| 特性维度                | GET                                          | POST                                       |
+| ----------------------- | -------------------------------------------- | ------------------------------------------ |
+| **语义 (Semantics)**    | **获取**数据（Read）                         | **提交/创建**数据（Create）                |
+| **幂等性 (Idempotent)** | **是**（多次执行结果相同）                   | **否**（多次执行可能产生不同结果或副作用） |
+| **安全性 (Safe)**       | **是**（不应改变服务器状态）                 | **否**（会改变服务器状态）                 |
+| **数据放置位置**        | URL 末尾的**查询字符串（Query String）**     | **请求体（Request Body）**                 |
+| **数据可见性**          | 在**浏览器地址栏、历史记录、日志**中完全可见 | 数据在Body中，**不在地址栏显示**           |
+| **数据长度限制**        | **有**（受限于URL最大长度，通常几KB）        | **理论上无限制**（服务器可配置限制）       |
+| **缓存 (Cacheable)**    | **可被浏览器、代理服务器、CDN缓存**          | **默认不可缓存**                           |
+| **书签/链接**           | **可收藏为书签，可被分享**                   | **不可收藏**（不包含数据体）               |
+| **浏览器历史记录**      | 参数保留在历史记录中                         | 参数**不**保留在历史记录中                 |
+| **浏览器刷新行为**      | 无任何警告，正常重新请求                     | 可能会弹出**“确认重新提交表单”**的警告     |
+| **主要应用场景**        | 搜索查询、筛选数据、访问页面、点击链接       | 登录、注册、下单、支付、修改信息、上传文件 |
+| **后端路由示例(Flask)** | `@app.get('/api/users')`                     | `@app.post('/api/users')`                  |
+| **传输安全性**          | **HTTPS下，URL和参数均被加密**               | **HTTPS下，URL和Body均被加密**             |
+
+------
+
+### 核心结论与误区澄清
+
+1. **首要区别是语义**：GET 用于“读”，POST 用于“写”。这是设计哲学和Web架构的基础，不应混淆。
+2. **性能关键在缓存**：GET 可被缓存是提升Web性能的重要手段，POST 则不能。
+3. post有body，可以携带字节流数据。get则不能，需要以？后跟参数的形式完成读操作。
+4. **安全性的误区**：
+   - **POST并不比GET更安全**：两者在HTTP下都是明文传输，在HTTPS下都同样安全加密。
+   - **POST的“安全”优势**仅在于敏感参数不会直接暴露在地址栏、日志等可见的地方，降低了偶然泄露的风险，但**并未解决传输过程中的窃听问题**。解决窃听必须依靠**HTTPS**。
+
+
 
 
 
