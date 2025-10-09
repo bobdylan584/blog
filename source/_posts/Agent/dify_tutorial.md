@@ -107,19 +107,19 @@ docker compose version
 
 可以克隆也可以直接下载
 
-![image-20250428153234792](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153234792.png)
+![image-20250428153234792](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153234792.png)
 
 #### 进入项目根目录找到docker文件夹
 
-![image-20250428153146464](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153146464.png)
+![image-20250428153146464](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153146464.png)
 
 #### .env文件重命名
 
-![image-20250429085744561](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250429085744561.png)
+![image-20250429085744561](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250429085744561.png)
 
 #### 右键打开命令行
 
-![image-20250428153332953](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153332953.png)
+![image-20250428153332953](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153332953.png)
 
 #### 运行docker环境
 
@@ -127,7 +127,7 @@ docker compose version
 docker compose up -d
 ```
 
-![image-20250428153408823](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153408823.png)
+![image-20250428153408823](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153408823.png)
 
 ## 启动dify
 
@@ -139,11 +139,11 @@ http://127.0.0.1/install
 
 首次登录需进行注册：
 
-![image-20250428153504167](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153504167.png)
+![image-20250428153504167](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153504167.png)
 
 dify的主界面如下所示：
 
-![image-20250428153545416](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250428153545416.png)
+![image-20250428153545416](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250428153545416.png)
 
 ## 大模型接入
 
@@ -159,11 +159,11 @@ dify的主界面如下所示：
 
 #### Dify页面-->点击头像-->设置-->模型供应商中设置要接入的模型
 
-![image-20250428153545416](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//image-20250427173106851.png)
+![image-20250428153545416](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/image-20250427173106851.png)
 
 #### 随便创建一个工作流，引用大模型
 
-![image-20250428153545416](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose//1759996685439.png)
+![1759996685439](https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/Agent/docker_compose/1759996685439.png)
 
 ### 应用类型
 
