@@ -5,7 +5,7 @@ categories:  [Language_Learning, English_learning-2025-02]
 tag: Language_Learning
 ---
 
-# 20250205
+# 2025-02-05
 
 Welcome to our class!
 My name’s Nata and I will be your teacher today. I live in Indonesia. I like gardening and cooking.
@@ -73,7 +73,7 @@ Set a meeting to communicate in a more appropriate way, not to make others angry
 Set quiet hours, where everyone cannot make any noise during this time.
 Mind the environment when making phone calls.
 
-# 20250206
+# 2025-02-06
 
 List of Winter Olympic sports
 Skiing 滑雪
@@ -105,7 +105,7 @@ Meaning of the letters
 Leeds, England
 patrice.robinson@ef.com
 
-# 20250206-afternoon
+# 2025-02-06-afternoon
 
 WELCOME TO THE CLASS
 
@@ -176,7 +176,7 @@ But say: I chose this to add to our newspaper
 You said: life in different country will be different
 But say: Life/ preferences are not the same for different countries
 
-# 20250207
+# 2025-02-07
 
 Welcome to our class!
 
@@ -250,7 +250,7 @@ Recognition and use of honesty and dishonesty in expression
 
 
 
-# 20250207-afternoon
+# 2025-02-07-afternoon
 
 #  Welcome to Career Club on 'Five Forms of Power'. Remember, in this workshop we have students from different levels and our sole focus is building fluency so you will not get error corrections, just feedback at the end of the lesson about whether you have met the task objectives in the lesson.
 
@@ -387,7 +387,7 @@ Mariangela B.
 @Bob, Jason and Maggie, this manager is very admired so people want to model what he does and follow what he tells them to do so it's 'referent power'.
 Type a message here
 
-# 20250208
+# 2025-02-08
 
 Listeners: Yang W, 
 
@@ -448,7 +448,7 @@ It's not as good as the massage a masseuse can give me.-Bob
 
 It is worst than other brands-Bob
 
-# 20250208-afternoon
+# 2025-02-08-afternoon
 
 Welcome to Life Club on 'Learn How to Teach'. Remember, in this workshop we have students from different levels and our sole focus is building fluency so you will not get error corrections, just feedback at the end of the lesson about whether you have met the task objectives in the lesson.
 
@@ -683,7 +683,7 @@ Student B (Waiter): Responds, takes the order, and asks follow-up questions (For
 Mariangela B.
 Teacher: Introduces the role play, assigns roles, then listens and provides feedback on pronunciation, fluency, and grammar.
 
-# 20250211
+# 2025-02-11
 
            Introduction
 
@@ -736,7 +736,7 @@ Please note that
 This is a conversation class and so it is important for everyone to take an active role in the class.
 If you are facing any technical problems please refresh your computer, check your hardware or your internet connection. 
 
-# 20250212
+# 2025-02-12
 
 Hi Students
 
@@ -786,7 +786,7 @@ It should be: I was looking at...
 You mentioned: Smell badly
 It should be: Smells bad
 
-# 20250213
+# 2025-02-13
 
 My name is Reinthya. You can call me Rein. I am from Jakarta, Indonesia. 
 
@@ -844,7 +844,7 @@ Can I get some compensation?
 
 PRONUNCIATION:
 
-# 20250225
+# 2025-02-25
 
 Hello, I am Queen / Q, I am from Cape Town, South Africa. I love being out in nature, travelling and I am a sports lover, I am passionate about education. I love working with people.
 Email: qaqamba.buso.pangea@gmail.com
@@ -917,7 +917,7 @@ No, I didn't use any of these phrases in my previous answers. What if... (Bob).
 
 Thank you everyone for taking class with me today. You all did well!
 
-# 20250226
+# 2025-02-26
 
 My name is Teacher Shanny
 
@@ -974,7 +974,7 @@ Simin - Just listening
 
  Thank you for joining class today :)
 
-# 202502026-afternoon
+# 2025-02-26-afternoon
 
 My name is Maya. I’m from Johannesburg, South Africa. I like traveling, baking and working out. Welcome to our classroom.
 
@@ -1027,7 +1027,7 @@ There are some various drops of water on this lipstick and there are our slogan 
 Taking the floor of the first advertisement it is rally eye cathcy. It will attract younger demographic and make the c
 Pronunciation
 
-# 20250227
+# 2025-02-27
 
 Hello, Welcome to class. My name is teacher Nadia. I am from Johannesburg, South Africa.
 
@@ -1096,7 +1096,7 @@ Bob-a-i
 Jimmy-a-i
 Xiangyang- David-a-p
 
-# 20250227-afternoon
+# 2025-02-27-afternoon
 
 Hi
 Welcome to the class
@@ -1120,7 +1120,7 @@ Stuttering
 
 Many Americans these days suffer from insomnia. This might have something to do with the amount of coffee they drink, or it could be due to something else. It may be related to stress. Often physical problems can be linked to psychological causes.
 
-# 20250228
+# 2025-02-28
 
 Mtika
 
@@ -1217,7 +1217,7 @@ I get these clothes from my mother.
 
 Okay maybe just wear what you like.
 
-# 20250305
+# 2025-03-05
 
 Date/Time- 3/5/25 7:00 EST
 Lesson/Grade Level- Planning a charity event
@@ -1318,7 +1318,7 @@ Actually, he's/he might be pushy. Others might put him off. Destroy the fund. Li
 
 
 
-# 20250306
+# 2025-03-06
 
 Hello, and Welcome to the Life Club! :D
 Things to know:

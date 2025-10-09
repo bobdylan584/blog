@@ -5,7 +5,7 @@ categories:  [Language_Learning, English_learning-2025-01]
 tag: Language_Learning
 ---
 
-# 20250107
+# 2025-01-07
 
 
 
@@ -181,7 +181,7 @@ Based on the limitations of the vacation time, we could go to the mountains inst
 
 Lets say we turn off the heat and wear sweaters.
 
-# 2025-0108-1943
+# 2025-01-08
 
 Hello, students! Welcome to our class. I'm Teacher Tanya, joining you from South Africa. Specifically, I reside in Johannesburg, renowned for its vibrant culture, art scene, culinary delights, and entertainment. During my leisure time, I find joy in listening to music, watching series, and playing video games. As we embark on this learning journey together, please don't hesitate to reach out via the chat box if you have any questions. Additionally, feel free to raise your hand if I'm moving too quickly. Let's make this a productive and enjoyable experience for us all! Please contact me on princesstanyanyamunga@gmail.com if you have any questions :)
 
@@ -220,7 +220,7 @@ King: I think nowadays advertising is everywhere in our lives in my opinion the 
 
 Eve: Yeah. because we can see a lot of advertisement like the short videos on the TV or the billboards so buy something and you do not know or can't decide which brand to buy so some advertisements can remind you to buy that brand. 
 
-# 2025-0110-2250
+# 2025-01-10
 
 Hello! Welcome to class! 
 My name is Jessica. I’m from South Africa! 
@@ -333,7 +333,7 @@ I grateful for your trust. Maybe they are just jealous about my work. I am valua
 Areas to practice
  word forms, prepositions, 
 
-# 2025-0111
+# 2025-01-11
 
 11/01/2025
 Welcome,
@@ -502,7 +502,7 @@ I focused on entertainment, and it seems like I played computer games instead of
 Feedback:
 Use the notes to expand your vocabulary. 
 
-# 2025-0112
+# 2025-01-12
 
 Introduction:
 Hello. I am teacher Nato from Johannesburg, South Africa. I am not a talkative and outgoing person. I enjoy my personal space.  
@@ -573,7 +573,7 @@ Task 1:
 Listeners: 
 Shirleen S. 
 
-# 2025-0113
+# 2025-01-13
 
 Hello and welcome to class!😊
 
@@ -647,7 +647,7 @@ Definition
 
 Ingratiating: bring oneself into favour with someone by flattering or trying to please them / Ingratiating behaviour is intended to make people like you.
 
-# 20250115
+# 2025-01-15
 
 Hi Students
 
@@ -700,7 +700,7 @@ It should be: She can expand the scope
 You mentioned: Which person you would like to confirm
 It should be: Which person you would like to select
 
-# 20250116
+# 2025-01-16
 
 Hello and welcome to our lesson. 
 
@@ -756,7 +756,7 @@ Mistake:
 
 Pronunciation 
 
-# 2025-0117
+# 2025-01-17
 
 Today is Friday, January 17, 2025.
 Welcome to our class! 
@@ -793,7 +793,7 @@ It would benefit you........
 Target language:
 Modals of advice and expressions for giving advice: If I were you, …; It might help if you …; I suggest you …; Have you considered …?; Why not try …?
 
-# 2025-0118
+# 2025-01-18
 
 Hi everyone, My name is Jo. I’m from Australia. I live in Bali, Indonesia. I love gardening and cooking.  I hope you enjoy our class today. Listening Only: Please feel free to write a question or comment in the chat box : ) 
 joanne.w.balicenter@gmail.com 
@@ -863,7 +863,7 @@ Erica: This year the economy is not good so the company needs to decrease our bo
 
 Listening Only
 
-# 2025-0119
+# 2025-01-19
 
 What is art?
 
@@ -915,7 +915,7 @@ Tim- My favorite is landscape because I think to travel to other places to see i
 
 Aime- I like all kinds of art because its painted by famous artists. 
 
-# 2025-0120
+# 2025-01-20
 
 Welcome: I am Teacher Mae. 
 I am from Johannesburg, South Africa
@@ -1035,7 +1035,7 @@ Thank you for attending this class and have a great day further.
 To book a private lesson with me, email me your student ID, date, time, and the topic to:
 ashminahm@outlook.com
 
-# 20250122
+# 2025-01-22
 
 Target language  - 
  collocations --- credit card theft,  online fraud,  pickpocket, shoplifting,  money laundering , black mail, fist fight, drug trafficking, 
