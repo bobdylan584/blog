@@ -105,7 +105,7 @@ Meaning of the letters
 Leeds, England
 patrice.robinson@ef.com
 
-# 2025-02-06-afternoon
+# 2025-02-06
 
 WELCOME TO THE CLASS
 
@@ -250,9 +250,9 @@ Recognition and use of honesty and dishonesty in expression
 
 
 
-# 2025-02-07-afternoon
+# 2025-02-07
 
-#  Welcome to Career Club on 'Five Forms of Power'. Remember, in this workshop we have students from different levels and our sole focus is building fluency so you will not get error corrections, just feedback at the end of the lesson about whether you have met the task objectives in the lesson.
+Welcome to Career Club on 'Five Forms of Power'. Remember, in this workshop we have students from different levels and our sole focus is building fluency so you will not get error corrections, just feedback at the end of the lesson about whether you have met the task objectives in the lesson.
 
 > If you have any questions, you can always email me after the lesson at: mariangela.barker@ef.com
 
@@ -448,7 +448,7 @@ It's not as good as the massage a masseuse can give me.-Bob
 
 It is worst than other brands-Bob
 
-# 2025-02-08-afternoon
+# 2025-02-08
 
 Welcome to Life Club on 'Learn How to Teach'. Remember, in this workshop we have students from different levels and our sole focus is building fluency so you will not get error corrections, just feedback at the end of the lesson about whether you have met the task objectives in the lesson.
 
@@ -974,7 +974,7 @@ Simin - Just listening
 
  Thank you for joining class today :)
 
-# 2025-02-26-afternoon
+# 2025-02-26
 
 My name is Maya. I’m from Johannesburg, South Africa. I like traveling, baking and working out. Welcome to our classroom.
 
@@ -1096,7 +1096,7 @@ Bob-a-i
 Jimmy-a-i
 Xiangyang- David-a-p
 
-# 2025-02-27-afternoon
+# 2025-02-27
 
 Hi
 Welcome to the class
