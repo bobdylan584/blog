@@ -1,7 +1,7 @@
 ---
 date: 2025-03-07 11:21:51
-title: RAG流程
-categories: [RAG_Notes, RAG流程]
+title: RAG项目在windows系统下的环境安装流程
+categories: [RAG_Notes, RAG项目在windows系统下的环境安装流程]
 tag: RAG_Notes
 ---
 
