@@ -16,12 +16,14 @@ nav:
   display_post_title: true
   # Whether to fix navigation bar
   fixed: false
-
-
+  
 menu:
-  "🏠": / || fas fa-home
-  "🏷️": /tags/ || fas fa-tags  
-  "🔍": /search/ || fas fa-search
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  分类: /categories/ || fas fa-folder-open
+  标签: /tags/ || fas fa-tags
+  搜索: /search/ || fas fa-search  # 修改这一行
+
   # Home: / || fas fa-home
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
