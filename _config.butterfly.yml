@@ -20,7 +20,7 @@ nav:
 menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
-  Music: /music_player/index.html/
+  Music: /music_player/index.html/ || fas fa-music   
   
 
   # Home: / || fas fa-home
