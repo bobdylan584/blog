@@ -1363,9 +1363,19 @@ inject:
 aplayer:
   enable: true
   # 使用 Butterfly 内置的 APlayer 注入功能（可选）
-  meting: false
+  meting: true
   
-
+meting:
+  enable: true
+  # 从 music.yml 加载歌单
+  type: playlist
+  server: netease
+  # 使用自定义歌单
+  custom:
+    - name: "我的歌单"
+      list:
+        - server: custom
+          url: /data/music.yml
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
