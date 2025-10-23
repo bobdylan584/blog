@@ -289,7 +289,7 @@ aside:
   position: right
   display:
     archive: false
-    tag: false
+    tag: true
     category: false
   card_author:
     enable: true
@@ -324,7 +324,7 @@ aside:
     expand: none
     sort_order:
   card_tags:
-    enable: false
+    enable: true
     # If set 0 will show all
     limit: 40
     color: false
