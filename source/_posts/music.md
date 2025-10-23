@@ -1,8 +1,8 @@
 ---
 date: 2024-01-02
 title: favorite songs
-categories: [音乐, favorite songs]
-tags: [音乐]
+categories: [Music, favorite songs]
+tags: [Music]
 ---
 
 
