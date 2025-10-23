@@ -1295,7 +1295,7 @@ inject:
       </script>
     # APlayer JS
     - <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-    # APlayer 初始化脚本
+    # APlayer 初始化脚本 - 动态加载 music.yml 数据
     - |
       <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1306,58 +1306,126 @@ inject:
           container.id = 'aplayer';
           document.body.appendChild(container);
           
-          // 歌曲列表 - 后续可以通过 Hexo 数据文件动态加载
-          const songs = [
-            {
-              name: '暖一杯茶',
-              artist: '邵帅',
-              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%82%B5%E5%B8%85%20-%20%E6%9A%96%E4%B8%80%E6%9D%AF%E8%8C%B6.mp3',
-              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-            },
-            {
-              name: '我要你默默走不回头',
-              artist: '队长的小斑鸠、向晚晚',
-              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%98%9F%E9%95%BF%E7%9A%84%E5%B0%8F%E6%96%91%E9%B8%A0%E3%80%81%E5%90%91%E6%99%9A%E6%99%9A%20-%20%E6%88%91%E8%A6%81%E4%BD%A0%E9%BB%98%E9%BB%98%E8%B5%B0%E4%B8%8D%E5%9B%9E%E5%A4%B4%20(%E8%AF%B4%E5%94%B1%E7%89%88).mp3',
-              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-            },
-            {
-              name: '爱河',
-              artist: 'ZaZaZsu咂咂苏',
-              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/ZaZaZsu%E5%92%82%E5%92%82%E8%8B%8F%20-%20%E7%88%B1%E6%B2%B3.mp3',
-              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-            },
-            {
-              name: '不凡',
-              artist: '王铮亮',
-              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E7%8E%8B%E9%93%AE%E4%BA%AE%20-%20%E4%B8%8D%E5%87%A1.mp3',
-              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-            }
-          ];
-          
-          console.log('加载歌曲数量:', songs.length);
-          
-          // 初始化 APlayer
-          const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true,
-            mini: true,
-            autoplay: false,
-            theme: '#2980b9',
-            loop: 'all',
-            order: 'list',
-            preload: 'auto',
-            volume: 0.7,
-            mutex: true,
-            lrcType: 0,
-            audio: songs
-          });
-          
-          console.log('音乐播放器初始化完成');
-          
-          // 移动端优化提示
-          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            console.log('移动端音乐播放器已优化');
+          // 动态加载 music.yml 数据
+          function loadMusicData() {
+            return fetch('/music.yml')
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('无法加载音乐数据');
+                }
+                return response.text();
+              })
+              .then(yamlText => {
+                console.log('原始 YAML 数据:', yamlText);
+                
+                // 改进的 YAML 解析
+                const songs = [];
+                const lines = yamlText.split('\n');
+                let currentSong = {};
+                
+                lines.forEach(line => {
+                  line = line.trim();
+                  
+                  if (line.startsWith('- name:')) {
+                    // 新歌曲开始，保存上一首
+                    if (Object.keys(currentSong).length > 0) {
+                      songs.push(currentSong);
+                    }
+                    currentSong = {
+                      name: extractValue(line, 'name')
+                    };
+                  } else if (line.startsWith('artist:')) {
+                    currentSong.artist = extractValue(line, 'artist');
+                  } else if (line.startsWith('url:')) {
+                    currentSong.url = extractValue(line, 'url');
+                  } else if (line.startsWith('cover:')) {
+                    currentSong.cover = extractValue(line, 'cover');
+                  }
+                });
+                
+                // 添加最后一首歌曲
+                if (Object.keys(currentSong).length > 0) {
+                  songs.push(currentSong);
+                }
+                
+                console.log('解析后的歌曲列表:', songs);
+                return songs;
+              })
+              .catch(error => {
+                console.error('加载音乐数据失败:', error);
+                // 返回备用歌曲列表
+                return getDefaultSongs();
+              });
           }
+          
+          // 提取值的辅助函数
+          function extractValue(line, key) {
+            return line.replace(new RegExp(`-?\\s*${key}:`), '').trim().replace(/^["']|["']$/g, '');
+          }
+          
+          // 备用默认歌曲
+          function getDefaultSongs() {
+            return [
+              {
+                name: '暖一杯茶',
+                artist: '邵帅',
+                url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%82%B5%E5%B8%85%20-%20%E6%9A%96%E4%B8%80%E6%9D%AF%E8%8C%B6.mp3',
+                cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+              },
+              {
+                name: '我要你默默走不回头',
+                artist: '队长的小斑鸠、向晚晚',
+                url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%98%9F%E9%95%BF%E7%9A%84%E5%B0%8F%E6%96%91%E9%B8%A0%E3%80%81%E5%90%91%E6%99%9A%E6%99%9A%20-%20%E6%88%91%E8%A6%81%E4%BD%A0%E9%BB%98%E9%BB%98%E8%B5%B0%E4%B8%8D%E5%9B%9E%E5%A4%B4%20(%E8%AF%B4%E5%94%B1%E7%89%88).mp3',
+                cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+              },
+              {
+                name: '爱河',
+                artist: 'ZaZaZsu咂咂苏',
+                url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/ZaZaZsu%E5%92%82%E5%92%82%E8%8B%8F%20-%20%E7%88%B1%E6%B2%B3.mp3',
+                cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+              },
+              {
+                name: '不凡',
+                artist: '王铮亮',
+                url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E7%8E%8B%E9%93%AE%E4%BA%AE%20-%20%E4%B8%8D%E5%87%A1.mp3',
+                cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+              }
+            ];
+          }
+          
+          // 加载并初始化播放器
+          loadMusicData().then(songs => {
+            console.log('成功加载歌曲数量:', songs.length);
+            
+            // 检查是否包含新增的歌曲
+            const hasNewSongs = songs.some(song => 
+              song.name.includes('若月亮没来') || song.name.includes('向云端')
+            );
+            console.log('是否包含新增歌曲:', hasNewSongs);
+            
+            // 初始化 APlayer
+            const ap = new APlayer({
+              container: document.getElementById('aplayer'),
+              fixed: true,
+              mini: true,
+              autoplay: false,
+              theme: '#2980b9',
+              loop: 'all',
+              order: 'list',
+              preload: 'auto',
+              volume: 0.7,
+              mutex: true,
+              lrcType: 0,
+              audio: songs
+            });
+            
+            console.log('音乐播放器初始化完成，共加载', songs.length, '首歌曲');
+            
+            // 移动端优化提示
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+              console.log('移动端音乐播放器已优化');
+            }
+          });
         });
       </script>
 
