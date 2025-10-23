@@ -1,0 +1,6 @@
+no: 1
+name: '暖一杯茶'
+artist: '邵帅'
+url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%82%B5%E5%B8%85%20-%20%E6%9A%96%E4%B8%80%E6%9D%AF%E8%8C%B6.mp3'
+cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+

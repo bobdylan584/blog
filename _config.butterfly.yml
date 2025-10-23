@@ -1166,7 +1166,7 @@ inject:
           }
         }
       </style>
-    # 添加 APlayer CSS
+    # APlayer CSS
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 
   bottom:
@@ -1293,89 +1293,75 @@ inject:
         }
         addVideoLoadingIndicator();
       </script>
-    # 添加 APlayer JS
+    # APlayer JS
     - <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-    # 添加 APlayer 初始化脚本
+    # APlayer 初始化脚本
     - |
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // 等待页面完全加载后再初始化播放器
-          setTimeout(() => {
-            // 检查是否已经存在播放器
-            if (!document.getElementById('aplayer')) {
-              // 创建播放器容器
-              const aplayerContainer = document.createElement('div');
-              aplayerContainer.id = 'aplayer';
-              document.body.appendChild(aplayerContainer);
-              
-              // 初始化 APlayer
-              const ap = new APlayer({
-                container: document.getElementById('aplayer'),
-                fixed: true,
-                mini: true,
-                autoplay: false,
-                theme: '#2980b9',
-                loop: 'all',
-                order: 'list',
-                preload: 'auto',
-                volume: 0.7,
-                mutex: true,
-                lrcType: 0,
-                audio: [
-                  {
-                    name: '我要你默默走不回头',
-                    artist: '队长的小斑鸠、向晚晚',
-                    url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%98%9F%E9%95%BF%E7%9A%84%E5%B0%8F%E6%96%91%E9%B8%A0%E3%80%81%E5%90%91%E6%99%9A%E6%99%9A%20-%20%E6%88%91%E8%A6%81%E4%BD%A0%E9%BB%98%E9%BB%98%E8%B5%B0%E4%B8%8D%E5%9B%9E%E5%A4%B4%20(%E8%AF%B4%E5%94%B1%E7%89%88).mp3',
-                    cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-                  },
-                  {
-                    name: '暖一杯茶',
-                    artist: '邵帅',
-                    url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%82%B5%E5%B8%85%20-%20%E6%9A%96%E4%B8%80%E6%9D%AF%E8%8C%B6.mp3',
-                    cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-                  },
-                  {
-                    name: '爱河',
-                    artist: 'ZaZaZsu咂咂苏',
-                    url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/ZaZaZsu%E5%92%82%E5%92%82%E8%8B%8F%20-%20%E7%88%B1%E6%B2%B3.mp3',
-                    cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-                  },
-                  {
-                    name: '不凡',
-                    artist: '王铮亮',
-                    url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E7%8E%8B%E9%93%AE%E4%BA%AE%20-%20%E4%B8%8D%E5%87%A1.mp3',
-                    cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-                  }
-                ]
-              });
-
-              console.log('APlayer 初始化完成');
-
-              // 移动端优化
-              if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                console.log('移动端 APlayer 优化启用');
-              }
+          console.log('开始初始化音乐播放器...');
+          
+          // 创建播放器容器
+          const container = document.createElement('div');
+          container.id = 'aplayer';
+          document.body.appendChild(container);
+          
+          // 歌曲列表 - 后续可以通过 Hexo 数据文件动态加载
+          const songs = [
+            {
+              name: '暖一杯茶',
+              artist: '邵帅',
+              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%82%B5%E5%B8%85%20-%20%E6%9A%96%E4%B8%80%E6%9D%AF%E8%8C%B6.mp3',
+              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+            },
+            {
+              name: '我要你默默走不回头',
+              artist: '队长的小斑鸠、向晚晚',
+              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E9%98%9F%E9%95%BF%E7%9A%84%E5%B0%8F%E6%96%91%E9%B8%A0%E3%80%81%E5%90%91%E6%99%9A%E6%99%9A%20-%20%E6%88%91%E8%A6%81%E4%BD%A0%E9%BB%98%E9%BB%98%E8%B5%B0%E4%B8%8D%E5%9B%9E%E5%A4%B4%20(%E8%AF%B4%E5%94%B1%E7%89%88).mp3',
+              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+            },
+            {
+              name: '爱河',
+              artist: 'ZaZaZsu咂咂苏',
+              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/ZaZaZsu%E5%92%82%E5%92%82%E8%8B%8F%20-%20%E7%88%B1%E6%B2%B3.mp3',
+              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+            },
+            {
+              name: '不凡',
+              artist: '王铮亮',
+              url: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/%E7%8E%8B%E9%93%AE%E4%BA%AE%20-%20%E4%B8%8D%E5%87%A1.mp3',
+              cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
             }
-          }, 500);
+          ];
+          
+          console.log('加载歌曲数量:', songs.length);
+          
+          // 初始化 APlayer
+          const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true,
+            mini: true,
+            autoplay: false,
+            theme: '#2980b9',
+            loop: 'all',
+            order: 'list',
+            preload: 'auto',
+            volume: 0.7,
+            mutex: true,
+            lrcType: 0,
+            audio: songs
+          });
+          
+          console.log('音乐播放器初始化完成');
+          
+          // 移动端优化提示
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            console.log('移动端音乐播放器已优化');
+          }
         });
       </script>
 
-# 在文件末尾的其他设置部分添加 APlayer 相关配置
-# --------------------------------------
-# Music Player Settings
-# --------------------------------------
 
-# APlayer 配置
-aplayer:
-  enable: true
-  # 使用 Butterfly 内置的 APlayer 注入功能（可选）
-  meting: false
-
-# 如果您想使用 Butterfly 内置的 APlayer 注入功能，可以取消注释下面的配置
-# 但基于您的需求，我们已经在 inject 中手动配置了
-# aplayerInject:
-#   enable: true
-#   per_page: true
 
 
 
