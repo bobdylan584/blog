@@ -991,7 +991,10 @@ pjax:
   preload:
     enable: true
 
-
+# Inject the css and script (aplayer/meting)
+aplayerInject:
+  enable: false
+  per_page: true
 
 # Snackbar - Toast Notification
 # https://github.com/polonel/SnackBar
@@ -1354,10 +1357,12 @@ inject:
         });
       </script>
 
-# Inject the css and script (aplayer/meting)
-aplayerInject:
+# APlayer 配置
+aplayer:
   enable: true
-  per_page: true
+  # 使用 Butterfly 内置的 APlayer 注入功能（可选）
+  meting: false
+
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
