@@ -1057,7 +1057,9 @@ css_prefix: true
 
 
 # 在 inject 部分添加 APlayer 配置
-
+music_player:
+  enable: true
+  songs: "<%- JSON.stringify(site.data.music) %>"
   
 inject:
   head:
@@ -1362,6 +1364,7 @@ aplayer:
   enable: true
   # 使用 Butterfly 内置的 APlayer 注入功能（可选）
   meting: false
+  
 
 
 # CDN Settings
