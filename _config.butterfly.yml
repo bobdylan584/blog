@@ -15,12 +15,12 @@ nav:
   display_title: true
   display_post_title: true
   # Whether to fix navigation bar
-  fixed: false
+  fixed: true
   
 menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
-  Music: /music_player/index.html/ || fas fa-music   
+  Music: /music_player/ || fas fa-music   
   
 
   # Home: / || fas fa-home
