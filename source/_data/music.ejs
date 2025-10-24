@@ -1,0 +1,439 @@
+<div class="music-player-container">
+  <div class="music-header">
+    <h1>我的音乐库</h1>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索歌曲...">
+    </div>
+  </div>
+
+  <div class="player-main">
+    <!-- 播放器控制区 -->
+    <div class="player-controls">
+      <div class="current-song">
+        <img id="cover" src="/images/music-cover.jpg" alt="专辑封面">
+        <div class="song-info">
+          <h3 id="songTitle">选择歌曲开始播放</h3>
+          <p id="songArtist">未知艺术家</p>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <button id="prevBtn" class="control-btn">⏮</button>
+        <button id="playBtn" class="control-btn">▶</button>
+        <button id="nextBtn" class="control-btn">⏭</button>
+        <button id="loopBtn" class="control-btn">🔁</button>
+      </div>
+      
+      <div class="progress-area">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="timer">
+          <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+        </div>
+      </div>
+      
+      <div class="volume-control">
+        <button id="volumeBtn" class="control-btn">🔊</button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50">
+      </div>
+    </div>
+
+    <!-- 播放列表 -->
+    <div class="playlist-section">
+      <h3>播放列表</h3>
+      <div class="playlist" id="playlist">
+        <!-- 歌曲列表将通过JavaScript动态生成 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.music-player-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.music-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.search-box {
+  margin-top: 15px;
+}
+
+.search-box input {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 300px;
+  outline: none;
+}
+
+.player-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.player-controls {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30px;
+  border-radius: 15px;
+  color: white;
+}
+
+.current-song {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.song-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.progress-area {
+  margin: 25px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: #fff;
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+.timer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#volumeSlider {
+  width: 100px;
+}
+
+.playlist-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.playlist {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.song-item:hover {
+  background: #e9ecef;
+}
+
+.song-item.playing {
+  background: #667eea;
+  color: white;
+}
+
+.song-item .song-number {
+  width: 30px;
+  text-align: center;
+}
+
+.song-item .song-info {
+  flex: 1;
+}
+
+.song-item .song-title {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.song-item .song-artist {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.song-item .song-duration {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .player-main {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+// 音乐文件配置 - 在这里添加你的本地MP3文件
+const musicFiles = [
+  {
+    title: "歌曲1",
+    artist: "艺术家1",
+    src: "/music/song1.mp3",
+    cover: "/images/cover1.jpg"
+  },
+  {
+    title: "歌曲2", 
+    artist: "艺术家2",
+    src: "/music/song2.mp3",
+    cover: "/images/cover2.jpg"
+  },
+  // 继续添加更多歌曲...
+];
+
+class MusicPlayer {
+  constructor() {
+    this.audio = new Audio();
+    this.currentIndex = 0;
+    this.isPlaying = false;
+    this.isLooping = false;
+    this.volume = 0.5;
+    
+    this.initializeElements();
+    this.initializeEventListeners();
+    this.renderPlaylist();
+    this.loadSong(0);
+  }
+
+  initializeElements() {
+    this.elements = {
+      playBtn: document.getElementById('playBtn'),
+      prevBtn: document.getElementById('prevBtn'),
+      nextBtn: document.getElementById('nextBtn'),
+      loopBtn: document.getElementById('loopBtn'),
+      volumeBtn: document.getElementById('volumeBtn'),
+      volumeSlider: document.getElementById('volumeSlider'),
+      progressBar: document.querySelector('.progress-bar'),
+      progress: document.querySelector('.progress'),
+      currentTime: document.getElementById('currentTime'),
+      totalTime: document.getElementById('totalTime'),
+      songTitle: document.getElementById('songTitle'),
+      songArtist: document.getElementById('songArtist'),
+      cover: document.getElementById('cover'),
+      playlist: document.getElementById('playlist'),
+      searchInput: document.getElementById('searchInput')
+    };
+  }
+
+  initializeEventListeners() {
+    this.elements.playBtn.addEventListener('click', () => this.togglePlay());
+    this.elements.prevBtn.addEventListener('click', () => this.previousSong());
+    this.elements.nextBtn.addEventListener('click', () => this.nextSong());
+    this.elements.loopBtn.addEventListener('click', () => this.toggleLoop());
+    this.elements.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
+    
+    this.elements.progressBar.addEventListener('click', (e) => {
+      const percent = (e.offsetX / this.elements.progressBar.offsetWidth);
+      this.audio.currentTime = percent * this.audio.duration;
+    });
+
+    this.audio.addEventListener('timeupdate', () => this.updateProgress());
+    this.audio.addEventListener('ended', () => this.nextSong());
+    this.audio.addEventListener('loadedmetadata', () => this.updateDuration());
+    
+    this.elements.searchInput.addEventListener('input', (e) => this.searchSongs(e.target.value));
+  }
+
+  loadSong(index) {
+    if (index < 0 || index >= musicFiles.length) return;
+    
+    this.currentIndex = index;
+    const song = musicFiles[index];
+    
+    this.audio.src = song.src;
+    this.elements.songTitle.textContent = song.title;
+    this.elements.songArtist.textContent = song.artist;
+    this.elements.cover.src = song.cover || '/images/music-cover.jpg';
+    
+    this.updatePlaylistHighlight();
+    
+    if (this.isPlaying) {
+      this.audio.play();
+    }
+  }
+
+  togglePlay() {
+    if (this.isPlaying) {
+      this.audio.pause();
+      this.elements.playBtn.textContent = '▶';
+    } else {
+      this.audio.play();
+      this.elements.playBtn.textContent = '⏸';
+    }
+    this.isPlaying = !this.isPlaying;
+  }
+
+  previousSong() {
+    this.loadSong((this.currentIndex - 1 + musicFiles.length) % musicFiles.length);
+  }
+
+  nextSong() {
+    this.loadSong((this.currentIndex + 1) % musicFiles.length);
+  }
+
+  toggleLoop() {
+    this.isLooping = !this.isLooping;
+    this.audio.loop = this.isLooping;
+    this.elements.loopBtn.style.background = this.isLooping ? 'rgba(255, 255, 255, 0.4)' : '';
+  }
+
+  setVolume(value) {
+    this.volume = value / 100;
+    this.audio.volume = this.volume;
+    this.elements.volumeBtn.textContent = value == 0 ? '🔇' : '🔊';
+  }
+
+  updateProgress() {
+    const percent = (this.audio.currentTime / this.audio.duration) * 100 || 0;
+    this.elements.progress.style.width = `${percent}%`;
+    this.elements.currentTime.textContent = this.formatTime(this.audio.currentTime);
+  }
+
+  updateDuration() {
+    this.elements.totalTime.textContent = this.formatTime(this.audio.duration);
+  }
+
+  formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  renderPlaylist() {
+    this.elements.playlist.innerHTML = musicFiles.map((song, index) => `
+      <div class="song-item" data-index="${index}">
+        <div class="song-number">${index + 1}</div>
+        <div class="song-info">
+          <div class="song-title">${song.title}</div>
+          <div class="song-artist">${song.artist}</div>
+        </div>
+        <div class="song-duration">${this.getSongDuration(song.src)}</div>
+      </div>
+    `).join('');
+
+    // 添加点击事件
+    this.elements.playlist.querySelectorAll('.song-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const index = parseInt(item.dataset.index);
+        this.loadSong(index);
+        if (!this.isPlaying) {
+          this.togglePlay();
+        }
+      });
+    });
+  }
+
+  getSongDuration(src) {
+    // 这里可以添加获取歌曲时长的逻辑
+    return '--:--';
+  }
+
+  updatePlaylistHighlight() {
+    this.elements.playlist.querySelectorAll('.song-item').forEach((item, index) => {
+      if (index === this.currentIndex) {
+        item.classList.add('playing');
+      } else {
+        item.classList.remove('playing');
+      }
+    });
+  }
+
+  searchSongs(query) {
+    const filteredSongs = musicFiles.filter(song => 
+      song.title.toLowerCase().includes(query.toLowerCase()) ||
+      song.artist.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    this.elements.playlist.innerHTML = filteredSongs.map((song, index) => `
+      <div class="song-item" data-index="${musicFiles.indexOf(song)}">
+        <div class="song-number">${musicFiles.indexOf(song) + 1}</div>
+        <div class="song-info">
+          <div class="song-title">${song.title}</div>
+          <div class="song-artist">${song.artist}</div>
+        </div>
+        <div class="song-duration">--:--</div>
+      </div>
+    `).join('');
+
+    // 重新绑定点击事件
+    this.elements.playlist.querySelectorAll('.song-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const index = parseInt(item.dataset.index);
+        this.loadSong(index);
+        if (!this.isPlaying) {
+          this.togglePlay();
+        }
+      });
+    });
+  }
+}
+
+// 初始化播放器
+document.addEventListener('DOMContentLoaded', () => {
+  new MusicPlayer();
+});
+</script>
