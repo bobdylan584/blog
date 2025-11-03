@@ -13,66 +13,101 @@ date: 2025-11-04
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
   <style>
     body {
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-      background: linear-gradient(180deg, #f9fafc 0%, #e3ebf6 100%);
+      margin: 0;
+      font-family: "Segoe UI","Microsoft YaHei",sans-serif;
       color: #222;
+      background: #f0f2f5;
+    }
+    .player-wrapper {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .bg-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px) brightness(0.6);
+      z-index: -1;
+    }
+    .content {
+      position: relative;
+      padding: 40px 20px;
       text-align: center;
-      padding: 40px 10px;
     }
     h1 {
-      font-size: 26px;
+      color: #fff;
+      font-size: 28px;
       margin-bottom: 10px;
     }
     p.desc {
-      color: #666;
-      margin-bottom: 25px;
-      font-size: 14px;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    .controls {
+      margin-bottom: 20px;
     }
     button {
       background: #0078d7;
       color: white;
       border: none;
       border-radius: 6px;
-      padding: 8px 18px;
+      padding: 8px 16px;
       font-size: 15px;
       cursor: pointer;
-      transition: 0.3s;
-      margin-bottom: 20px;
+      margin: 0 5px;
+      transition: background 0.3s;
     }
     button:hover { background: #005fa3; }
+
+    #searchInput {
+      padding: 6px 10px;
+      font-size: 14px;
+      width: 80%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 4px;
+    }
 
     #aplayer {
       margin: 0 auto;
       max-width: 700px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
       border-radius: 10px;
-      background: #fff;
     }
 
-    #loading {
-      font-size: 15px;
-      color: #555;
-      margin-top: 20px;
-      display: none;
-    }
-
-    /* 夜间模式适配 */
-    [data-theme="dark"] body {
-      background: #1e1e1e;
-      color: #ccc;
-    }
-    [data-theme="dark"] #aplayer {
-      background: #2a2a2a;
+    /* 暗黑模式 */
+    @media (prefers-color-scheme: dark) {
+      body { background: #121212; color: #eee; }
+      button { background: #1e88e5; }
+      #aplayer { background: rgba(30,30,30,0.9); }
     }
   </style>
 </head>
 
 <body>
-  <h1>🎧 在线音乐播放器</h1>
-  <p class="desc">从阿里云 OSS 自动读取音乐列表</p>
-  <button id="reloadBtn">🔄 重新加载音乐列表</button>
-  <div id="aplayer"></div>
-  <p id="loading">加载中，请稍候...</p>
+  <div class="player-wrapper">
+    <div class="bg-cover" id="bgCover"></div>
+    <div class="content">
+      <h1>🎧 在线音乐播放器</h1>
+      <p class="desc">从云端读取音乐列表 & 动态封面大图效果</p>
+
+      <div class="controls">
+        <button id="btnReload">🔄 重新加载列表</button>
+        <button id="btnMode">🔀 切换模式</button>
+      </div>
+
+      <input type="text" id="searchInput" placeholder="🔍 搜索歌曲 / 歌手" />
+
+      <div id="aplayer"></div>
+    </div>
+  </div>
 
   <script>
     const listUrl = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/list.json";
@@ -89,38 +124,72 @@ date: 2025-11-04
       audio: []
     });
 
+    let originalList = [];
+
     async function loadMusicList() {
-      const loading = document.getElementById("loading");
-      loading.style.display = "block";
-      loading.textContent = "正在加载音乐列表...";
-
       try {
-        const res = await fetch(listUrl + "?_=" + Date.now());
+        const res = await fetch(listUrl + "?v=" + Date.now());
         if (!res.ok) throw new Error("无法加载 list.json");
-
         const data = await res.json();
-        aplayer.list.clear();
-
-        data.forEach(item => {
-          aplayer.list.add({
-            name: item.title,
-            artist: "未知",
-            url: item.url,
-            cover: item.cover || defaultCover
-          });
-        });
-
-        loading.textContent = `✅ 已加载 ${data.length} 首歌曲`;
-        setTimeout(() => (loading.style.display = "none"), 1500);
-
+        originalList = data.map(item => ({
+          title: item.title,
+          url: item.url,
+          cover: item.cover || defaultCover,
+          artist: item.artist || "未知"
+        }));
+        applyList(originalList);
       } catch (err) {
-        loading.textContent = "❌ 加载失败，请检查 OSS 配置。";
+        alert("加载音乐列表失败，请检查 OSS 配置。");
         console.error(err);
       }
     }
 
-    document.getElementById("reloadBtn").addEventListener("click", loadMusicList);
-    loadMusicList();
+    function applyList(list) {
+      aplayer.list.clear();
+      list.forEach(item => {
+        aplayer.list.add({
+          name: item.title,
+          artist: item.artist,
+          url: item.url,
+          cover: item.cover
+        });
+      });
+      // 更新背景封面
+      updateBackground(list[0]?.cover || defaultCover);
+    }
+
+    function updateBackground(imageUrl) {
+      const bg = document.getElementById("bgCover");
+      bg.style.backgroundImage = `url("${imageUrl}")`;
+    }
+
+    document.getElementById("btnReload").addEventListener("click", () => {
+      loadMusicList();
+    });
+
+    document.getElementById("btnMode").addEventListener("click", () => {
+      const currentOrder = aplayer.config.order;
+      aplayer.config.order = (currentOrder === "random" ? "list" : "random");
+      alert("播放模式切换为：" + (aplayer.config.order === "random" ? "随机播放" : "顺序播放"));
+    });
+
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = originalList.filter(item => 
+        item.title.toLowerCase().includes(q) || item.artist.toLowerCase().includes(q)
+      );
+      applyList(filtered);
+    });
+
+    // 监听播放切换以更新背景
+    aplayer.on('play', () => {
+      const current = aplayer.list.audios[aplayer.list.index];
+      updateBackground(current.cover);
+    });
+
+    window.onload = () => {
+      loadMusicList();
+    };
   </script>
 </body>
 </html>
