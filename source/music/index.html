@@ -9,104 +9,152 @@ date: 2025-11-04
   <meta charset="UTF-8">
   <title>🎵 在线音乐播放器</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- APlayer -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
   <style>
-    body {
+    /* ======= 页面基础 ======= */
+    html, body {
       margin: 0;
-      font-family: "Segoe UI","Microsoft YaHei",sans-serif;
-      color: #222;
-      background: #f0f2f5;
+      padding: 0;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
+
     .player-wrapper {
       position: relative;
       min-height: 100vh;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
     }
+
+    /* ======= 背景封面 ======= */
     .bg-cover {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-size: cover;
       background-position: center;
-      filter: blur(20px) brightness(0.6);
-      z-index: -1;
+      filter: blur(25px) brightness(0.6);
+      z-index: 0;
+      transition: background-image 1s ease-in-out;
     }
-    .content {
-      position: relative;
-      padding: 40px 20px;
-      text-align: center;
+
+    .bg-cover::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.45);
     }
+
+    /* ======= 标题与控件 ======= */
     h1 {
-      color: #fff;
       font-size: 28px;
       margin-bottom: 10px;
+      text-shadow: 0 0 6px rgba(255,255,255,0.4);
     }
+
     p.desc {
       color: #ddd;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-size: 15px;
     }
+
     .controls {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
+
     button {
-      background: #0078d7;
-      color: white;
-      border: none;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 6px;
       padding: 8px 16px;
-      font-size: 15px;
+      font-size: 14px;
       cursor: pointer;
-      margin: 0 5px;
-      transition: background 0.3s;
+      margin: 0 6px;
+      transition: all 0.3s ease;
     }
-    button:hover { background: #005fa3; }
+
+    button:hover {
+      background: rgba(255,255,255,0.35);
+    }
 
     #searchInput {
-      padding: 6px 10px;
-      font-size: 14px;
+      display: block;
+      margin: 10px auto 25px auto;
+      padding: 8px 12px;
       width: 80%;
-      max-width: 400px;
-      margin-bottom: 20px;
+      max-width: 380px;
+      border-radius: 8px;
       border: none;
-      border-radius: 4px;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
     }
 
+    #searchInput::placeholder {
+      color: #aaa;
+    }
+
+    /* ======= 播放器 ======= */
     #aplayer {
       margin: 0 auto;
+      width: 90%;
       max-width: 700px;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.1);
       border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      z-index: 2;
     }
 
-    /* 暗黑模式 */
+    /* ======= 暗黑模式 ======= */
     @media (prefers-color-scheme: dark) {
-      body { background: #121212; color: #eee; }
-      button { background: #1e88e5; }
-      #aplayer { background: rgba(30,30,30,0.9); }
+      body { background-color: #000; color: #fff; }
+      button { background: rgba(255,255,255,0.2); }
+    }
+
+    /* ======= 加载提示 ======= */
+    #loading {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 20px;
+      display: none;
     }
   </style>
 </head>
 
 <body>
+  <div class="bg-cover" id="bgCover"></div>
+
   <div class="player-wrapper">
-    <div class="bg-cover" id="bgCover"></div>
-    <div class="content">
-      <h1>🎧 在线音乐播放器</h1>
-      <p class="desc">从云端读取音乐列表 & 动态封面大图效果</p>
+    <h1>🎧 在线音乐播放器</h1>
+    <p class="desc">从 OSS 自动读取音乐列表，封面动态切换</p>
 
-      <div class="controls">
-        <button id="btnReload">🔄 重新加载列表</button>
-        <button id="btnMode">🔀 切换模式</button>
-      </div>
-
-      <input type="text" id="searchInput" placeholder="🔍 搜索歌曲 / 歌手" />
-
-      <div id="aplayer"></div>
+    <div class="controls">
+      <button id="btnReload">🔄 重新加载</button>
+      <button id="btnMode">🔀 切换模式</button>
     </div>
+
+    <input type="text" id="searchInput" placeholder="🔍 搜索歌曲 / 歌手" />
+
+    <div id="aplayer"></div>
+    <p id="loading">加载中，请稍候...</p>
   </div>
 
   <script>
@@ -121,12 +169,17 @@ date: 2025-11-04
       listFolded: false,
       preload: "none",
       fixed: false,
+      theme: "#ff3e3e",
       audio: []
     });
 
     let originalList = [];
 
     async function loadMusicList() {
+      const loading = document.getElementById("loading");
+      loading.style.display = "block";
+      loading.textContent = "正在加载音乐列表...";
+
       try {
         const res = await fetch(listUrl + "?v=" + Date.now());
         if (!res.ok) throw new Error("无法加载 list.json");
@@ -138,8 +191,9 @@ date: 2025-11-04
           artist: item.artist || "未知"
         }));
         applyList(originalList);
+        loading.style.display = "none";
       } catch (err) {
-        alert("加载音乐列表失败，请检查 OSS 配置。");
+        loading.textContent = "❌ 加载失败，请检查 OSS 配置。";
         console.error(err);
       }
     }
@@ -154,7 +208,7 @@ date: 2025-11-04
           cover: item.cover
         });
       });
-      // 更新背景封面
+      // 更新初始背景
       updateBackground(list[0]?.cover || defaultCover);
     }
 
@@ -163,9 +217,8 @@ date: 2025-11-04
       bg.style.backgroundImage = `url("${imageUrl}")`;
     }
 
-    document.getElementById("btnReload").addEventListener("click", () => {
-      loadMusicList();
-    });
+    // ======= 控件事件 =======
+    document.getElementById("btnReload").addEventListener("click", () => loadMusicList());
 
     document.getElementById("btnMode").addEventListener("click", () => {
       const currentOrder = aplayer.config.order;
@@ -175,21 +228,25 @@ date: 2025-11-04
 
     document.getElementById("searchInput").addEventListener("input", (e) => {
       const q = e.target.value.toLowerCase();
-      const filtered = originalList.filter(item => 
-        item.title.toLowerCase().includes(q) || item.artist.toLowerCase().includes(q)
+      const filtered = originalList.filter(item =>
+        item.title.toLowerCase().includes(q) ||
+        item.artist.toLowerCase().includes(q)
       );
       applyList(filtered);
     });
 
-    // 监听播放切换以更新背景
-    aplayer.on('play', () => {
+    // ======= 事件监听：播放时更新背景封面 =======
+    aplayer.on("play", () => {
       const current = aplayer.list.audios[aplayer.list.index];
       updateBackground(current.cover);
     });
 
-    window.onload = () => {
-      loadMusicList();
-    };
+    // 页面加载完成后立即执行
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadMusicList();
+      const current = aplayer.list.audios[0];
+      if (current) updateBackground(current.cover);
+    });
   </script>
 </body>
 </html>
