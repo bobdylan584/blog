@@ -2,12 +2,12 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>🎧 我的音乐播放器</title>
+  <title>🎧 在线音乐播放器</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
   <style>
     body { font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px; background: #f7f7f7; }
-    h1 { margin-bottom: 20px; }
+    h1 { margin-bottom: 20px; font-size: 28px; }
     button { margin-bottom: 20px; padding: 8px 18px; border: none; background: #0078d7; color: white; border-radius: 6px; cursor: pointer; }
     button:hover { background: #005fa3; }
     #aplayer { margin: 0 auto; max-width: 600px; }
@@ -19,7 +19,7 @@
   <div id="aplayer"></div>
 
   <script>
-    const ossPrefix = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/'; // 你的 OSS 音乐目录
+    const ossPrefix = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/';
     const aplayer = new APlayer({
       container: document.getElementById('aplayer'),
       autoplay: false,
@@ -30,35 +30,31 @@
     });
 
     async function fetchMusicList() {
-      // 方法1：如果你的 OSS 已开放目录索引，可以直接 fetch 文件列表
-      // 例如：https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/?prefix=audio/
-      // 否则我们用本地定义的文件清单（推荐）
-    
+      // 你可以改成自动扫描，但这里先手动写死测试列表
       const fileList = [
-        'ZaZaZsu-爱河.mp3',
-        '王铮亮-不凡.mp3',
-        '邵帅-暖一杯茶.mp3'
+        'ZaZaZsu 咔咔苏 - 爱河.mp3',
+        '王铮亮 - 不凡.mp3',
+        '邵帅 - 暖一杯茶.mp3'
       ];
-    
-      const audios = fileList.map(name => ({
-        name: decodeURIComponent(name.replace('.mp3', '')),
-        artist: '未知',
-        url: ossPrefix + encodeURIComponent(name),
-        cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-      }));
-    
+
+      const audios = fileList.map(name => {
+        const encoded = encodeURIComponent(name.trim());
+        return {
+          name: name.replace('.mp3', ''),
+          artist: '未知',
+          url: ossPrefix + encoded,
+          cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+        };
+      });
+
       aplayer.list.clear();
       audios.forEach(song => aplayer.list.add(song));
-      console.log('音乐列表加载完成，共', audios.length, '首');
+
+      console.log('✅ 音乐列表加载完成，共', audios.length, '首');
     }
-    
+
     document.getElementById('reloadBtn').addEventListener('click', fetchMusicList);
-    
-    // 页面加载时自动拉一次
-    fetchMusicList();
+    fetchMusicList(); // 页面加载自动执行一次
   </script>
 </body>
 </html>
-
-
-
