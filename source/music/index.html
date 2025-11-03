@@ -103,13 +103,15 @@
       const data = await response.json();
 
       // 格式化音乐列表
-      const musicList = data.map(item => ({
-        name: item.title,
-        artist: item.artist || '未知',
-        url: item.url,
-        cover: item.cover || 'https://cdn.jsdelivr.net/gh/metowolf/assets@master/cover/default.jpg',
-        lrc: item.lrc || ''
-      }));
+
+	  const musicList = data.map(item => ({
+		name: item.name,
+		artist: item.artist || '未知',
+		url: item.url,
+		cover: item.cover || 'https://cdn.jsdelivr.net/gh/metowolf/assets@master/cover/default.jpg',
+		lrc: item.lrc || ''
+	  }));
+
 
       // 创建播放器实例
       window.ap = new APlayer({
