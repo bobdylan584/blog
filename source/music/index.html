@@ -6,20 +6,44 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px; background: #f7f7f7; }
-    h1 { margin-bottom: 20px; font-size: 28px; }
-    button { margin-bottom: 20px; padding: 8px 18px; border: none; background: #0078d7; color: white; border-radius: 6px; cursor: pointer; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      text-align: center; 
+      padding: 40px; 
+      background: #f7f7f7; 
+    }
+    h1 { 
+      margin-bottom: 20px; 
+      font-size: 28px; 
+    }
+    button { 
+      margin-bottom: 20px; 
+      padding: 8px 18px; 
+      border: none; 
+      background: #0078d7; 
+      color: white; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-size: 15px;
+    }
     button:hover { background: #005fa3; }
-    #aplayer { margin: 0 auto; max-width: 600px; }
+    #aplayer { 
+      margin: 0 auto; 
+      max-width: 640px; 
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
   <h1>🎵 在线音乐播放器</h1>
-  <button id="reloadBtn">读取音乐</button>
+  <button id="reloadBtn">🔄 重新加载音乐列表</button>
   <div id="aplayer"></div>
 
   <script>
-    const ossPrefix = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/audio/';
+    const listUrl = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/list.json';
+
     const aplayer = new APlayer({
       container: document.getElementById('aplayer'),
       autoplay: false,
@@ -29,32 +53,31 @@
       audio: []
     });
 
-    async function fetchMusicList() {
-      // 你可以改成自动扫描，但这里先手动写死测试列表
-      const fileList = [
-        'ZaZaZsu咂咂苏 - 爱河.mp3',
-        '王铮亮 - 不凡.mp3',
-        '邵帅 - 暖一杯茶.mp3'
-      ];
+    async function loadMusicList() {
+      try {
+        const res = await fetch(listUrl + '?_=' + Date.now()); // 加时间戳防止缓存
+        if (!res.ok) throw new Error('无法加载 list.json');
+        const data = await res.json();
 
-      const audios = fileList.map(name => {
-        const encoded = encodeURIComponent(name.trim());
-        return {
-          name: name.replace('.mp3', ''),
-          artist: '未知',
-          url: ossPrefix + encoded,
-          cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
-        };
-      });
+        aplayer.list.clear();
+        data.forEach(item => {
+          aplayer.list.add({
+            name: item.title,
+            artist: '未知',
+            url: item.url,
+            cover: 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg'
+          });
+        });
 
-      aplayer.list.clear();
-      audios.forEach(song => aplayer.list.add(song));
-
-      console.log('✅ 音乐列表加载完成，共', audios.length, '首');
+        console.log(`✅ 已加载 ${data.length} 首歌曲`);
+      } catch (err) {
+        console.error('❌ 读取 list.json 出错:', err);
+        alert('加载音乐列表失败，请检查 OSS 是否存在 list.json');
+      }
     }
 
-    document.getElementById('reloadBtn').addEventListener('click', fetchMusicList);
-    fetchMusicList(); // 页面加载自动执行一次
+    document.getElementById('reloadBtn').addEventListener('click', loadMusicList);
+    loadMusicList(); // 页面加载时自动运行
   </script>
 </body>
 </html>

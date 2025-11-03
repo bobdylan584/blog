@@ -12,6 +12,8 @@
     "version": "7.3.0"
   },
   "dependencies": {
+    "ali-oss": "^6.23.0",
+    "dotenv": "^17.2.3",
     "hexo": "^7.3.0",
     "hexo-algolia": "^1.3.2",
     "hexo-generator-archive": "^2.0.0",
@@ -27,5 +29,18 @@
     "hexo-tag-aplayer": "^3.0.4",
     "hexo-theme-butterfly": "^5.4.3",
     "hexo-theme-landscape": "^1.0.0"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobdylan584/blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bobdylan584/blog/issues"
+  },
+  "homepage": "https://github.com/bobdylan584/blog#readme"
 }
