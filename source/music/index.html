@@ -1,325 +1,132 @@
----
-title: 🎧 在线音乐播放器（动态歌词版）
-date: 2025-11-04
----
-
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>🎵 在线音乐播放器（带歌词）</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎵 音乐播放器</title>
 
-  <!-- 引入 APlayer -->
+  <!-- 引入 APlayer 与 MetingJS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
   <style>
-    html, body {
+    body {
+      background: linear-gradient(to bottom right, #f5f7fa, #dfe9f3);
       margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    .player-wrapper {
-      position: relative;
-      min-height: 100vh;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
       justify-content: center;
-      z-index: 1;
+      color: #222;
     }
 
-    /* 背景封面 */
-    .bg-cover {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      filter: blur(25px) brightness(0.6);
-      z-index: 0;
-      transition: background-image 1s ease-in-out;
-    }
-
-    .bg-cover::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    /* 标题与控件 */
     h1 {
-      font-size: 28px;
+      font-size: 2rem;
       margin-bottom: 10px;
-      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #2c3e50;
     }
 
-    p.desc {
-      color: #ddd;
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
-
-    .controls {
-      margin-bottom: 15px;
-    }
-
-    button {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 6px;
-      padding: 8px 16px;
-      font-size: 14px;
-      cursor: pointer;
-      margin: 0 6px;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background: rgba(255,255,255,0.35);
-    }
-
-    #searchInput {
-      display: block;
-      margin: 10px auto 25px auto;
-      padding: 8px 12px;
-      width: 80%;
-      max-width: 380px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      font-size: 15px;
-      text-align: center;
+    h1::before {
+      content: "🎧";
+      font-size: 2.2rem;
     }
 
     #aplayer {
-      margin: 0 auto;
       width: 90%;
-      max-width: 700px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 720px;
+      border-radius: 16px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
-      z-index: 2;
     }
 
-    /* 动态歌词 */
-    #lyricsBox {
-      text-align: center;
-      margin-top: 25px;
-      color: #ccc;
-      max-height: 160px;
-      overflow: hidden;
-      line-height: 1.8;
-      font-size: 15px;
+    .control-bar {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
     }
 
-    #lyricsBox p {
-      margin: 4px 0;
-      transition: color 0.3s;
+    .control-bar button {
+      background-color: #3498db;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
     }
 
-    #lyricsBox p.active {
-      color: #fff;
-      font-weight: bold;
-      font-size: 17px;
-      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    .control-bar button:hover {
+      background-color: #2980b9;
+      transform: scale(1.1);
     }
 
-    #loading {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 20px;
-      display: none;
+    footer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #888;
     }
   </style>
 </head>
 
 <body>
-  <div class="bg-cover" id="bgCover"></div>
 
-  <div class="player-wrapper">
-    <h1>🎧 在线音乐播放器（动态歌词）</h1>
-    <p class="desc">自动从 OSS 读取音乐 + 封面 + 歌词</p>
+  <h1>音乐播放器</h1>
 
-    <div class="controls">
-      <button id="btnReload">🔄 重新加载</button>
-      <button id="btnMode">🔀 切换模式</button>
-    </div>
+  <div id="aplayer" class="aplayer"></div>
 
-    <input type="text" id="searchInput" placeholder="🔍 搜索歌曲 / 歌手" />
-
-    <div id="aplayer"></div>
-    <div id="lyricsBox"></div>
-    <p id="loading">加载中，请稍候...</p>
+  <div class="control-bar">
+    <button onclick="ap.list.switch(ap.list.index - 1)">⏮</button>
+    <button onclick="ap.toggle()">⏯</button>
+    <button onclick="ap.list.switch(ap.list.index + 1)">⏭</button>
+    <button onclick="ap.pause()">⏹</button>
   </div>
 
+  <footer>🎵 由阿里云 OSS 提供存储支持</footer>
+
   <script>
-    const listUrl = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/list.json";
-    const defaultCover = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg";
-    const lyricsBase = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/";
-
-    const aplayer = new APlayer({
-      container: document.getElementById("aplayer"),
-      autoplay: false,
-      loop: "all",
-      order: "random",
-      listFolded: false,
-      preload: "none",
-      fixed: false,
-      theme: "#ff3e3e",
-      audio: []
-    });
-
-    let originalList = [];
-    let lyricsMap = {}; // 保存每首歌的歌词
-    let lyricsData = [];
+    // OSS 上的 list.json 路径
+    const listUrl = 'https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/list.json';
 
     async function loadMusicList() {
-      const loading = document.getElementById("loading");
-      loading.style.display = "block";
-      loading.textContent = "正在加载音乐列表...";
+      const response = await fetch(listUrl);
+      const data = await response.json();
 
-      try {
-        const res = await fetch(listUrl + "?v=" + Date.now());
-        if (!res.ok) throw new Error("无法加载 list.json");
-        const data = await res.json();
-        originalList = data.map(item => ({
-          title: item.title,
-          url: item.url,
-          cover: item.cover || defaultCover,
-          artist: item.artist || "未知"
-        }));
-        applyList(originalList);
-        loading.style.display = "none";
-      } catch (err) {
-        loading.textContent = "❌ 加载失败，请检查 OSS 配置。";
-        console.error(err);
-      }
-    }
+      // 格式化音乐列表
+      const musicList = data.map(item => ({
+        name: item.title,
+        artist: item.artist || '未知',
+        url: item.url,
+        cover: item.cover || 'https://cdn.jsdelivr.net/gh/metowolf/assets@master/cover/default.jpg',
+        lrc: item.lrc || ''
+      }));
 
-    function applyList(list) {
-      aplayer.list.clear();
-      list.forEach(item => {
-        aplayer.list.add({
-          name: item.title,
-          artist: item.artist,
-          url: item.url,
-          cover: item.cover
-        });
+      // 创建播放器实例
+      window.ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        audio: musicList,
+        fixed: false,
+        mini: false,
+        autoplay: false,
+        lrcType: 3,
+        volume: 0.8,
+        theme: '#3498db'
       });
-      updateBackground(list[0]?.cover || defaultCover);
     }
 
-    function updateBackground(imageUrl) {
-      const bg = document.getElementById("bgCover");
-      bg.style.backgroundImage = `url("${imageUrl}")`;
-    }
-
-    // ======= 加载歌词 =======
-    async function loadLyrics(title) {
-      const lyricsUrl = `${lyricsBase}${encodeURIComponent(title)}.lrc`;
-      try {
-        const res = await fetch(lyricsUrl);
-        if (!res.ok) throw new Error("无歌词文件");
-        const text = await res.text();
-        lyricsData = parseLRC(text);
-        renderLyrics();
-      } catch {
-        document.getElementById("lyricsBox").innerHTML = "<p>🎵 暂无歌词</p>";
-      }
-    }
-
-    // ======= 解析 LRC 歌词 =======
-    function parseLRC(text) {
-      const lines = text.split("\n");
-      const result = [];
-      const timeReg = /\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\]/;
-      for (let line of lines) {
-        const match = line.match(timeReg);
-        if (match) {
-          const min = parseInt(match[1]) * 60;
-          const sec = parseInt(match[2]);
-          const ms = match[3] ? parseInt(match[3]) / 1000 : 0;
-          const time = min + sec + ms;
-          const text = line.replace(timeReg, "").trim();
-          result.push({ time, text });
-        }
-      }
-      return result.sort((a, b) => a.time - b.time);
-    }
-
-    function renderLyrics() {
-      const box = document.getElementById("lyricsBox");
-      box.innerHTML = lyricsData.map(l => `<p>${l.text}</p>`).join("");
-    }
-
-    function highlightLyrics(currentTime) {
-      const box = document.getElementById("lyricsBox");
-      const lines = box.querySelectorAll("p");
-      let index = lyricsData.findIndex((l, i) => currentTime < l.time && i > 0);
-      if (index === -1) index = lyricsData.length - 1;
-      else index = index - 1;
-      lines.forEach((p, i) => {
-        p.classList.toggle("active", i === index);
-      });
-      if (index >= 2) {
-        box.scrollTop = (index - 2) * 28;
-      }
-    }
-
-    // ======= 控件事件 =======
-    document.getElementById("btnReload").addEventListener("click", () => loadMusicList());
-
-    document.getElementById("btnMode").addEventListener("click", () => {
-      const currentOrder = aplayer.config.order;
-      aplayer.config.order = (currentOrder === "random" ? "list" : "random");
-      alert("播放模式切换为：" + (aplayer.config.order === "random" ? "随机播放" : "顺序播放"));
-    });
-
-    document.getElementById("searchInput").addEventListener("input", (e) => {
-      const q = e.target.value.toLowerCase();
-      const filtered = originalList.filter(item =>
-        item.title.toLowerCase().includes(q) ||
-        item.artist.toLowerCase().includes(q)
-      );
-      applyList(filtered);
-    });
-
-    // ======= 事件监听 =======
-    aplayer.on("play", async () => {
-      const current = aplayer.list.audios[aplayer.list.index];
-      updateBackground(current.cover);
-      await loadLyrics(current.name);
-    });
-
-    aplayer.on("timeupdate", () => {
-      const currentTime = aplayer.audio.currentTime;
-      highlightLyrics(currentTime);
-    });
-
-    // 页面加载完成后执行
-    document.addEventListener("DOMContentLoaded", async () => {
-      await loadMusicList();
-      const current = aplayer.list.audios[0];
-      if (current) {
-        updateBackground(current.cover);
-        await loadLyrics(current.name);
-      }
+    loadMusicList().catch(err => {
+      alert('❌ 加载音乐列表失败，请检查 OSS 是否存在 list.json');
+      console.error(err);
     });
   </script>
 </body>
