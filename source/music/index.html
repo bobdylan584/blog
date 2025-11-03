@@ -1,5 +1,5 @@
 ---
-title: 🎧 在线音乐播放器
+title: 🎧 在线音乐播放器（动态歌词版）
 date: 2025-11-04
 ---
 
@@ -7,15 +7,14 @@ date: 2025-11-04
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>🎵 在线音乐播放器</title>
+  <title>🎵 在线音乐播放器（带歌词）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- APlayer -->
+  <!-- 引入 APlayer -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 
   <style>
-    /* ======= 页面基础 ======= */
     html, body {
       margin: 0;
       padding: 0;
@@ -35,7 +34,7 @@ date: 2025-11-04
       z-index: 1;
     }
 
-    /* ======= 背景封面 ======= */
+    /* 背景封面 */
     .bg-cover {
       position: fixed;
       top: 0;
@@ -56,14 +55,14 @@ date: 2025-11-04
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0, 0, 0, 0.4);
     }
 
-    /* ======= 标题与控件 ======= */
+    /* 标题与控件 */
     h1 {
       font-size: 28px;
       margin-bottom: 10px;
-      text-shadow: 0 0 6px rgba(255,255,255,0.4);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
     }
 
     p.desc {
@@ -107,11 +106,6 @@ date: 2025-11-04
       text-align: center;
     }
 
-    #searchInput::placeholder {
-      color: #aaa;
-    }
-
-    /* ======= 播放器 ======= */
     #aplayer {
       margin: 0 auto;
       width: 90%;
@@ -123,13 +117,29 @@ date: 2025-11-04
       z-index: 2;
     }
 
-    /* ======= 暗黑模式 ======= */
-    @media (prefers-color-scheme: dark) {
-      body { background-color: #000; color: #fff; }
-      button { background: rgba(255,255,255,0.2); }
+    /* 动态歌词 */
+    #lyricsBox {
+      text-align: center;
+      margin-top: 25px;
+      color: #ccc;
+      max-height: 160px;
+      overflow: hidden;
+      line-height: 1.8;
+      font-size: 15px;
     }
 
-    /* ======= 加载提示 ======= */
+    #lyricsBox p {
+      margin: 4px 0;
+      transition: color 0.3s;
+    }
+
+    #lyricsBox p.active {
+      color: #fff;
+      font-weight: bold;
+      font-size: 17px;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
     #loading {
       font-size: 14px;
       color: #ccc;
@@ -143,8 +153,8 @@ date: 2025-11-04
   <div class="bg-cover" id="bgCover"></div>
 
   <div class="player-wrapper">
-    <h1>🎧 在线音乐播放器</h1>
-    <p class="desc">从 OSS 自动读取音乐列表，封面动态切换</p>
+    <h1>🎧 在线音乐播放器（动态歌词）</h1>
+    <p class="desc">自动从 OSS 读取音乐 + 封面 + 歌词</p>
 
     <div class="controls">
       <button id="btnReload">🔄 重新加载</button>
@@ -154,12 +164,14 @@ date: 2025-11-04
     <input type="text" id="searchInput" placeholder="🔍 搜索歌曲 / 歌手" />
 
     <div id="aplayer"></div>
+    <div id="lyricsBox"></div>
     <p id="loading">加载中，请稍候...</p>
   </div>
 
   <script>
     const listUrl = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/list.json";
     const defaultCover = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/website_background_img/snow_cover.jpg";
+    const lyricsBase = "https://bob-blog-image.oss-cn-shanghai.aliyuncs.com/mp3/";
 
     const aplayer = new APlayer({
       container: document.getElementById("aplayer"),
@@ -174,6 +186,8 @@ date: 2025-11-04
     });
 
     let originalList = [];
+    let lyricsMap = {}; // 保存每首歌的歌词
+    let lyricsData = [];
 
     async function loadMusicList() {
       const loading = document.getElementById("loading");
@@ -208,13 +222,64 @@ date: 2025-11-04
           cover: item.cover
         });
       });
-      // 更新初始背景
       updateBackground(list[0]?.cover || defaultCover);
     }
 
     function updateBackground(imageUrl) {
       const bg = document.getElementById("bgCover");
       bg.style.backgroundImage = `url("${imageUrl}")`;
+    }
+
+    // ======= 加载歌词 =======
+    async function loadLyrics(title) {
+      const lyricsUrl = `${lyricsBase}${encodeURIComponent(title)}.lrc`;
+      try {
+        const res = await fetch(lyricsUrl);
+        if (!res.ok) throw new Error("无歌词文件");
+        const text = await res.text();
+        lyricsData = parseLRC(text);
+        renderLyrics();
+      } catch {
+        document.getElementById("lyricsBox").innerHTML = "<p>🎵 暂无歌词</p>";
+      }
+    }
+
+    // ======= 解析 LRC 歌词 =======
+    function parseLRC(text) {
+      const lines = text.split("\n");
+      const result = [];
+      const timeReg = /\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\]/;
+      for (let line of lines) {
+        const match = line.match(timeReg);
+        if (match) {
+          const min = parseInt(match[1]) * 60;
+          const sec = parseInt(match[2]);
+          const ms = match[3] ? parseInt(match[3]) / 1000 : 0;
+          const time = min + sec + ms;
+          const text = line.replace(timeReg, "").trim();
+          result.push({ time, text });
+        }
+      }
+      return result.sort((a, b) => a.time - b.time);
+    }
+
+    function renderLyrics() {
+      const box = document.getElementById("lyricsBox");
+      box.innerHTML = lyricsData.map(l => `<p>${l.text}</p>`).join("");
+    }
+
+    function highlightLyrics(currentTime) {
+      const box = document.getElementById("lyricsBox");
+      const lines = box.querySelectorAll("p");
+      let index = lyricsData.findIndex((l, i) => currentTime < l.time && i > 0);
+      if (index === -1) index = lyricsData.length - 1;
+      else index = index - 1;
+      lines.forEach((p, i) => {
+        p.classList.toggle("active", i === index);
+      });
+      if (index >= 2) {
+        box.scrollTop = (index - 2) * 28;
+      }
     }
 
     // ======= 控件事件 =======
@@ -235,17 +300,26 @@ date: 2025-11-04
       applyList(filtered);
     });
 
-    // ======= 事件监听：播放时更新背景封面 =======
-    aplayer.on("play", () => {
+    // ======= 事件监听 =======
+    aplayer.on("play", async () => {
       const current = aplayer.list.audios[aplayer.list.index];
       updateBackground(current.cover);
+      await loadLyrics(current.name);
     });
 
-    // 页面加载完成后立即执行
+    aplayer.on("timeupdate", () => {
+      const currentTime = aplayer.audio.currentTime;
+      highlightLyrics(currentTime);
+    });
+
+    // 页面加载完成后执行
     document.addEventListener("DOMContentLoaded", async () => {
       await loadMusicList();
       const current = aplayer.list.audios[0];
-      if (current) updateBackground(current.cover);
+      if (current) {
+        updateBackground(current.cover);
+        await loadLyrics(current.name);
+      }
     });
   </script>
 </body>
