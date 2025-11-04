@@ -32,6 +32,7 @@ i18n_dir: :lang
 ## skip_render:   deepseek改过
 # 找到或添加 skip_render 配置
 skip_render:
+  - static/**
   - html_file/**/*
   - tags/a_new_FT/**/*
   - assistant/**/*
@@ -97,6 +98,7 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
+  - static/**
   - _data/**/*.css
   - _data/**/*.yml
   - static_html/**
