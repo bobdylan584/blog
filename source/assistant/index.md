@@ -3,6 +3,7 @@ title: 阿甘小助手
 date: 2025-11-04
 ---
 
+{% raw %}
 <div id="coze-assistant"></div>
 
 <script>
@@ -12,7 +13,7 @@ date: 2025-11-04
   script.defer = true;
   script.onload = function() {
     new CozeWebSDK({
-      bot_id: "7568773837157253158",  // ← 你的 Coze 智能体 ID
+      bot_id: "7568773837157253158",
       title: "阿甘小助手",
       theme: "light",
       bubble_text: "💬 问问阿甘？",
@@ -22,3 +23,4 @@ date: 2025-11-04
   document.body.appendChild(script);
 })();
 </script>
+{% endraw %}
