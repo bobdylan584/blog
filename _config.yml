@@ -36,6 +36,7 @@ skip_render:
   - tags/a_new_FT/**/*
   - assistant/**/*
   - assistant/index.html
+  - static_html/**
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
@@ -98,6 +99,7 @@ pagination_dir: page
 include:
   - _data/**/*.css
   - _data/**/*.yml
+  - static_html/**
 exclude:
 ignore:
 
