@@ -21,7 +21,7 @@ menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
   Music: /music/ || fas fa-music   
-  阿甘助手: /assistant/ || fas fa-robot  
+  阿甘助手: /assistant/index.html || fas fa-robot  
   assistant: /static_html/assistant.html || fas fa-robot
 
   # Home: / || fas fa-home
