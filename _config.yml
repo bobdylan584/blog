@@ -35,6 +35,7 @@ skip_render:
   - html_file/**/*
   - tags/a_new_FT/**/*
   - assistant/**/*
+  - assistant/index.html
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
