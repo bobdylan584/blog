@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>阿甘小助手</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0a192f, #1e3c72);
+      color: white;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    h1 {
+      margin-top: 25vh;
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- ✅ 阿甘小助手 - 永久可用版 -->
+  <script>
+  (function() {
+    const s = document.createElement("script");
+    s.src = "https://lf26-cdn-tos.bytecdntp.com/obj/byte-tos/static-resource/coze-widget.js";
+    s.defer = true;
+    s.onload = function() {
+      new CozeWebSDK({
+        bot_id: "7568773837157253158", // ← 你的 Coze 智能体 ID
+        title: "阿甘小助手",
+        theme: "light",
+        bubble_text: "💬 问问阿甘？",
+        bubble_icon: "🤖",
+      }).init();
+    };
+    document.body.appendChild(s);
+  })();
+  </script>
+
+</head>
+<body>
+  <h1>阿甘小助手</h1>
+  <p>加载中，请稍候……</p>
+</body>
+</html>
