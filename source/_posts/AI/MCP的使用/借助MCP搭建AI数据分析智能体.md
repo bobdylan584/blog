@@ -1,8 +1,8 @@
 ---
 date: 2025-05-21 18:32:14
 title: 借助MCP搭建AI数据分析智能体
-categories: [AI_Module, 借助MCP搭建AI数据分析智能体]
-tag: AI_Module
+categories: [AI, 借助MCP搭建AI数据分析智能体]
+tag: AI
 ---
 
 # 借助MCP搭建AI数据分析智能体

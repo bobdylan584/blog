@@ -1,8 +1,8 @@
 ---
 date: 2025-06-11 14:32:24
 title: 基于LangGraph的垂直领域智能体实战
-categories: [AI_Module, 基于LangGraph的垂直领域智能体实战]
-tag: AI_Module
+categories: [AI, 基于LangGraph的垂直领域智能体实战]
+tag: AI
 ---
 
 

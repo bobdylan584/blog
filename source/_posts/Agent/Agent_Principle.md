@@ -224,21 +224,37 @@ action：agent按照计划执行各项任务，处理客户的退货请求。
 
 ### 常见的Agent开发平台
 
-#### 百度AgentBuilder：https://agents.baidu.com/center
+#### 百度AgentBuilder
 
-#### 字节扣子平台：https://www.coze.cn/home
+https://agents.baidu.com/center
 
-#### 昆仑万维天工SkyAgents平台：https://model-platform-skyagents.tiangong.cn/home/agent
+#### 字节扣子平台
 
-#### AgentGPT：https://agentgpt.reworkd.ai/zh
+https://www.coze.cn/home
 
-#### LangChain：https://github.com/langchain-ai/langchain
+#### 昆仑万维天工SkyAgents平台
 
-#### AutoGen：https://github.com/microsoft/autogen
+https://model-platform-skyagents.tiangong.cn/home/agent
 
-#### ChatDev：https://github.com/OpenBMB/ChatDev
+#### AgentGPT
 
-#### CrewAI：https://github.com/joaomdmoura/crewAI
+https://agentgpt.reworkd.ai/zh
+
+#### LangChain
+
+https://github.com/langchain-ai/langchain
+
+#### AutoGen
+
+https://github.com/microsoft/autogen
+
+#### ChatDev
+
+https://github.com/OpenBMB/ChatDev
+
+#### CrewAI
+
+https://github.com/joaomdmoura/crewAI
 
 ## Coze平台
 

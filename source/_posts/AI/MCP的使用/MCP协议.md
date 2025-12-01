@@ -1,8 +1,8 @@
 ---
 date: 2025-05-05 12:34:22
 title: MCP协议
-categories: [AI_Module, MCP协议]
-tag: AI_Module
+categories: [AI, MCP协议]
+tag: AI
 ---
 
 **MCP协议**
