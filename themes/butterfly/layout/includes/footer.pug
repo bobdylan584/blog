@@ -1,0 +1,59 @@
+- const { nav, owner, copyright, custom_text } = theme.footer
+
+if nav
+  .footer-flex
+    for block in nav
+      .footer-flex-items(style=`${ block.width ? 'flex-grow:' + block.width : '' }`)
+        for blockItem in block.content
+          .footer-flex-item
+            .footer-flex-title= blockItem.title
+            .footer-flex-content
+              for subitem in blockItem.item
+                if subitem.html
+                  div!= subitem.html
+                else if subitem.url
+                  a(href=url_for(subitem.url), target='_blank' title=subitem.title)= subitem.title
+                else if subitem.title
+                  div!= subitem.title
+.footer-other
+  .footer-copyright
+    if owner.enable
+      - const currentYear = new Date().getFullYear()
+      - const sinceYear = owner.since
+      span.copyright
+        if sinceYear && sinceYear != currentYear
+          != `&copy;&nbsp;${sinceYear} - ${currentYear} By ${config.author}`
+        else
+          != `&copy;&nbsp;${currentYear} By ${config.author}`
+    if copyright.enable
+      - const v = copyright.version ? getVersion() : false
+      span.framework-info
+        if owner.enable && nav
+          span.footer-separator |
+        span= _p('footer.framework') + ' '
+        a(href='https://hexo.io')= `Hexo${ v ? ' ' + v.hexo : '' }`
+        span.footer-separator |
+        span= _p('footer.theme') + ' '
+        a(href='https://github.com/jerryc127/hexo-theme-butterfly')= `Butterfly${ v ? ' ' + v.theme : '' }`
+  if theme.footer.custom_text
+    .footer_custom_text!= theme.footer.custom_text
+	
+
+// Coze Chat SDK - 阿甘小助手（悬浮气泡版）
+script(src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js")
+script.
+  window.addEventListener('DOMContentLoaded', function() {
+    try {
+      const client = new CozeWebSDK({
+        bot_id: '7568773837157253158',   // ← 你的 Bot ID
+        title: '阿甘小助手',             // 聊天窗口标题
+        theme: 'light',                   // 主题，可选 'light' 或 'dark'
+        bubble_text: '💬 问问阿甘？',     // 悬浮按钮上的文字
+        bubble_icon: '🤖'                 // 可自定义图标 emoji
+      });
+      client.init();
+    } catch (err) {
+      console.error('Coze SDK 初始化失败：', err);
+    }
+  });
+

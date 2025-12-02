@@ -1,7 +1,6 @@
 extends includes/layout.pug
 
 block content
-  //- 自定义 CSS —— 直接写在内容开头（这是允许的）
   style.
     .tag-page-container {
       padding: 40px 20px;
@@ -66,9 +65,8 @@ block content
       opacity: .75;
     }
 
-  //- 页面主体
   .tag-page-container
-    h1.tag-title ✨ 标签 Tags（封面图自动生成）
+    h1.tag-title ✨ 标签 Tags
 
     - var tagList = site.tags.toArray().sort((a, b) => a.name.localeCompare(b.name))
 
@@ -76,9 +74,9 @@ block content
       each tag in tagList
         - var tagName = tag.name
         - var encoded = encodeURIComponent(tagName)
-        - var colors = ["1e3c72","0093e9","ff6f61","7f53ac","ff9a9e","16a085","2980b9","8e44ad","c0392b","d35400"];
-		- var bg = colors[Math.abs(tagName.length % colors.length)];
-		- var imgUrl = "https://dummyimage.com/600x400/" + bg + "/ffffff&text=" + encoded;
+        - var colors = ["1e3c72","0093e9","ff6f61","7f53ac","ff9a9e","16a085","2980b9","8e44ad","c0392b","d35400"]
+        - var bg = colors[Math.abs(tagName.length % colors.length)]
+        - var imgUrl = "https://dummyimage.com/600x400/" + bg + "/ffffff&text=" + encoded
 
         a.tag-card(href=url_for(tag.path))
           .tag-card-content

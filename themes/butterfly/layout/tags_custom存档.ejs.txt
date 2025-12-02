@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%- css('css/index') %>
+  <%- css('css/style') %>
+
+  <title>Tags</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      backdrop-filter: blur(20px);
+    }
+
+    .tag-page-container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .tag-title {
+      text-align: center;
+      font-size: 42px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #4c8bf5, #9b59b6, #e67e22);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 40px;
+    }
+
+
+    .tag-masonry {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .tag-masonry { column-count: 2; }
+    }
+
+    @media (max-width: 600px) {
+      .tag-masonry { column-count: 1; }
+    }
+
+
+    .tag-card {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: inherit;
+      break-inside: avoid;
+    }
+
+    .tag-card-content {
+      position: relative;
+      padding: 0;
+      border-radius: 15px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .tag-card:hover .tag-card-content {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .2);
+    }
+
+    .tag-cover {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tag-info {
+      padding: 18px 20px;
+    }
+
+    .tag-name {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .tag-count {
+      font-size: 14px;
+      opacity: .75;
+    }
+
+    [data-theme='dark'] .tag-card-content {
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #eaeaea;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="tag-page-container">
+    <h1 class="tag-title">✨ 标签 Tags（封面图自动生成）</h1>
+
+    <div class="tag-masonry">
+      <% site.tags.sort('name').forEach(function(tag){ 
+           var tagName = tag.name;
+           var encoded = encodeURIComponent(tagName);
+           var imgUrl = "https://picsum.photos/seed/" + encoded + "/600/400";
+      %>
+
+      <a class="tag-card" href="<%- url_for(tag.path) %>">
+        <div class="tag-card-content">
+
+          <img class="tag-cover" src="<%= imgUrl %>" />
+
+          <div class="tag-info">
+            <span class="tag-name"><%= tagName %></span>
+            <span class="tag-count"><%= tag.length %> 篇文章</span>
+          </div>
+
+        </div>
+      </a>
+
+      <% }); %>
+    </div>
+
+  </div>
+
+</body>
+</html>
