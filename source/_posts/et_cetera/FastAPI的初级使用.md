@@ -1,8 +1,8 @@
 ---
 date: 2025-01-10 04:12:45
 title: FastAPI的初级使用
-categories: [et_cetera, FastAPI的初级使用]
-tag: et_cetera
+categories: [Et_Cetera, FastAPI的初级使用]
+tag: Et_Cetera
 ---
 
 # 简单的FastAPI实现

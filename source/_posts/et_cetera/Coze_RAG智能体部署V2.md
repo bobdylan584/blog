@@ -1,8 +1,8 @@
 ---
 date: 2025-10-21 09:31:27
 title: Coze_RAG智能体部署V2
-categories: [AI, Coze_RAG智能体部署V2]
-tag: AI
+categories: [Et_Cetera, Coze_RAG智能体部署V2]
+tag: Et_Cetera
 ---
 
 # 测试聊天
@@ -36,9 +36,9 @@ async function sendMessage() {
 ​      })
 ​    });
 ​    
-    const data = await response.json();
-    console.log('API响应:', data);
-    
+​    const data = await response.json();
+​    console.log('API响应:', data);
+​    
     input.value = '';
     addMessage('assistant', '响应: ' + JSON.stringify(data));
 

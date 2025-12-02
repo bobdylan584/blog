@@ -1,8 +1,8 @@
 ---
 date: 2025-10-21 09:31:27
 title: Coze_RAG智能体部署
-categories: [AI, Coze_RAG智能体部署]
-tag: AI
+categories: [Et_Cetera, Coze_RAG智能体部署]
+tag: Et_Cetera
 ---
 
 

@@ -1,8 +1,8 @@
 ---
 date: 2025-12-01
 title: Transformer作者爆料GPT-5.1内幕！OpenAI内部命名规则变乱了
-categories: [NEWS, Transformer作者爆料GPT-5.1内幕！OpenAI内部命名规则变乱了]
-tag: NEWS
+categories: [News, Transformer作者爆料GPT-5.1内幕！OpenAI内部命名规则变乱了]
+tag: News
 ---
 
 - [首页](http://www.qbitai.com/)

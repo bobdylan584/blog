@@ -1,7 +1,7 @@
 ---
 title: 部署本地大模型
 date: 2024-07-21 10:21:50
-tag: Local_deploy_LLM
+tag: Local_Deploy_LLM
 ---
 
 * 了解私有化大模型
