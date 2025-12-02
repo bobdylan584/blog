@@ -110,6 +110,8 @@ ignore:
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
 theme: butterfly
+theme_dir: node_modules/hexo-theme-butterfly
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
