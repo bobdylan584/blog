@@ -1,4 +1,4 @@
 ---
+layout: tags_custom
 title: Tags
-layout: tags
 ---
