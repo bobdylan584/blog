@@ -7,6 +7,7 @@ block content
       .tag-grid(style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;")
         each tag in site.tags.toArray().sort((a, b) => a.name.localeCompare(b.name))
           - var tagName = tag.name || '';
+          - var count = tag.length || 0;
           - var encoded = encodeURIComponent(tagName);
           - var imgUrl = "https://picsum.photos/seed/" + encoded + "/300/180";
           - var tagUrl = url_for(tag.path || '');
@@ -14,6 +15,5 @@ block content
             a.tag-card-link(href=tagUrl, style="display: block;")
               .tag-card-image
                 img(src=imgUrl, alt=tagName, style="width: 100%; border-radius: 8px;")
-
             .tag-card-title(style="font-size: 20px; font-weight: bold; margin-top: 10px;")
-              | #{tagName}
+              | #{tagName}(#{count} docs)

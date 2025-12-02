@@ -283,7 +283,7 @@ footer:
 # --------------------------------------
 
 aside:
-  enable: true
+  enable: false
   hide: false
   # Show the button to hide the aside in bottom right button
   button: true
@@ -292,7 +292,7 @@ aside:
   position: right
   display:
     archive: false
-    tag: true
+    tag: false
     category: false
   card_author:
     enable: true
@@ -327,7 +327,7 @@ aside:
     expand: none
     sort_order:
   card_tags:
-    enable: true
+    enable: false
     # If set 0 will show all
     limit: 40
     color: false

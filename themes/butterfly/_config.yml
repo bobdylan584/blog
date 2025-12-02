@@ -282,7 +282,7 @@ footer:
 # --------------------------------------
 
 aside:
-  enable: true
+  enable: false
   hide: false
   # Show the button to hide the aside in bottom right button
   button: true
