@@ -1,7 +1,7 @@
 ---
 title: Conda_Command
 date: 2024-07-26 10:51:07
-tag: command_set
+tag: Command_Record
 ---
 
 # Conda_Command
