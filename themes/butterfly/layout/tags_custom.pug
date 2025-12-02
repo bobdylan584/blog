@@ -14,5 +14,6 @@ block content
             a.tag-card-link(href=tagUrl, style="display: block;")
               .tag-card-image
                 img(src=imgUrl, alt=tagName, style="width: 100%; border-radius: 8px;")
-              .tag-card-title(style="font-size: 20px; font-weight: bold; margin-top: 8px;")
-                #{tagName} (#{tag.length || 0})
+
+            .tag-card-title(style="font-size: 20px; font-weight: bold; margin-top: 10px;")
+              | #{tagName}
