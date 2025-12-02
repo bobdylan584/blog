@@ -9,3 +9,8 @@ git log --oneline
 3. 回退到你想要的那一次提交（比如早上的那次）
 git reset --hard 7ac91bd
 
+4、强制推本地更新好的版本到main上面去
+git branch -M main（可以改本地分支名为main）
+git push -f origin main
+git push -f origin master:main(如果本地git是叫master，而github是叫main的话)
+

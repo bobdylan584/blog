@@ -1,86 +1,18 @@
-extends includes/layout.pug
+extends includes/layout
 
 block content
-  style.
-    .tag-page-container {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .tag-title {
-      text-align: center;
-      font-size: 42px;
-      font-weight: 800;
-      background: linear-gradient(90deg, #4c8bf5, #9b59b6, #e67e22);
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 40px;
-    }
-    .tag-masonry {
-      column-count: 3;
-      column-gap: 20px;
-    }
-    @media (max-width: 900px) {
-      .tag-masonry { column-count: 2; }
-    }
-    @media (max-width: 600px) {
-      .tag-masonry { column-count: 1; }
-    }
-    .tag-card {
-      display: inline-block;
-      width: 100%;
-      margin-bottom: 20px;
-      text-decoration: none;
-      color: inherit;
-      break-inside: avoid;
-    }
-    .tag-card-content {
-      border-radius: 15px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 4px 20px rgba(0,0,0,.1);
-      transition: transform .25s, box-shadow .25s;
-    }
-    .tag-card:hover .tag-card-content {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 35px rgba(0,0,0,.2);
-    }
-    .tag-cover {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .tag-info {
-      padding: 18px 20px;
-    }
-    .tag-name {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-    .tag-count {
-      font-size: 14px;
-      opacity: .75;
-    }
-
-  .tag-page-container
-    h1.tag-title ✨ 标签 Tags
-
-    - var tagList = site.tags.toArray().sort((a, b) => a.name.localeCompare(b.name))
-
-    .tag-masonry
-      each tag in tagList
-        - var tagName = tag.name
-        - var encoded = encodeURIComponent(tagName)
-        - var colors = ["1e3c72","0093e9","ff6f61","7f53ac","ff9a9e","16a085","2980b9","8e44ad","c0392b","d35400"]
-        - var bg = colors[Math.abs(tagName.length % colors.length)]
-        - var imgUrl = "https://dummyimage.com/600x400/" + bg + "/ffffff&text=" + encoded
-
-        a.tag-card(href=url_for(tag.path))
-          .tag-card-content
-            img.tag-cover(src=imgUrl)
-            .tag-info
-              span.tag-name #{tagName}
-              span.tag-count #{tag.length} 篇文章
+  .page
+    h1.page-title 标签
+    .tags-page
+      .tag-grid(style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;")
+        each tag in site.tags.toArray().sort((a, b) => a.name.localeCompare(b.name))
+          - var tagName = tag.name || '';
+          - var encoded = encodeURIComponent(tagName);
+          - var imgUrl = "https://picsum.photos/seed/" + encoded + "/300/180";
+          - var tagUrl = url_for(tag.path || '');
+          .tag-card(style="text-align: center;")
+            a.tag-card-link(href=tagUrl, style="display: block;")
+              .tag-card-image
+                img(src=imgUrl, alt=tagName, style="width: 100%; border-radius: 8px;")
+              .tag-card-title(style="font-size: 20px; font-weight: bold; margin-top: 8px;")
+                #{tagName} (#{tag.length || 0})
