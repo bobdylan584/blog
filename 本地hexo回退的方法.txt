@@ -1,0 +1,11 @@
+打开cmd
+1. 打开本地项目目录
+cd D:\my_blog\hexo
+打开cmd
+
+2. 查看历史 commit
+git log --oneline
+
+3. 回退到你想要的那一次提交（比如早上的那次）
+git reset --hard 7ac91bd
+
