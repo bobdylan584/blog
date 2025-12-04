@@ -15,6 +15,7 @@ if nav
                   a(href=url_for(subitem.url), target='_blank' title=subitem.title)= subitem.title
                 else if subitem.title
                   div!= subitem.title
+
 .footer-other
   .footer-copyright
     if owner.enable
@@ -37,19 +38,19 @@ if nav
         a(href='https://github.com/jerryc127/hexo-theme-butterfly')= `Butterfly${ v ? ' ' + v.theme : '' }`
   if theme.footer.custom_text
     .footer_custom_text!= theme.footer.custom_text
-	
 
-// Coze Chat SDK - 阿甘小助手（悬浮气泡版）
+
+// --- Coze Chat SDK ---
 script(src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js")
 script.
   window.addEventListener('DOMContentLoaded', function() {
     try {
       const client = new CozeWebSDK({
-        bot_id: '7568773837157253158',   // ← 你的 Bot ID
-        title: '阿甘小助手',             // 聊天窗口标题
-        theme: 'light',                   // 主题，可选 'light' 或 'dark'
-        bubble_text: '💬 问问阿甘？',     // 悬浮按钮上的文字
-        bubble_icon: '🤖'                 // 可自定义图标 emoji
+        bot_id: '7568773837157253158',
+        title: '阿甘小助手',
+        theme: 'light',
+        bubble_text: '💬 问问阿甘？',
+        bubble_icon: '🤖'
       });
       client.init();
     } catch (err) {
@@ -58,20 +59,54 @@ script.
   });
 
 
+// --- Footer Webinfo Display (moved from card_webinfo) ---
+.footer-webinfo(style="text-align:center; color:#fff; margin-top:25px; font-size:15px;")
+  .webinfo(style="display:inline-block; text-align:left; line-height:1.8em;")
+
+    if theme.aside.card_webinfo.post_count
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.article_name')} :`
+        .item-count= site.posts.length
+
+    if theme.aside.card_webinfo.runtime_date
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.runtime.name')} :`
+        .item-count#runtimeshow(data-publishDate=date_xml(theme.aside.card_webinfo.runtime_date))
+          i.fa-solid.fa-spinner.fa-spin
+
+    if theme.wordcount.enable && theme.wordcount.total_wordcount
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.site_wordcount')} :`
+        .item-count= totalcount(site)
+
+    if theme.busuanzi.site_uv
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.site_uv_name')} :`
+        .item-count#busuanzi_value_site_uv
+          i.fa-solid.fa-spinner.fa-spin
+
+    if theme.busuanzi.site_pv
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.site_pv_name')} :`
+        .item-count#busuanzi_value_site_pv
+          i.fa-solid.fa-spinner.fa-spin
+
+    if theme.aside.card_webinfo.last_push_date
+      .webinfo-item
+        .item-name= `${_p('aside.card_webinfo.last_push_date.name')} :`
+        .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
+          i.fa-solid.fa-spinner.fa-spin
 
 
-//- --- Butterfly 原生风格的底部 PV/UV 显示 ---
-.footer-visitor(style="text-align:center; margin-top:15px; font-size:14px; color:#666;")
+// --- Required Script for Busuanzi + Runtime ---
+script(async src="https://cdn.staticfile.org/busuanzi/2.3.0/busuanzi.pure.mini.js")
+script(src= url_for('/js/runtime.js'))
+script(src= url_for('/js/last-push-date.js'))
 
-  span#busuanzi_container_site_uv
-    span.footer-visitor-title 👤 访客人数：
-    span#busuanzi_value_site_uv
-
-  |   |  
-
-  span#busuanzi_container_site_pv
-    span.footer-visitor-title 👁️ 浏览次数：
-    span#busuanzi_value_site_pv
-
-//- busuanzi 必须加载一次
-script(async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js")
+style.
+  .footer-webinfo .item-count {
+    display: inline-block !important;
+  }
+  .footer-webinfo .webinfo-item {
+    margin: 3px 0;
+  }
