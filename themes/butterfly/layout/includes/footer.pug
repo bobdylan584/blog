@@ -1,5 +1,6 @@
-- const { nav, owner, copyright, custom_text } = theme.footer
+- const { nav, owner, copyright } = theme.footer
 
+// ===== Footer Navigation Blocks =====
 if nav
   .footer-flex
     for block in nav
@@ -16,6 +17,7 @@ if nav
                 else if subitem.title
                   div!= subitem.title
 
+// ===== Copyright / Framework =====
 .footer-other
   .footer-copyright
     if owner.enable
@@ -26,6 +28,7 @@ if nav
           != `&copy;&nbsp;${sinceYear} - ${currentYear} By ${config.author}`
         else
           != `&copy;&nbsp;${currentYear} By ${config.author}`
+
     if copyright.enable
       - const v = copyright.version ? getVersion() : false
       span.framework-info
@@ -36,11 +39,45 @@ if nav
         span.footer-separator |
         span= _p('footer.theme') + ' '
         a(href='https://github.com/jerryc127/hexo-theme-butterfly')= `Butterfly${ v ? ' ' + v.theme : '' }`
-  if theme.footer.custom_text
-    .footer_custom_text!= theme.footer.custom_text
+
+// ========= Footer Webinfo (Horizontal Layout) =========
+.footer-webinfo(style="text-align:center; color:#fff; margin-top:30px; font-size:16px;")
+  .webinfo-row(style="display:flex; justify-content:center; gap:35px; flex-wrap:wrap; line-height:1.8em;")
+
+    // Article Count
+    if theme.aside.card_webinfo.post_count
+      .webinfo-item
+        span.item-name Article Count :
+        span.item-count= site.posts.length
+
+    // Unique Visitors (UV)
+    if theme.busuanzi.site_uv
+      .webinfo-item
+        span.item-name Unique Visitors :
+        span.item-count#busuanzi_value_site_uv
+          i.fa-solid.fa-spinner.fa-spin
+
+    // Page Views (PV)
+    if theme.busuanzi.site_pv
+      .webinfo-item
+        span.item-name Page Views :
+        span.item-count#busuanzi_value_site_pv
+          i.fa-solid.fa-spinner.fa-spin
+
+    // Last Update Time
+    if theme.aside.card_webinfo.last_push_date
+      .webinfo-item
+        span.item-name Last Update :
+        span.item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
+          i.fa-solid.fa-spinner.fa-spin
 
 
-// --- Coze Chat SDK ---
+// ====== Required JS (Busuanzi + Runtime) ======
+script(async src="https://cdn.staticfile.org/busuanzi/2.3.0/busuanzi.pure.mini.js")
+script(src= url_for('/js/runtime.js'))
+script(src= url_for('/js/last-push-date.js'))
+
+// ====== Coze Bot ======
 script(src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js")
 script.
   window.addEventListener('DOMContentLoaded', function() {
@@ -58,55 +95,18 @@ script.
     }
   });
 
-
-// --- Footer Webinfo Display (moved from card_webinfo) ---
-.footer-webinfo(style="text-align:center; color:#fff; margin-top:25px; font-size:15px;")
-  .webinfo(style="display:inline-block; text-align:left; line-height:1.8em;")
-
-    if theme.aside.card_webinfo.post_count
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.article_name')} :`
-        .item-count= site.posts.length
-
-    if theme.aside.card_webinfo.runtime_date
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.runtime.name')} :`
-        .item-count#runtimeshow(data-publishDate=date_xml(theme.aside.card_webinfo.runtime_date))
-          i.fa-solid.fa-spinner.fa-spin
-
-    if theme.wordcount.enable && theme.wordcount.total_wordcount
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.site_wordcount')} :`
-        .item-count= totalcount(site)
-
-    if theme.busuanzi.site_uv
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.site_uv_name')} :`
-        .item-count#busuanzi_value_site_uv
-          i.fa-solid.fa-spinner.fa-spin
-
-    if theme.busuanzi.site_pv
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.site_pv_name')} :`
-        .item-count#busuanzi_value_site_pv
-          i.fa-solid.fa-spinner.fa-spin
-
-    if theme.aside.card_webinfo.last_push_date
-      .webinfo-item
-        .item-name= `${_p('aside.card_webinfo.last_push_date.name')} :`
-        .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
-          i.fa-solid.fa-spinner.fa-spin
-
-
-// --- Required Script for Busuanzi + Runtime ---
-script(async src="https://cdn.staticfile.org/busuanzi/2.3.0/busuanzi.pure.mini.js")
-script(src= url_for('/js/runtime.js'))
-script(src= url_for('/js/last-push-date.js'))
-
+// ====== Styles for Webinfo ======
 style.
-  .footer-webinfo .item-count {
-    display: inline-block !important;
+  .webinfo-row {
+    margin-top: 8px;
   }
-  .footer-webinfo .webinfo-item {
-    margin: 3px 0;
+  .webinfo-item {
+    white-space: nowrap;
+  }
+  .item-name {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .item-count {
+    font-weight: 400;
   }
