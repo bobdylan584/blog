@@ -57,15 +57,21 @@ script.
     }
   });
 
-//- --- 网站访问统计（busuanzi） ---
-.site-counter(style="text-align:center; font-size:14px; margin-top:15px;")
+
+
+
+//- --- Butterfly 原生风格的底部 PV/UV 显示 ---
+.footer-visitor(style="text-align:center; margin-top:15px; font-size:14px; color:#666;")
+
   span#busuanzi_container_site_uv
-    | 👤 访客人数：
+    span.footer-visitor-title 👤 访客人数：
     span#busuanzi_value_site_uv
+
   |   |  
+
   span#busuanzi_container_site_pv
-    | 👁️ 浏览次数：
+    span.footer-visitor-title 👁️ 浏览次数：
     span#busuanzi_value_site_pv
 
-//- busuanzi 脚本（必须）
+//- busuanzi 必须加载一次
 script(async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js")
