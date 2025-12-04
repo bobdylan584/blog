@@ -21,7 +21,7 @@ menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
   Music: /music/ || fas fa-music   
-  privateGump: /assistant/assistant.html || fas fa-robot
+  旅游规划小助手: /assistant/assistant.html || fas fa-robot
   阿甘小助手: http://47.115.72.68:8000/ || fas fa-robot
 
 
