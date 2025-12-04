@@ -57,3 +57,15 @@ script.
     }
   });
 
+//- --- 网站访问统计（busuanzi） ---
+.site-counter(style="text-align:center; font-size:14px; margin-top:15px;")
+  span#busuanzi_container_site_uv
+    | 👤 访客人数：
+    span#busuanzi_value_site_uv
+  |   |  
+  span#busuanzi_container_site_pv
+    | 👁️ 浏览次数：
+    span#busuanzi_value_site_pv
+
+//- busuanzi 脚本（必须）
+script(async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js")
