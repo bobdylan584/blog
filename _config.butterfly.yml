@@ -1387,3 +1387,8 @@ CDN:
     # waline_css:
     # waline_js:
     
+busuanzi_count:
+  enable: true
+  site_uv: true   # 访客数（唯一）
+  site_pv: true   # 访问量（浏览次数）
+  page_pv: true   # 单页面浏览次数
