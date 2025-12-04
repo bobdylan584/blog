@@ -45,7 +45,7 @@ endlocal
 echo 提交成功！
 echo.
 
-echo 第四步：正在推送到远程仓库...；执行如下代码：git push origin master:main；记得开梯子。
+echo 第四步：正在推送到远程仓库...；执行如下代码：git push origin main；记得开梯子。
 pause
 git push origin main
 if %errorlevel% neq 0 (
