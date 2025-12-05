@@ -1,7 +1,7 @@
 ---
 title: Lunix_Commands
 date: 2025-08-20 10:51:07
-tag: Lunix_Commands
+tag: Command_Record
 ---
 
 ### 
