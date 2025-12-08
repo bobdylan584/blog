@@ -1,8 +1,8 @@
 ---
 date: 2025-04-21 19:03:57
 title: milvus索引算法-IVF-PQ的原理解释
-categories: [AI_Module, milvus索引算法-IVF-PQ的原理解释]
-tag: AI_Module
+categories: [AI, milvus索引算法-IVF-PQ的原理解释]
+tag: AI
 ---
 
 给我解释一下milvus数据库索引方法的IVF-PQ的原理

@@ -1,8 +1,8 @@
 ---
 date: 2025-04-02 11:09:52
 title: 图像分类
-categories: [CV, 图像分类]
-tag: AI_Module
+categories: [AI, 图像分类]
+tag: AI
 ---
 
 # 图像分类_overview

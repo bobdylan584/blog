@@ -1,8 +1,8 @@
 ---
 date: 2025-04-05 00:27:31
 title: RAG项目梳理
-categories: [AI_Module, RAG项目梳理]
-tag: AI_Module
+categories: [AI, RAG项目梳理]
+tag: AI
 ---
 
 # 目前代码用到的包

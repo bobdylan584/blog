@@ -1,8 +1,8 @@
 ---
 date: 2025-04-08 13:46:20
 title: 基于ChatGLM微调多任务
-categories: [AI_Module, lora微调, 基于ChatGLM微调多任务]
-tag: AI_Module
+categories: [AI, lora微调, 基于ChatGLM微调多任务]
+tag: AI
 ---
 
 # 项目整体介绍：
