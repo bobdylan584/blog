@@ -122,7 +122,31 @@ sudo lsof -i:8080 -P -t
 sudo kill -9 5678
 ```
 
+### `cp` 常见用法
 
+```
+cp 是 Linux / macOS / Unix 系统中的“复制文件”命令，全称 copy。
+它的作用就是：把一个文件复制成另一个文件。
+e.g.	cp .env.example .env
+意思是：把项目提供的 .env.example 模板文件复制一份，命名为 .env。
+这是很多 Docker / Node / Python 项目常见的做法，因为：
+.env.example 是示例环境变量文件
+.env 是真正运行时读取的环境变量文件
+为什么 .env 要复制？
+开发者不会把 .env 发到 GitHub，因为里面会有私密信息。
+所以会提供一个 .env.example 让你：照着写
+修改自己的参数
+用于本地或服务器部署
+
+复制文件：
+cp source.txt target.txt
+
+复制文件到目录：
+cp file.txt /some/path/
+
+递归复制文件夹（必须带 -r）：
+cp -r src_folder/ new_folder/
+```
 
 
 
