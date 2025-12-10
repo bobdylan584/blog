@@ -73,35 +73,49 @@ VITE_API=http://40.100.70.60:3000/ pm2 start "npm run dev:web" --name "music-web
 pm2 是一个让 Node 项目在服务器“长期运行、不掉、可重启”的守护进程管理工具。让 node / npm 程序后台运行（不用一直开终端），程序崩溃自动重启
 
 ```
+安装pm2工具：
+sudo npm install pm2@latest -g 
+
+在home目录下创建musicuser的类似用户账号目录，并赋予pm2读写权限：
+sudo mkdir -p /home/musicuser/.pm2
+sudo chown -R musicuser:musicuser /home/musicuser/.pm2
+sudo chmod -R 755 /home/musicuser/.pm2
+
+查看版本号，顺便查看pm2是否读写权限授予成功：
+pm2 -v 
+
+
+授予musicuser用户root权限，加入sudo组，让musicuser具备使用sudo执行任何命令的权限：
+sudo usermod -aG sudo musicuser
+
+pm2的log管理工具pm2-logrotate，防止日志内存爆炸
+pm2 install pm2-logrotate （一键启用自动清理pm2 的logs）
+pm2 set pm2-logrotate:rotateInterval '0 0 * * *'  （每天重置日志）
+pm2 set pm2-logrotate:max_size 10M （限制单个日志最大文件大小（例如 10M））
+pm2 set pm2-logrotate:retain 7 （保留最近 7 个日志文件（自动删除旧的））
+pm2 set pm2-logrotate:compress true （是否启用压缩（建议开启））
+pm2 flush （立即清空所有日志？）
+
 pm2 list（查看当前状态）
-
 pm2 stop name （停止指定进程）
-
 pm2 restart name （重新启动某进程）
-
 pm2 delete name （用程序名删除）
-
 pm2 stop 7 （用id停止）
-
 pm2 delete music-web （用id删除）
-
 pm2 save（保存启动的进程）
-
 pm2 logs（看进程执行的日志）
-
 pm2 start "npm run dev:web" --name "music-web"（程序管理工具打开网页开发模式，取别名）
 pm2 start app.js
-
 pm2 start "npm run dev"
 
-pm2 startup （把pm2进程管理工具，放到服务器的开机自启名单里）
+启用了 PM2 的开机自启功能：
+pm2 startup（服务器重启后，pm2工具会自启，里面的running的程序也会随之自启）
+pm2 save
+
 
 npm run start（Node 后端项目的启动命令）
-
 pm2 logs music-api（查看该进程有没有起来）
-
 我的项目是 Electron + 前端 + 后端 混合仓库
-
 cat package.json（查看script字段，找到后台 API 的真正启动命令）
 
 ```
@@ -148,5 +162,55 @@ cp file.txt /some/path/
 cp -r src_folder/ new_folder/
 ```
 
+### docker命令
 
+```
+docker ps 查看挂起的容器的id等信息
+docker stop ID
+docker rm ID
+docker rm -f ID 强制删除
+docker logs ID 确认容器内部程序监听几号端口
+docker build -t myfreebili .   把本地项目包装成镜像
+docker run -d -p 8000:8000 myfreebili  运行自己的镜像
+docker images （docker image ls）查看本地所有 Docker 镜像
+docker rmi myfreebili （删除前必须确保所有使用该镜像的容器都已停止并删除）
+docker ps -a 查看所有容器（包括停止的容器）
+
+每次你修改本地项目，都必须重新执行以下两步
+docker build -t freebili:latest .
+docker stop freebili
+docker rm freebili
+docker run -d -p 8000:8000 freebili:latest
+
+docker exec -it e0d1f7e3 bash  进入容器内部（最常用）
+Get-Process -Name python | Stop-Process -Force 强制停止所有 Python 进程
+
+uv sync  # 本项目使用uv管理python依赖
+uv run fastapi dev main.py# 启动项目
+```
+
+### tar
+
+```
+tar -czvf 文件名.tar.gz 要压缩的文件夹 
+tar -czvf backup.tar.gz file1 file2 file3   把多个文件打包成 tar.gz
+tar -xzvf 文件名.tar.gz  解压缩命令
+```
+
+### scp
+
+```
+上传单个文件： scp 本地文件路径 用户名@服务器IP:/服务器路径/
+scp project.tar.gz musicuser@47.115.72.68:/home/projects/
+
+从本地上传整个文件夹到服务器：scp -r 本地文件夹路径 用户名@服务器IP:/服务器路径/
+scp -r MusicPlayer/ musicuser@47.115.72.68:/home/projects/
+```
+
+### sudo
+
+```
+授予musicuser用户root权限，加入sudo组，让musicuser具备使用sudo执行任何命令的权限：
+sudo usermod -aG sudo musicuser
+```
 
