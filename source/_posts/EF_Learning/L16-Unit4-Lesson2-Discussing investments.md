@@ -1,51 +1,15 @@
 ---
 date: 2025-12-01
-title: L16-Unit4-财务规划
-categories: [EF_Learning, Level-16-Unit4-财务规划]
+title: L16-Unit4-Lesson2-Discussing investments
+categories: [EF_Learning, L16-Unit4-Lesson2-Discussing investments]
 tag: EF_Learning
 ---
 
-# Unit4 财务规划
+# L16-Unit4-Lesson2-Discussing investments
 
-###Vocabulary（）
+## Vocabulary（Investment schemes）
 
-###Expression（）
-
-###grammar（）
-
-###Listening（）
-
-###Final（）
-
-## Class1 选择投资方案
-
-### Vocabulary（投资资金）
-
-Done
-
-### Expression（评估行动结果）
-
-Done
-
-### Listening（听起来具有欺骗性或诚实）
-
-Done
-
-### Final（选择投资方案）
-
-1、select the best investment company for your aunt.(speech)
-
-Centerville Investments		 (/ˈsentərˌvɪl/) 
-
-Morton Investments		(/ˈmɔːtən/) 
-
-Maynard Funds		(/ˈmeɪnɑːd/)
-
-## Class2 讨论投资
-
-### Vocabulary（投资方案）
-
-**1、(match synonym)**
+### match synonym
 
 capital ->  cash for investment（资金，可用于投资的资本性现金）
 
@@ -59,7 +23,7 @@ small -> minute(/ˈmɪnɪt/:分钟；/maɪˈnjuːt/极小的)
 
 return -> profit
 
-**2、(reading comprehension)**
+### reading comprehension
 
 **What are mutual funds?**
 Mutual funds are regulated under federal law and assets are managed communally by professional investment advisors for the benefit of shareholders. There are two types of mutual funds: closed-end funds and open-end funds. Closed-end funds have a fixed amount of shares, are issued and traded on a stock market, and are carried out based on a market price which is established by an auction system. Typically, closed-end funds issue all the shares at the outset and investors can trade the shares. Investors may be subject to a commission charge to buy or sell such funds.
@@ -244,9 +208,9 @@ short-term obligations（短期债券）
 这些债券通常被视为**有政府担保**，因此属于**极低风险**资产——
  毕竟，政府要支付利息时，理论上**只需要多印一些钱**即可完成偿付。
 
-**3、(choice question)**
+### choice question
 
-1、with the snap of a finger
+#### with the snap of a finger
 
 immediately
 
@@ -254,7 +218,7 @@ lazily
 
 fiercely(/ˈfɪəs.li/猛烈地)
 
-2、through the grapevine（ɡreɪpˌvaɪn）
+#### through the grapevine（ɡreɪpˌvaɪn）
 
 via an informal contact（通过非正式渠道 / 小道消息）
 
@@ -262,7 +226,7 @@ over the phone（“电话里”）
 
 via a well-known source （正规渠道）
 
-3、bull market
+#### bull market
 
 a period when investors are hesitant(/ˈhezɪ.tənt/ adj. 犹豫的；)
 
@@ -270,7 +234,7 @@ a period when investors are optimistic（投资者乐观的时期）
 
 a period when investors are pessimistic(adj.悲观的；/ˌpesɪˈmɪs.tɪk/)
 
-4、toss up
+#### toss up
 
 in interesting experience
 
@@ -278,7 +242,7 @@ an unpredictable phenomenon(/fəˈnɒmɪnɒn/ n. 现象；事件；)
 
 a predictable result
 
-5、this means a decline in general price levels, often caused by a reduction in the supply of money or credit.(decline 美/dɪˈklaɪn/n.v.衰退 下降。reduction 下降)
+#### this means a decline in general price levels, often caused by a reduction in the supply of money or credit.(decline 美/dɪˈklaɪn/n.v.衰退 下降。reduction 下降)
 
 这意味着整体物价水平的下降，通常是由于货币或信贷供应减少所导致的。
 
@@ -288,7 +252,7 @@ deflation（通货紧缩）
 
 regulation
 
-6、if a company doesn't have much of  this, then an increase in their prices would lessen the demand for their products(lessen 美/ˈlesn/v.减少；变少，减弱)
+#### if a company doesn't have much of  this, then an increase in their prices would lessen the demand for their products(lessen 美/ˈlesn/v.减少；变少，减弱)
 
 如果一家公司在这方面能力不足，那么提高产品价格就会减少消费者对其产品的需求。
 
@@ -298,7 +262,7 @@ mutual funds
 
 gamble
 
-7、this is when an investor elects a particular for when they want their returns to be paid out.(paid out支付；付清；)
+#### this is when an investor elects a particular for when they want their returns to be paid out.(paid out支付；付清；)
 
 这是一个投资者选择特定的时间，用来领取他们的投资收益。
 
@@ -308,13 +272,261 @@ deferred purchase（延期购买 / 延期领取）（adj.延期的；/dɪˈfɜː
 
 high-speed turnover
 
-### grammar（副词）
+## grammar（Adverbs）
+
+### match
+
+- **beneficially** /ˌbenəˈfɪʃəli/：有益地
+
+  expediently /ɪkˈspiːdiəntli/：权宜地、方便而有效地
+
+  profitably /ˈprɒfɪtəbli/：有利可图地、收益良好地
+
+- **quickly** /ˈkwɪkli/：快速地
+
+  swiftly /ˈswɪftli/：迅速地
+
+  rapidly /ˈræpɪdli/：快速地
+
+- **carefully** /ˈkeəfəli/：小心地、仔细地
+
+  diligently /ˈdɪlɪdʒəntli/：勤勉地、认真努力地
+
+  assiduously /əˈsɪdʒuəsli/：刻苦地、不懈地
+
+### fill in the blanks
+
+**cautiously** /ˈkɔːʃəsli/ **adv.** 小心地；谨慎地
+
+**assiduously** /əˈsɪdʒuəsli/ **adv.** 勤勉地；刻苦地；尽心尽力地
+
+**communally** /kəˈmjuːnəli/ **adv.** 集体地；共同地
+
+**relatively** /ˈrelətɪvli/ **adv.** 相对地；比较而言
+
+**rapidly** /ˈræpɪdli/ **adv.** 快速地；迅速地
+
+#### Mutual funds are managed ( ) by investment advisors.
+
+共同基金由投资顾问 **共同地/集体地** 管理。
+
+#### If your fund manager doesn't do their job (assiduously ), you might have to take more responsibility.
+
+如果你的基金经理不 **勤勉地** 完成他们的工作，你可能不得不承担更多责任。
+
+#### The interest rate for treasury bonds is (rapidly) low.
+
+国债的利率 **相对地** 较低。
+
+#### Managers can (rapidly) move assets around for high-speed turnover.
+
+管理者可以 **快速地** 调动资产以实现高速周转。
+
+#### you should invest your money (cautiously) and with the least amount of risk.
+
+你应该 **谨慎地** 投资你的资金，并将风险降到最低。
+
+### record voice
+
+reciprocally
+
+diligently
+
+assiduously
+
+profitably
+
+expediently
+
+rapidly
+
+swiftly
+
+## Expression（considering benefits and drawbacks）
+
+### Part1 sound recording
+
+#### Debt comes in the form of credit cards, student loans and (mortgages).
+
+paychecks
+
+mortgages
+
+bonuses
+
+#### 'Tighten your belt' means to ().
+
+spend less money
+
+change your look
+
+lose weight
+
+#### One way to reduce credit card debt is to ().
+
+borrow money from friends to pay it off
+
+use another credit card to pay it off
+
+pay it off as quickly as possible every month
+
+### Part2 Reading
+
+From _
+
+Dear Sara,
+
+You are right in saying that they are a relatively safe investment, but in order to make a decent amount of money you are better off avoiding short-term obligations because the returns are next to nothing. A 3-month bond yields virtually nothing. Even a 30-year one pays less than 3%.
+
+I advise longer-dated bonds this year due to deflation – they should provide you with a steady source of income if you are willing to invest long term.
+
+All the best,
+
+Frank
+
+你说得没错，它们确实是一种相对安全的投资，但如果你想赚到一笔可观的钱，最好避免短期债券，因为它们的回报几乎等于零。三个月的债券几乎没有收益，甚至三十年的债券收益率也不到 3%。
+
+今年我建议你选择期限更长的债券，因为通货紧缩——如果你愿意长期投资，它们应该能够为你提供稳定的收入来源。
+
+---
+
+From_
+
+ToAll
+
+Dear Hilary,
+
+You are right in saying that these are among the best this year. Despite the typical risks involved in buying them, I believe investing long term will be beneficial – especially if you are looking for decent and rapid returns. Experts say that due to possible mergers and acquisitions, you could be looking at as much as 6% return this year.
+
+All the best,
+
+Frank
+
+你说得没错，这些确实是今年表现最好的资产之一。尽管购买它们通常会伴随一定风险，但我认为长期投资仍然是有利的——尤其是如果你追求 **不错且快速** 的回报。专家表示，由于可能发生的并购活动，今年你的回报率可能会高达 **6%**。
+
+---
+
+From_
+
+ToAll
+
+Dear Joe,
+
+Personally I don’t like the idea of these, or investing communally at all – it is truly risky business. Even though you may have the opportunity to earn more than 35% in a short period of time, you could lose everything even quicker. I don’t think it is a very smart move as they are not regulated by the government. I suggest you diligently look elsewhere to invest your money.
+
+All the best,
+
+Frank
+
+就我个人而言，我不喜欢这种投资方式，事实上我根本不喜欢任何形式的共同投资——这真的是一门高风险的生意。即使你可能有机会在短时间内获得超过 35% 的收益，你也可能更快地把所有钱都赔光。
+
+我认为这不是一个明智的决定，因为它们不受政府监管。我建议你 **认真地** 去寻找其他更适合你资金的投资方向。
+
+---
+
+**Vocabularies:**
+
+decent /ˈdiːsnt/ adj.**不错的；相当好的**（常用于表达数量、收入、回报“还可以”）
+
+virtually  adv. /ˈvɜːrtʃuəli/ 几乎；差不多；实际上
+
+virtually nothing 几乎没有
+
+yield 美/jiːld/ v. 产生(收益、效益等)
+
+among the best 最好的之一；名列前茅；属于顶尖行列
+
+among prep.（介词）/əˈmʌŋ 属于……之一
+
+acquisitions noun（名词，复数）/ˌækwɪˈzɪʃənz/ 收购
+
+hedge 美/hedʒ/ adj. 套期保值的，两面下注的；对冲的
+
+**question:**
+
+#### Frank advises Sarah to invest in (long-term bonds).
+
+long-term bonds
+
+3-month stocks
+
+short-term ventures /ˈventʃərz/ n.风险项目 
+
+#### Frank tells Hilary that utility stocks will give her a high return due to (mergers and acquisitions) .
+
+mergers and acquisitions
+
+stocks and shares
+
+typical long-term risks
+
+#### Frank advises Joe not to trust hedge funds because () .
+
+the government doesn't agree with them
+
+you can't trust the other investors
+
+you can win big, but also lose big
+
+### part3 match
+
+#### benefits：
+
+​	earn more than 35% on capital
+
+​	as much as 6% return
+
+​	relatively safe investment
+
+#### drawbacks：
+
+​	short-term obligations 短期债务
+
+​	pays less than 3%
+
+​	truly risky business
+
+​	not regulated
+
+​	lose everything
+
+### part4 Reorder
+
+For the majority of investors, trading stocks online gives them the opportunity to act rapidly on stock movement.
+
+Also, not only does it give them instant access to prices and charts, but it also allows them to buy and sell stock instantly.
+
+However, trading stocks online lacks the availability of an investment plan which is usually created by one's investment broker or advisor.
+
+It would be profitably viable if you combined both the services of a broker or advisor and the online services.
+
+The downside to this is that you'd have to pay for the creation of the investment plan, but in the long run you'll have a better chance of avoiding serious trading loss.
 
 
 
-### Expression（副词）
+对于大多数投资者来说，线上交易股票让他们有机会能够对股价变动 **迅速做出反应**。
 
-### Final（讨论投资）
+此外，它不仅让投资者可以 **即时获取价格和图表**，还允许他们 **立即买卖股票**。
+
+然而，线上交易股票缺乏投资计划的支持，而投资计划通常由投资经纪人或顾问制定。
+
+如果你能将经纪人或投资顾问的服务与线上服务结合起来，这会是 **一种有利可图的可行方案**。
+
+这样做的缺点是，你需要为制定投资计划付费，但从长远来看，你将 **更有机会避免严重的交易损失**。
+
+instant 美/ˈɪnstənt/  adj.立即的，
+
+broker 经纪人；掮客，能让你破产的人
+
+viable adj.可行的；可实施的；
+
+stock movement 股票走势
+
+profitably viable 有利可图且行得通的；既能赚钱又能成功实施的
+
+availability n.可用性；
+
+## Final（讨论投资）
 
 
 
