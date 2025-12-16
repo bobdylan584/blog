@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f2385d-922d-4afc-b360-b569bd191548" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/04_推送文件到github.bat" beforeDir="false" afterPath="$PROJECT_DIR$/04_推送文件到github.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.butterfly.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.butterfly.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/butterfly/layout/tags_custom.pug" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/本地hexo回退的方法.txt" beforeDir="false" afterPath="$PROJECT_DIR$/本地hexo回退的方法.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/News/_template_unedit - 副本 - 副本 (3).md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +18,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="36HbCuiiSmjnfyTfdYOQNJIK8UX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,7 +31,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,6 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1764666320477</updated>
       <workItem from="1764666321585" duration="1240000" />
+      <workItem from="1765597350177" duration="232000" />
     </task>
     <servers />
   </component>
