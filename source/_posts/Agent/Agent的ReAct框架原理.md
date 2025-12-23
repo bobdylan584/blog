@@ -118,6 +118,19 @@ ToT = Tree of Thoughts 思维树（树状思维）
 21  agent = create_react_agent(llm, tools, prompt)
 22  response = agent.invoke({"current_time": "2025-07-11 14:00", "weather": "晴", "inventory": .....})
 
+ps:
+描述函数功能：
+为了向模型描述外部函数库，需要向tools字段传入可以调用的函数列表，参数如下：
+参数名称	  类型	是否必填		参数说明
+type		String		是		设置为function类型
+function	Object		是		
+name		String		是		函数名称
+description	String		是		用于描述函数功能，模型会根据这段描述决定函数调用方式
+parameters	Object		是		parameter字段需要传入一个json schema对象，以准确的定义函数所接受的参数，若调用函数时不需要参数参数，省略该参数即可。
+required				否		指定哪些属性在数据中必须被包含
+
+最重要的就是name、description、parameters
+
 ```
 
 3. 观察与反思（Observation Phase）

@@ -528,6 +528,80 @@ availability n.可用性；
 
 ## Final（讨论投资）
 
+### When the video is playing, give a response to the host in the video.
+
+**vocabulary collection**
+
+inheritance  美/ɪnˈherɪtəns/ n.遗产
+
+I'm not planning on：我并没有打算
+
+anytime soon：在可预见的近期内（不是“永远不投”，而是“短期内不投”）
+
+*percentage* 明确指 分成 / 抽成 / 佣金
+
+**invest it all**：把所有钱都投入
+
+brokerage 美/ˈbroʊkərɪdʒ/ n. 证券/投资经纪机构
+
+**a major investment brokerage**：大型投资经纪公司
+
+**hedge fund**：对冲基金
+
+Maynard 美/ˈmeɪnərd/ 梅纳德
+
+Morton 美/ˈmɔrtən/ n. 莫顿
+
+treasury  美 [ˈtreʒəri] 国债
+
+#### Round 1
+
+A. Yeah, I'd be interested in talking about your inheritance.
+
+B. Right, but I don't have much money and I'm not planning on investing anytime soon.
+
+C. Well, I'm sorry to hear about your grandmother, but congratulations on the inheritance.
+
+#### Round 2
+
+A. Well, my house isn't very big, but are you seriously considering buying it?
+
+B. Well, I know a lot about investing. What percentage will I get for helping you?
+
+C. Well, I'll help you if I can, but you know that I'm not a financial advisor, right?
+
+#### Round 3
+
+A. Oh, I wouldn't invest it all in one company. The stock could do really badly.
+
+B. That sounds like a great idea! You should invest everything in one company.
+
+C. Actually, I know a financier who can guarantee a 20 percent return in one year!
+
+#### Round 4
+
+A. What about a major investment brokerage, one that has a lot of mutual funds?
+
+B. Have you thought about a hedge fund? You can increase your money rapidly.
+
+C. You should just put it in a savings account. That would be really safe.
+
+#### Round 5
+
+A. Morton is probably OK, but Maynard funds is now guaranteeing ten percent growth a year!
+
+B. I don't know about Morton. Don't you want your investments to be a cash cow?
+
+C. Yeah, that's what I've heard also. Morton does a lot of research before investing.
+
+#### Round 6
+
+A. Yeah, Maynard is the best.
+
+B. Yeah, stick with treasuries.
+
+C. It was my pleasure.
+
 
 
 

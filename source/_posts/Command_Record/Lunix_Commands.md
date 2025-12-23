@@ -214,3 +214,27 @@ scp -r MusicPlayer/ musicuser@47.115.72.68:/home/projects/
 sudo usermod -aG sudo musicuser
 ```
 
+### langchain降版本
+
+```
+检查当前执行的python环境是哪一个（检查路径是不是和interpreter一致）：
+python -c "import sys; print(sys.executable)"
+
+# 1. 确认 pip 属于 venv
+python -m pip -V
+# 2. 清干净 LangChain 新体系
+python -m pip uninstall langchain langchain-core langchain-community langchain-openai -y
+# 3. 装你要的老版本（支持 initialize_agent）
+python -m pip install langchain==0.1.16
+
+步骤 1：卸载当前高版本 LangChain
+pip uninstall langchain -y
+步骤 2：安装保留 initialize_agent 的旧版本
+pip install langchain==0.3.26
+步骤 3：验证版本（确保降级成功）
+import langchain
+print(langchain.__version__)  # 输出 0.0.350 即成功
+
+
+```
+
