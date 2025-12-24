@@ -1,7 +1,7 @@
 ---
 date: 2025-07-18
-title: SmartVoyage多智能体项目复习
-categories: [Agent, SmartVoyage多智能体项目复习]
+title: SmartTravel多智能体项目复习
+categories: [Agent, SmartTravel多智能体项目复习]
 tag: Agent
 ---
 

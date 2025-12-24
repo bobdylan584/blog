@@ -1,7 +1,7 @@
 ---
 date: 2025-07-16
-title: SmartVoyage项目实现
-categories: [Agent, SmartVoyage项目实现]
+title: SmartTravel项目实现
+categories: [Agent, SmartTravel项目实现]
 tag: Agent
 ---
 

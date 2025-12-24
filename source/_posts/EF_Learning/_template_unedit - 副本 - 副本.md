@@ -14,3 +14,22 @@ tag: EF_Learning
 ###Listening（）
 
 ###Final（）
+
+'''python
+
+````python
+
+````
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 ---
 date: 2025-07-15
-title: SmartVoyage项目技术
-categories: [Agent, SmartVoyage项目技术]
+title: SmartTravel项目技术
+categories: [Agent, SmartTravel项目技术]
 tag: Agent
 ---
 
