@@ -20,10 +20,10 @@ nav:
 menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
-  Music: http://music.altairnexus.top/ || fas fa-music
-  Video: http://video.altairnexus.top/ || fas fa-film  
+  Music: https://music.altairnexus.top/ || fas fa-music
+  Video: https://video.altairnexus.top/ || fas fa-film  
   旅游规划小助手: /assistant/assistant.html || fas fa-robot
-  阿甘小助手: http://assistant.altairnexus.top/ || fas fa-robot
+  阿甘小助手: https://assistant.altairnexus.top/ || fas fa-robot
 
 
   # Home: / || fas fa-home
