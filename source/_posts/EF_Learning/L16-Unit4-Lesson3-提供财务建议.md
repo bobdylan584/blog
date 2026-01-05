@@ -185,9 +185,105 @@ Use your time profitably. Rather than shopping or working late, sign up for a ni
 
 ### part2
 
+frivolous 美/ˈfrɪvələs/ adj.轻浮的；无聊的；
+
+**once in a while**：偶尔
+
+splurge 美/splɜːrdʒ/ n.挥霍；乱花钱；糟蹋钱 v.挥霍；
+
+bargains 美/ˈbɑːrɡən/ n.便宜货；减价品 vi.(与某人就某事)讨价还价，
+
+**a money diary**：资金日记 / 消费记录本
+
+一、The first advisor says _____.
+
+you should only spend money on the things you really like
+
+you shouldn't worry about buying frivolous things sometimes
+
+you should prioritize the things you want to buy
+
+二、The second advisor thinks _____.
+
+you should splurge once in a while
+
+you should splurge only when it's necessary
+
+you should try not to splurge
+
+三、The third advisor suggests _____.
+
+avoiding bargains as they are usually low quality
+
+being patient when you're looking for a bargain 在寻找优惠时要有耐心。
+
+taking advantage of bargains whenever you see them 无论何时看到优惠，都要加以利用。
+
+四、The fourth advisor talks about a money diary. What is a money diary?
+
+a book in which you write down all the money you make
+
+a book in which you write down all the things you buy
+
+a book in which you write down all the people who owe you money
+
+五、The fifth advisor's tip is to _____.
+
+make a list of all the things you waste money on 列出你所有浪费钱的项目。
+
+make a list of all your bills and expenses 
+
+make a shopping list whenever you go shopping
+
 ### part3
 
+deceive 美/dɪˈsiːv/ v. 蒙骗；误导；欺骗
 
+frugal 美/ˈfruːɡl/ adj.节俭的；
+
+left over 留下
+
+deceptive 美/dɪˈseptɪv/ adj.骗人的；
+
+surplus 美/ˈsɜːrplʌs/ n.盈余；剩余；过剩；剩余额 adj.剩余的；
+
+deficit 美/ˈdefɪsɪt/ n. 赤字；亏损；缺少；
+
+budget deficit 预算赤字
+
+budget surplus 预算盈（结）余
+
+*break the budget*：超出预算（固定搭配）
+
+*extend yourself*：勉强自己；超出能力或财力范围（习语）
+
+extend /ɪkˈstend/ v. 延伸；扩大；过度使用（原形词）
+
+
+
+1、All of these unexpected expenses have （broken） the budget.
+
+所有这些意料之外的支出已经打破了预算（使预算超支）。
+
+2、I'd recommend avoiding （frivolous）  purchases like ice cream.
+
+我建议避免购买像冰淇淋这样不必要的消费品。
+
+3、Be frugal, and then if you have money left over you can （splurge）.
+
+要先保持节俭，如果还有剩余的钱，再进行适当的奢侈消费。
+
+4、My grandmother is very （frugal） and saves as much as she can.
+
+能省则省
+
+5、Our goal is to have a budget （surplus） at the end of the year.
+
+我们的目标是在年底实现预算盈余。
+
+6、Be careful of your spending. You don't want to（extend） yourself.
+
+要谨慎控制你的支出，你可不想让自己在财务上过度透支。
 
 ## grammar（强调句型）
 
