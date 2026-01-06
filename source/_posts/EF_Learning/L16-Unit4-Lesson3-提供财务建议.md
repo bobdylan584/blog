@@ -179,7 +179,7 @@ Eat seasonally. Buying produce which is in season not only means you get more ba
 
 Use your time profitably. Rather than shopping or working late, sign up for a night class at a local college or university.	Sometimes you can get a lot more than you bargained for. Many universities offer discounted rates or free admissions to their fitness center, sporting events, guest lectures, performances and art exhibits.	Last but not least, work out what your priorities are.	Cut out unnecessary expenses. Save time for what you really want to do.	As the old saying goes, ‘Prevention is the best medicine.’	**Living a life which is outwardly simple but inwardly rich is one of the best ways to ward off ‘affluenza’.**
 
-### 精读解析
+#### 精读解析
 
 【新生活方式】有时候，你得到的会远超预期。许多大学都会为学生提供健身中心、体育赛事、嘉宾讲座、演出和艺术展览的优惠票价，甚至免费入场。最后但同样重要的是，弄清楚什么才是你的优先事项。正如老话所说：“预防胜于治疗。”过一种外在简朴、内心丰盈的生活，是抵御“富裕病（过度物质主义）”的最佳方式之一。
 
@@ -286,6 +286,138 @@ extend /ɪkˈstend/ v. 延伸；扩大；过度使用（原形词）
 要谨慎控制你的支出，你可不想让自己在财务上过度透支。
 
 ## grammar（强调句型）
+
+In a cleft sentence：在裂句结构中
+
+cleft 美/kleft/ cleave的过去分词和过去式 adj. 劈（裂）开的
+
+cleave 美/kliːv/ v. （被）劈开
+
+bold 美/boʊld/ adj. 粗体的
+
+in bold 加粗
+
+emphasis 美/ˈemfəsɪs/ n. (对某个词或短语的)强调，加重语气，重读
+
+with emphasis 加重语气
+
+Pseudo 美/ˈsudoʊ/ 假的
+
+Pseudo-cleft （伪裂句）
+
+Inferential 美/ɪnfəˈrɛnʃəl/adj.推理的；
+
+Inferential cleft（推断裂句 / 解释性裂句）
+
+Demonstrative 美/dɪˈmɑːnstrətɪv/ 指示的
+
+Demonstrative cleft（指示裂句）
+
+demonstrative pronouns 指示代词
+
+### part 1 在继续前，请确保阅读并了解以下材料：
+
+1/2		Cleft Sentences
+
+Cleft Sentences
+
+In a cleft sentence, information which could be given in one clause is divided into two parts, each with its own verb. The purpose of a cleft sentence is to emphasize a key point in the sentence. There are different types of cleft sentences, but the most common are below. Notice that the words in bold should be said with emphasis.
+**It**-cleft =
+*It is our \**budget** that we need to organize.*
+**Wh**-cleft =
+*What we need to organize is our \**budget**.*
+**All**-cleft =
+*All we need to do is organize our \**budget**.
+
+在裂句中，原本可以用一个从句表达的信息，被拆分成两部分，每一部分都有自己的动词。裂句的目的，是为了强调句子中的某个关键信息。裂句有不同的类型，但最常见的几种如下所示。请注意，加粗的词在朗读时应当重读，以示强调。
+
+It is … that …：It-cleft 的固定强调结构
+
+What we need to organize：what 引导的主语从句（“我们需要整理的东西”）
+
+All we need to do：all 引导的主语从句，表示“我们所需要做的全部事情”
+
+整体总结
+
+- **It-cleft**：强调“是 X，而不是别的”
+- **Wh-cleft**：强调“X 就是答案”
+- **All-cleft**：强调“只需要做这一件事”
+
+2/2 
+
+Pseudo-cleft =
+*A \**budget** is what we need to organize.*
+Inferential cleft =
+*It’s not that we have to organize the budget \**right now**; it’s just that we have to organize it **very soon**.***
+
+强调点：**时间判断的微妙差别**
+
+**
+Demonstrative cleft =
+**\*That is** what we need to organize.*
+In the last sentence, **that** refers to the budget
+
+并不是说我们**必须马上**整理预算；而是说，我们**很快就需要**整理它。
+
+### part 2 选择正确的选项
+
+1、Choose the correct cleft sentence version of what you hear.
+
+It was unexpected expenses that broke the budget.
+
+The budget caused us many unexpected expenses.
+
+2、Choose the correct cleft sentence version of what you hear.
+
+What we have to do is reduce spending.
+
+Our spending really has to be reduced.
+
+3、Choose the correct cleft sentence version of what you hear.
+
+You extended yourself and that is why there's a lack of planning.
+
+A lack of planning is why you extended yourself.
+
+4、Choose the correct cleft sentence version of what you hear.
+
+A serious place is what we need for the spending plan.
+
+A serious spending plan is what we need to have in place.
+
+### part 3 录下这个短语
+
+1、What you have to do is make your payments manageable.
+
+你必须做的是让自己的付款金额处于可控范围。
+
+make...manageable：使…… 可控
+
+2、The best thing is to consolidate the debt into one sum.
+
+最佳方案是将债务合并为一笔总额。
+
+consolidate /kən'sɑːlɪdeɪt/vt. & vi. 合并
+
+one sum：一笔总额
+
+3、What you need to do is identify the debts you can pay.
+
+你需要做的是明确自己能偿还的债务。
+
+4、The next thing is to identify any assets you could sell.
+
+接下来要做的是找出你可以变卖的资产。
+
+5、What you should do is consider selling some valuables.
+
+你应该做的是考虑变卖一些贵重物品。
+
+valuable 美/'væljuəbl/ n. 贵重物品
+
+6、All you need to do is work out debt payments.
+
+你唯一需要做的是规划好债务还款的金额。
 
 
 
