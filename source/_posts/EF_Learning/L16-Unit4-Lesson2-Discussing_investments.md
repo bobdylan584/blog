@@ -1,7 +1,7 @@
 ---
 date: 2025-12-01
-title: L16-Unit4-Lesson2-Discussing investments
-categories: [EF_Learning, L16-Unit4-Lesson2-Discussing investments]
+title: L16-Unit4-Lesson2-Discussing_investments
+categories: [EF_Learning, L16-Unit4-Lesson2-Discussing_investments]
 tag: EF_Learning
 ---
 

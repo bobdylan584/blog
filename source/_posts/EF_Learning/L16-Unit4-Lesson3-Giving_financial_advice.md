@@ -1,7 +1,7 @@
 ---
 date: 2025-12-15
-title: L16-Unit4-Lesson3-提供财务建议
-categories: [EF_Learning, L16-Unit4-Lesson3-提供财务建议]
+title: L16-Unit4-Lesson3-Giving_financial_advice
+categories: [EF_Learning, L16-Unit4-Lesson3-Giving_financial_advice.]
 tag: EF_Learning
 ---
 
@@ -423,7 +423,35 @@ valuable 美/'væljuəbl/ n. 贵重物品
 
 ## Final Task（提供财务建议）
 
+### Part1 提示时作出回应
 
+1、 It all just crept up on me one moment. My debt was manageable. The next moment it was out of control. Now I'm behind on my mortgage, my car payments, my student loans and my utilities. I'm also in debt to four major credit card companies and owe sums of money  to three department stores.
+
+这一切几乎是在一瞬间悄然降临到我身上的。当时我的债务还是在可控范围内的。可转眼之间，一切就彻底失控了。现在，我已经拖欠了房贷、车贷、学生贷款，连水电等日常费用也付不起了。此外，我还欠着四家大型信用卡公司，以及三家百货商店的一大笔钱。
+
+A. Have you thought about getting more credit cards?
+
+B. Do you owe any other money, say to a friend?
+
+C. I suggest you get more store cards so you can eat.
+
+crept up on 固定搭配：在不知不觉中发生 / 悄然逼近
+
+crept 美/krept/ v. 匍匐爬行（creep的过去式）
+
+creep 美 /kriːp/ vi. 爬行；慢慢地移动；蔓延 n. 爬行；
+
+*creep up on* vt. 爬向(慢慢到来)
+
+*Trouble crept up on us* 麻烦蔓延到我们身上
+
+department stores 百货商店
+
+I'm behind on… 固定表达：拖欠 / 未能按时支付
+
+utilities 水、电、燃气等公共事业费用
+
+I'm also in debt to… 另一个常见搭配：欠……的钱
 
 
 
