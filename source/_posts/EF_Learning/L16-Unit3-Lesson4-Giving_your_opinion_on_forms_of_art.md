@@ -487,19 +487,19 @@ that is：典型英式尾缀。功能：加强语气 + 拉长节奏≈“真是�
 
 录音同上
 
-1️⃣ The mother agrees to her daughter’s tattoo.
+### （1/3） The mother agrees to her daughter’s tattoo.
 
 true
 
 false
 
-2️⃣ The mother is unconcerned about her daughter’s school.
+### （2/3） The mother is unconcerned about her daughter’s school.
 
 true
 
 false
 
-3️⃣ The daughter is surprised her mother likes graffiti.
+### （3/3）  The daughter is surprised her mother likes graffiti.
 
 true
 
@@ -509,7 +509,7 @@ false
 
 录音同上
 
-1、 “Over my dead body”
+### （1/5） “Over my dead body”
 
 The mother is exaggerating to make her point.
 
@@ -519,7 +519,7 @@ The mother will not allow her daughter to get a tattoo.
 
 The daughter would kill to get her own way.
 
-2、“What’s that school of yours coming to?”
+### （2/5）“What’s that school of yours coming to?”
 
 The mother thinks things have gone too far. 母亲认为事情已经发展得太过分了。
 
@@ -529,7 +529,7 @@ The daughter doesn't enjoy going to this school.
 
 The mother is concerned about the school.
 
-3、“It was almost a hanging offense.”“那几乎是要被处以绞刑的重罪。”
+### （3/5）“It was almost a hanging offense.”“那几乎是要被处以绞刑的重罪。”
 
 To do this would get you into a lot of trouble.
 
@@ -539,7 +539,7 @@ The students enjoyed hanging out together.
 
 The school was very easygoing about these things.
 
-4、“I’ve gone right off you.”“我已经彻底对你没好感了。”
+### （4/5）“I’ve gone right off you.”“我已经彻底对你没好感了。”
 
 The daughter is using humor to complain.女儿在用幽默/讽刺的方式表达不满。
 
@@ -549,7 +549,7 @@ The daughter doesn't agree with her mother's decision.
 
 The daughter wants to leave.
 
-5、“What a turn-up for the books that is! ” “ 这可真是出人意料啊！”
+### （5/5）“What a turn-up for the books that is! ” “ 这可真是出人意料啊！”
 
 It was unexpected.
 
@@ -575,9 +575,217 @@ his is a turn-up, isn't it, Sherlock?真是出人意表，不是吗，夏洛克�
 
 # 三、Expression（Expressing opinion）
 
+## section1 在继续之前，请确保阅读并了解以下材料
 
+### （1/4）Use expressions like these to add your opinion to a conversation.
+
+**Expressing opinions**
+
+Use expressions like these to add your opinion to a conversation.
+
+使用像下面这样的表达方式，把你的观点加入到对话中。
+
+``That’s my honest opinion.``
+
+这就是我真实的看法。
+
+```For what it’s worth, the sculptures will probably be vandalized.```
+
+不管你怎么看，我觉得这些雕塑很可能会被人破坏。
+
+``If you want my two cents, public art is an expression of the public itself.``
+
+如果你想听听我的看法，公共艺术本身就是公众自我表达的一种形式。
+
+总结
+
+🔹 三个非常地道的「表达观点」口语框架，全部都是**母语者高频使用**、比 *I think* 更自然的表达。
+
+1. **That’s my honest opinion.**（直接表态）
+2. **For what it’s worth, …**（保留态度 + 提出看法）
+3. **If you want my two cents, …**（礼貌地插入个人观点）
+
+**words**
+
+vandalize/ˈvændəlaɪz/vt.破坏；故意破坏；
+
+For what it’s worth习语； 字面是“不管它值多少”👉；实际语用：**不一定重要，但我还是说一句**
+
+If you want my two cents  地道口语习语；； two cents = “如果你想要我的两分钱的意见”；含义：**如果你想听听我的看法的话**
+
+
+
+### （2/4）Use expressions like these to agree with someone else's opinion.
+
+使用像下面这样的表达方式，来表示你赞同别人的观点。
+
+I was just thinking that myself.我刚才正好在这么想
+
+I'm with you.我站你这边。
+
+You have a point.你说得有道理。
+
+Tell me about it. 字面意思：跟我讲讲；实际常见含义：我太懂了 / 我深有同感/可不是嘛。
+
+使用前提：对方说的情况你也经历过，带有“共鸣、无奈、感同身受”的语气
+
+总结
+
+表示「赞同他人观点」的四个地道表达层级，全部都比 *Yes, I agree* 更母语、更自然。
+
+**I was just thinking that myself.**（高度认同 + 呼应）
+
+**I'm with you.**（直接站队式同意）
+
+**You have a point.**（理性、克制的认同）
+
+**Tell me about it.**（情绪共鸣式认同）
+
+### （3/4）Use expressions like these to disagree with someone else's opinion.
+
+That's not always the case. 情况并不总是这样。/ 也不完全是这么回事。
+
+Can't see it, myself. 我个人不这么看。/ 我倒没看出来是这样。
+
+Sorry, but I have to side with her on that.不好意思，但在这件事上我得站在她那一边。
+
+Over my dead body. 想都别想。/ 除非我死了/ 绝对不可能。
+
+Be careful; **over my dead body** can be taken as a threat.
+
+**words**
+
+the case：事实 / 情况
+
+can’t see it：我看不出来 / 我不这么认为
+
+side with：v.支持；偏袒；站在…一边；多方讨论中，明确表示你不站在说话人这一边
+
+can be taken as：可能会被理解为
+
+总结（表达强度分级）
+
+不同意他人观点的「语气梯度」，越往下，冲突性越强，越不适合正式或陌生场合。
+
+1. **That’s not always the case.**（理性、克制）
+2. **Can’t see it, myself.**（主观、随意）
+3. **I have to side with her on that.**（明确站队）
+4. **Over my dead body.**（强烈情绪化反对 ⚠️慎用）
+
+### （4/4）Use expressions like these to end a heated discussion where people are becoming frustrated or upset.
+
+使用下面这些表达方式，来结束一场人们开始感到沮丧或不快的激烈讨论。
+
+Let’s just drop it, shall we? 要不我们就算了吧，好吗？/ 干脆别再讨论这个了，行不行？
+
+Let’s agree to disagree.我们就各自保留不同意见吧。
+
+Whatever you say.随你怎么说吧。/ 行行行，你说了算。
+
+Be careful; **whatever you say** can convey annoyance or a patronizing attitude.
+
+要注意，“whatever you say” 这句话可能会传达出生气或居高临下的态度。
+
+**words**
+
+patronize/ˈpeɪtrənaɪz/v. 光顾；资助；屈尊俯就地对待；摆出高人一等的派头；
+
+patronizing/ˈpeɪtrənaɪzɪŋ/adj. 摆派头的；自认为高人一等的；自诩清高；居高临下
+
+annoyance /əˈnɔɪəns/n.烦恼；恼怒；
+
+convey /kənˈveɪ/vt. 传达；传送；输送；表达，传递(思想、感情等)；运送
+
+heated /ˈhiːtɪd/adj.(用加热器)加热了的；激烈的；愤怒的；十分激动的
+
+heat/hiːt/v.加热；变热；(使)变暖
+
+a heated discussion：激烈的讨论 / 争论
+
+where people are becoming：在……情况下，人们正在变得
+
+frustrated：沮丧的、受挫的
+
+drop it：把这事放下 / 不再继续
+
+agree to disagree：固定搭配；承认分歧，停止争论
+
+总结（结束争论的「安全度」对比）
+结束激烈讨论的表达方式（由安全 → 危险）， 在正式、职场、考试或不熟的人面前，尽量避免第 3 种。
+
+Let’s agree to disagree.（最安全、最理性）
+
+Let’s just drop it, shall we?（缓和但仍带情绪）
+
+Whatever you say.（⚠️ 极易被理解为不耐烦或讽刺）
+
+## section2 选择正确的选项
+
+### （1/8）Tell me about it.
+
+### （4/8）For what it's worth, these sculptures also represent the town's best-loved historical figures.
+
+不管怎么说，这些雕塑同样也代表着这座小镇最受人爱戴的历史人物。
+
+disagreeing
+
+agreeing
+
+ending the discussion
+
+adding an opinion
+
+### （5/8）I just can't see it 
+
+### （6/8）over my dead body
+
+### （7/8）Let's drop it
+
+### （8/8）that's not always the case
+
+**words**
+
+best-loved/best lʌvd/最受欢迎的；最喜欢的
+
+represent /ˌreprɪˈzent/v.代表，
+
+## section3 录下这个短语
+
+ ### （1/6）That's my two cents.
+
+ ### （2/6）I'm with you.
+
+ ### （3/6）Tell me about it! Too many compromises.可不是嘛！妥协太多了。
+
+ ### （4/6）For what it's worth, modern art is quite valuable.
+
+ ### （5/6）Over my dead body.
+
+ ### （6/6）Let's agree to disagree.
+
+**words**
+
+compromise/ˈkɑːmprəmaɪz/n.&v.妥协
 
 # 四、Final Task（Giving your opinion on forms of art）
+
+## 根据录音原文，选择正确的答案
+
+###（1/8）
+
+###（2/8）
+
+###（3/8）
+
+###（4/8）
+
+###（5/8）
+
+###（6/8）
+
+###（7/8）
+
+###（8/8）
 
 
 
