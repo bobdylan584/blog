@@ -5,15 +5,15 @@ categories: [EF_Learning, L16-Unit3-Lesson4-Giving_your_opinion_on_forms_of_art]
 tag: EF_Learning
 ---
 
-###Vocabulary（）
+Vocabulary（）
 
-###Expression（）
+Expression（）
 
-###grammar（）
+grammar（）
 
-###Listening（）
+Listening（）
 
-###Final Task（）
+Final Task（）
 
 # Title：Giving your opinion on forms of art
 
@@ -487,19 +487,19 @@ that is：典型英式尾缀。功能：加强语气 + 拉长节奏≈“真是�
 
 录音同上
 
-### （1/3） The mother agrees to her daughter’s tattoo.
+### (1/3)  The mother agrees to her daughter’s tattoo.
 
 true
 
 false
 
-### （2/3） The mother is unconcerned about her daughter’s school.
+### (2/3)  The mother is unconcerned about her daughter’s school.
 
 true
 
 false
 
-### （3/3）  The daughter is surprised her mother likes graffiti.
+### (3/3)  The daughter is surprised her mother likes graffiti.
 
 true
 
@@ -509,7 +509,7 @@ false
 
 录音同上
 
-### （1/5） “Over my dead body”
+### (1/5) “Over my dead body”
 
 The mother is exaggerating to make her point.
 
@@ -519,7 +519,7 @@ The mother will not allow her daughter to get a tattoo.
 
 The daughter would kill to get her own way.
 
-### （2/5）“What’s that school of yours coming to?”
+### (2/5) “What’s that school of yours coming to?”
 
 The mother thinks things have gone too far. 母亲认为事情已经发展得太过分了。
 
@@ -529,7 +529,7 @@ The daughter doesn't enjoy going to this school.
 
 The mother is concerned about the school.
 
-### （3/5）“It was almost a hanging offense.”“那几乎是要被处以绞刑的重罪。”
+### (3/5) “It was almost a hanging offense.”“那几乎是要被处以绞刑的重罪。”
 
 To do this would get you into a lot of trouble.
 
@@ -539,7 +539,7 @@ The students enjoyed hanging out together.
 
 The school was very easygoing about these things.
 
-### （4/5）“I’ve gone right off you.”“我已经彻底对你没好感了。”
+### (4/5) “I’ve gone right off you.”“我已经彻底对你没好感了。”
 
 The daughter is using humor to complain.女儿在用幽默/讽刺的方式表达不满。
 
@@ -549,7 +549,7 @@ The daughter doesn't agree with her mother's decision.
 
 The daughter wants to leave.
 
-### （5/5）“What a turn-up for the books that is! ” “ 这可真是出人意料啊！”
+### (5/5) “What a turn-up for the books that is! ” “ 这可真是出人意料啊！”
 
 It was unexpected.
 
@@ -577,7 +577,7 @@ his is a turn-up, isn't it, Sherlock?真是出人意表，不是吗，夏洛克�
 
 ## section1 在继续之前，请确保阅读并了解以下材料
 
-### （1/4）Use expressions like these to add your opinion to a conversation.
+### (1/4) Use expressions like these to add your opinion to a conversation.
 
 **Expressing opinions**
 
@@ -615,7 +615,7 @@ If you want my two cents  地道口语习语；； two cents = “如果你想�
 
 
 
-### （2/4）Use expressions like these to agree with someone else's opinion.
+### (2/4) Use expressions like these to agree with someone else's opinion.
 
 使用像下面这样的表达方式，来表示你赞同别人的观点。
 
@@ -641,7 +641,7 @@ Tell me about it. 字面意思：跟我讲讲；实际常见含义：我太懂�
 
 **Tell me about it.**（情绪共鸣式认同）
 
-### （3/4）Use expressions like these to disagree with someone else's opinion.
+### (3/4) Use expressions like these to disagree with someone else's opinion.
 
 That's not always the case. 情况并不总是这样。/ 也不完全是这么回事。
 
@@ -672,7 +672,7 @@ can be taken as：可能会被理解为
 3. **I have to side with her on that.**（明确站队）
 4. **Over my dead body.**（强烈情绪化反对 ⚠️慎用）
 
-### （4/4）Use expressions like these to end a heated discussion where people are becoming frustrated or upset.
+### (4/4) Use expressions like these to end a heated discussion where people are becoming frustrated or upset.
 
 使用下面这些表达方式，来结束一场人们开始感到沮丧或不快的激烈讨论。
 
@@ -721,9 +721,9 @@ Whatever you say.（⚠️ 极易被理解为不耐烦或讽刺）
 
 ## section2 选择正确的选项
 
-### （1/8）Tell me about it.
+### (1/8) Tell me about it.
 
-### （4/8）For what it's worth, these sculptures also represent the town's best-loved historical figures.
+### (4/8) For what it's worth, these sculptures also represent the town's best-loved historical figures.
 
 不管怎么说，这些雕塑同样也代表着这座小镇最受人爱戴的历史人物。
 
@@ -735,13 +735,13 @@ ending the discussion
 
 adding an opinion
 
-### （5/8）I just can't see it 
+### (5/8) I just can't see it 
 
-### （6/8）over my dead body
+### (6/8) over my dead body
 
-### （7/8）Let's drop it
+### (7/8) Let's drop it
 
-### （8/8）that's not always the case
+### (8/8) that's not always the case
 
 **words**
 
@@ -751,17 +751,17 @@ represent /ˌreprɪˈzent/v.代表，
 
 ## section3 录下这个短语
 
- ### （1/6）That's my two cents.
+ ### (1/6) That's my two cents.
 
- ### （2/6）I'm with you.
+ ### (2/6) I'm with you.
 
- ### （3/6）Tell me about it! Too many compromises.可不是嘛！妥协太多了。
+ ### (3/6) Tell me about it! Too many compromises.可不是嘛！妥协太多了。
 
- ### （4/6）For what it's worth, modern art is quite valuable.
+ ### (4/6) For what it's worth, modern art is quite valuable.
 
- ### （5/6）Over my dead body.
+ ### (5/6) Over my dead body.
 
- ### （6/6）Let's agree to disagree.
+ ### (6/6) Let's agree to disagree.
 
 **words**
 
@@ -771,21 +771,21 @@ compromise/ˈkɑːmprəmaɪz/n.&v.妥协
 
 ## 根据录音原文，选择正确的答案
 
-###（1/8）
+###(1/8)
 
-###（2/8）
+###(2/8)
 
-###（3/8）
+###(3/8)
 
-###（4/8）
+###(4/8)
 
-###（5/8）
+###(5/8)
 
-###（6/8）
+###(6/8)
 
-###（7/8）
+###(7/8)
 
-###（8/8）
+###(8/8)
 
 
 
