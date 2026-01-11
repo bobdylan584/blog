@@ -771,23 +771,231 @@ compromise/ˈkɑːmprəmaɪz/n.&v.妥协
 
 ## 根据录音原文，选择正确的答案
 
-###(1/8)
+### (1/8)
 
-###(2/8)
+Before we begin, I'd like to warn you that I'm not planning on changing my mind. You'll put a modern sculpture in a public park over my dead body.
 
-###(3/8)
+在我们开始之前，我得先提醒你一句：我没打算改变自己的立场。想把一座现代雕塑放进公共公园，除非我死了。
 
-###(4/8)
+**A.** Let’s just drop it, shall we?
 
-###(5/8)
+要不我们就算了吧，好吗？
 
-###(6/8)
+**B.** For what it’s worth, famous cities display modern art.
 
-###(7/8)
+不管你怎么看，很多知名城市都会展示现代艺术。
 
-###(8/8)
+**C.** I’m with you, and I think we should fight the proposal.
 
+**words**
 
+I'm not planning on doing sth.：我没打算做某事
 
+display/dɪˈspleɪ/v.显示；展示；
 
+### (2/8)
+
+What Chicago and New York do with their public spaces is none of my concern. Furthermore, our citizens need to appreciate and understand their history. That's why I'd like the sculptures to be of the town's best-loved historical figures.
+
+芝加哥和纽约如何使用他们的公共空间，与我无关。此外，我们的市民有必要去欣赏并理解他们自己的历史。正因如此，我希望这些雕塑以本城最受爱戴的历史人物为主题。
+
+**A.** Let’s not drop it because it’s expensive.
+
+不要仅仅因为它很贵就把这件事放弃了。
+
+**B.** I was just thinking they wouldn’t lend a traditional feel.
+
+我只是觉得它们可能营造不出一种传统的感觉。
+
+**C.** I can’t see how that would appeal to young people.
+
+我看不出来那样会对年轻人有什么吸引力。
+
+**words**
+
+is none of my concern：与我无关 / 不在我关心范围之内
+
+appreciate/əˈpriːʃieɪt/v.欣赏；感谢；
+
+I'd like … to be …：我希望……是……
+
+be of …：以……为主题 / 以……为对象
+
+feel/fiːl/n.感觉，气氛；
+
+ lend/lend/v.借给；给予，提供（帮助、支持等）；给…增加，增添(特色)；
+
+### (3/8)
+
+But that just proves my point. They need to be reminded of the city's history. And what's more, I simply can't stand these modern sculptures. The last time I stood in front of one, I had absolutely no idea what I was looking at.
+
+但那恰恰证明了我的观点。他们需要被提醒这座城市的历史。而且更重要的是，我实在受不了这些现代雕塑。上一次我站在其中一座雕塑前时，我完全不知道自己在看什么。
+
+**A.** For what it’s worth, modern sculpture’s boring. So abstract!
+
+不管你怎么想，我觉得现代雕塑挺无聊的，太抽象了！
+
+**B.** I’m with you. Modern sculpture will get vandalized anyway.
+
+我同意你。反正现代雕塑迟早都会被人破坏。
+
+**C.** My two cents? Modern sculpture encourages creativity.
+
+说说我的看法吧：现代雕塑能激发创造力。
+
+**words**
+
+need to be reminded of …：需要被提醒……
+
+And what's more：而且，更重要的是
+
+I simply can't stand …：我实在受不了……
+
+simply实在；(强调某说法)确实
+
+### (4/8)
+
+What nonsense! Why don't we just hand out free spray paint to any young person who feels creative, and ask them to cover the park in graffiti? And that's another thing. There's a real danger these modern sculptures could be vandalized.
+
+简直是胡说八道！那我们干脆给所有自认为有创意的年轻人免费发喷漆，让他们把整个公园都涂满涂鸦算了？而且还有一点。
+
+**A.** I'm glad you appreciate graffiti as an art form.
+
+我很高兴你把涂鸦当作一种艺术形式来欣赏。
+
+**B.** But traditional sculptures would face the same risk.
+
+但传统雕塑同样也会面临这样的风险。
+
+**C.** It's normal for a young person to get a tongue piercing.
+
+年轻人打个舌钉是很正常的事情。
+
+**words**
+
+spray /spreɪ/n.喷雾；喷雾器；喷剂；v.喷；喷洒；向…喷洒；
+
+paint/peɪnt/n.油漆
+
+hand out：分发、发放
+
+free spray paint：免费的喷漆
+
+any young person who feels creative：任何自认为有创意的年轻人
+
+### (5/8)
+
+That may be so, but I have a question. What would putting modern sculptures in our parks say about our town? What statement would it make? If we see public art as an expression of the public itself, what would it say about us?
+
+也许确实如此，但我有一个问题。在我们的公园里放置现代雕塑，会向外界传达我们这座城镇怎样的形象？这会传达出一种怎样的立场或态度？如果我们把公共艺术视为公众自身的一种表达，那它又会反映出我们是怎样的人？
+
+**A.** Our government would be seen as living in the old world.
+
+**B.** Our city would be seen as part of the modern world.
+
+**C.** Our leaders would be seen as opposing the art world.
+
+我们的领导者会被认为是在与艺术界对立。
+
+**words**
+
+say 	v.传达 / 表明 / 反映
+
+X says something about Y	= X 在“象征意义上”反映了 Y 是什么样的
+
+statement /ˈsteɪtmənt/声明、立场、态度
+
+If we see … as …：如果我们把……看作……
+
+an expression of the public itself：公众自身的表达
+
+opposing /əˈpoʊz/vt.反对
+
+### (6/8)
+
+Ah, I see what you're trying to say. You think that I'm old-fashioned, out-of-date, a dinosaur, just because I think it's important to remind the public of their past.
+
+啊，我明白你想表达的意思了。就因为我认为提醒公众记住他们的过去很重要，你就觉得我是老派、过时，甚至像个老古董。
+
+**A.** Yet you say you want to focus on the future.
+
+可你却说自己想把重心放在未来。
+
+**B.** Yet we also need to think about their future.
+
+但我们同样也需要考虑他们的未来。
+
+**C.** Yet they never show an interest in the future.
+
+可他们从来都没有表现出对未来的兴趣。
+
+**words**
+
+out-of-date：过时的、不合时宜的
+
+dinosaur/ˈdaɪnəsɔːr/n.恐龙；守旧落伍的人；过时落后的东西
+
+a dinosaur：老古董
+
+Yet/jet/conj. 然而；但是
+
+### (7/8)
+
+You do have a point. And our park is certainly big enough to display sculptures that suggest both the past and the future. Hold on. I think I've just worked out next year's election's slogan  Mayor brings the past and the future.
+
+你确实说得有道理。而且我们的公园当然也足够大，可以展示既体现过去、也暗示未来的雕塑。等等。我想我刚刚已经想好了明年的竞选口号：把过去与未来结合起来。
+
+**A.** I'm with you. We can display fine examples of each form.
+
+我同意你的看法。我们可以把两种艺术形式的优秀作品都展示出来。
+
+**B.** That's not always the case. Slogans can be conservative.
+
+事情并不总是这样。口号也可能是保守的。
+
+**C.** Over my dead body. The trees in the park are too important.
+
+除非我死了。公园里的树太重要了。
+
+**words**
+
+conservative/kənˈsɜːrvətɪv/adj.保守的；；守旧的；
+
+suggest/səˈdʒest/v.暗示、体现（不是直白表达）
+
+Mayor/ˈmeɪər/n.市长
+
+### (8/8)
+
+Write this down. I want a traditional statue of Florence,  the famous World War 2 nurse beside Lily pond and one of about Springfield, the town founder in the Rose Garden. Then I want two modern sculptures displayed in the larger public areas.
+
+把这个记下来。我想要一座佛罗伦萨主题的传统雕像、一座放置在百合池旁的著名二战护士雕像，以及一座纪念城镇创始人斯普林菲尔德的雕像，后者要设在玫瑰园里。另外，我还希望在较大的公共区域陈列两座现代风格的雕塑。
+
+**A.** This proposal is totally the wrong way to go.
+
+这份提案完全是错误的方向。
+
+**B.** This compromise is definitely the way forward.
+
+这种妥协方案无疑是可行的办法。
+
+**C.** This decision is something that will haunt us later.
+
+这个决定会让我们日后深受困扰。
+
+**words**
+
+the way forward：前进的方向 / 可行的办法（表示符合发展需求）
+
+haunt /hɔːnt/vt.困扰；
+
+Florence/ˈflɔrəns/n.佛罗伦萨（意大利中部一城市，托斯卡纳区首府）
+
+statue /ˈstætʃuː/n.雕像
+
+ Lily Pond/ˈlɪli pɑːnd/这里大概率是指种植百合花的池塘周边区域
+
+lily/ˈlɪli/n.百合花adj.洁白；纯洁的
+
+pond/pɑːnd/n.池塘(尤指人工的)
 
