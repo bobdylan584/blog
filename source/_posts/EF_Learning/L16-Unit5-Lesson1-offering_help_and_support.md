@@ -7,7 +7,7 @@ tag: EF_Learning
 
 # Vocabulary（Stress）
 
-## SECTION 1 
+## SECTION 1 听录音根据问题选择正确的答案
 
 ### (1/5)
 
@@ -193,11 +193,137 @@ without any cause for concern 没有值得担忧的理由
 
 
 
+## SECTION 2 听录音选择正确答案
+
+**audio**
+
+Well, in the current economic climate, it's no big surprise that employees are reporting being more stressed than ever. Workers are fretting about the possibility of being laid off, and those who survive the job cuts are left overwhelmed trying to keep on top of an increasingly burdensome workload. With these frazzled workers in mind, we've invited psychiatrist Dr. Candace Koopland into the studio to share some advice on how to cope with stress in the workplace. Dr. Koopland, thank you for joining us. Now, what advice can you give our listeners on how to deal with stress? Well, one of the most effective ways to deal with stress is to prioritize. This may sound quite obvious in theory, but in practice, many of us are tempted to focus on easy-to-tackle tasks rather than those that are truly more important. We do this so we can get a sense of accomplishment from finishing the easier jobs, but we would be better advised to put the non-essential on the back burner while we deal with our more pressing deadlines. Don't sweat the small stuff, right? Exactly. Another tip I like to share is to keep a tidy desk. This simple strategy to reduce stress means taking 5 minutes at the end of every workday to tidy up your workspace. Being greeted by a messy desk in the morning can certainly affect your mood, making you feel burned out before you even start. So why not give yourself the gift of a fresh start each day? Next, strive for a work-life balance. Chronic stress can lead to a number of stress-related conditions, including high blood pressure. With that in mind, it's essential that you take care of yourself, if only because you certainly aren't going to make headway on that important project if you get sick. So be sure to set aside some downtime from that hectic schedule to take a breather. Get a massage, read a book, or go out to a concert. Pretty much whatever helps you recharge your batteries. That's right. And speaking of recharging, it's essential that you get adequate rest. If you are having a hard time getting to sleep, try combating your insomnia by taking time before bed each night to decompress. Take a hot bath, read a short story, or do some deep breathing exercises. Many people make the mistake of bringing their laptops to bed to check their emails. No wonder they toss and turn. Whatever you do, never take your work to bed. If you find yourself plagued by your to-do list, get out of bed, write it down, and go back to bed. Rest assured that you can pick up and get started on that list in the morning. Lastly, an often overlooked strategy is to simply ask for a hand. Many workers don't ask for the help they need because they are afraid to appear incompetent. But if you can't handle the workload on your own, you shouldn't be afraid to accept a helping hand. In the end, what people will remember is that the job got done. All very good advice. Thank you, Dr. Koopland. Now, we'll open up our phone lines. Got a question for Dr. Koopland? Give a call in our studio at 555...
+
+在当前的经济形势下，员工们比以往任何时候都感到更加紧张，这并不令人意外。许多员工为可能被裁员而忧心忡忡，而那些在裁员中留下来的人，则不得不承受越来越沉重的工作负担，常常感到不堪重负。考虑到这些身心俱疲的员工，我们邀请了精神科医生坎迪斯·库普兰博士来到演播室，分享一些应对职场压力的建议。
+
+库普兰博士，感谢您来到节目。您能给我们的听众一些应对压力的建议吗？
+
+应对压力最有效的方法之一，就是学会分清事情的轻重缓急。这在理论上听起来很简单，但在实际中，许多人更容易把精力放在那些容易完成的任务上，而不是那些真正重要的事情。这样做可以让我们通过完成简单任务获得成就感，但更明智的做法，是先把不重要的事情放一边，集中精力应对更紧迫的截止期限。
+
+也就是说，别为小事操心，对吗？
+
+正是如此。另一个我想分享的建议是保持办公桌整洁。这个简单的减压方法，就是每天工作结束前花五分钟整理一下桌面。早上面对一张凌乱的桌子，确实会影响情绪，甚至在开始工作前就让人感到精疲力竭。所以，为什么不给自己每天一个“重新开始”的机会呢？
+
+接下来，要努力实现工作与生活的平衡。长期压力可能导致多种与压力相关的健康问题，比如高血压。基于这一点，照顾好自己至关重要——毕竟一旦生病，你也不可能在重要项目上取得任何进展。因此，一定要从繁忙的日程中抽出一些时间放松一下。去做个按摩、读本书，或听一场音乐会，总之，做任何能让你恢复精力的事情。
+
+没错。说到恢复精力，充足的睡眠同样必不可少。如果你难以入睡，可以在每晚睡前留出时间放松自己，比如泡个热水澡、读一篇短篇故事，或做一些深呼吸练习。许多人犯的错误是把笔记本电脑带到床上查看邮件，难怪会辗转反侧。无论如何，千万不要把工作带到床上。
+
+如果你被待办事项清单困扰，不妨起床把它写下来，然后再回去睡觉。请放心，第二天早上你完全可以再重新开始处理这些事情。
+
+最后，一个经常被忽视的策略其实很简单——主动寻求帮助。许多员工不愿意求助，是因为害怕显得自己不够能干。但如果你确实无法独自应付工作量，就不必害怕接受他人的帮助。最终，人们记住的，只会是事情是否顺利完成。
+
+这些建议都非常有价值。谢谢你，库普兰博士。接下来，我们将开通热线电话。如果你有问题想请教库普兰博士，欢迎拨打我们演播室的电话 555……
+
+**question**
+
+**words**
+
+climate/ˈklaɪmət/n.环境
+
+reporting being more stressed than ever：反映自己承受着前所未有的压力
+
+fret/fret/v.烦恼；烦躁；苦恼；焦虑不安
+
+survive the job cuts：在裁员中“幸存”下来
+
+frazzled /ˈfræzld/adj.疲惫而烦躁的
+
+overwhelmed /ˌoʊvərˈwelmd/adj.被压倒的，不知所措的
+
+burdensome /ˈbɜːrdnsəm/adj.负担沉重的；繁重的
+
+psychiatrist /saɪˈkaɪətrɪst/n.精神科医生；精神病学家
+
+Candace /ˈkændəs/n.坎迪斯；坎达丝
+
+studio /ˈstuːdioʊ/演播室；
+
+cope /koʊp/vi.处理；
+
+cope with vt. 处理；
+
+tempt/tempt/vt.引诱；
+
+tackle /ˈtækl/v.解决；
+
+accomplishment /əˈkɑːmplɪʃmənt/n.成就
+
+burner /ˈbɜːrnər/n.炉子；煤气灶火圈
+
+pressing /ˈpresɪŋ/adj.紧迫的；
+
+sweat /swet/ 辛苦地干
+
+tidy up/ˈtaɪdi ʌp/整理；收拾
+
+tidy/ˈtaɪdi/ v.整理；adj.整洁的；
+
+greet/ɡriːt/vt.欢迎；
+
+messy /ˈmesi/adj.混乱的；不整洁的；
+
+burned out adj.筋疲力尽
+
+strive /straɪv/vi.努力；力求；
+
+Chronic/ˈkrɑːnɪk/adj.慢性的；长期的；
+
+headway /ˈhedweɪ/n.前进；进展
+
+make headway前进;取得进展
+
+hectic /ˈhektɪk/adj.忙碌的；
+
+set aside/ˈset əsaɪd/搁置
+
+breather/ˈbriːðər/n.短暂的休息
+
+adequate /ˈædɪkwət/adj.足够的；
+
+concert/ˈkɑːnsərt/n.音乐会；
+
+rest/rest/n.休息时间
+
+combat/ˈkɑːmbæt/vt.防止，减轻，抑制；
+
+decompress/ˌdiːkəmˈpres/v.(使)减压；
+
+compress/kəmˈpres , ˈkɑːmpres/v.压缩
+
+wonder n.惊讶；奇事；
+
+no wonder 不奇怪
+
+toss and turn辗转反侧;翻来覆去
+
+plagued /pleɪɡ/vt.困扰
+
+Rest assured/rest əˈʃʊrd/放心；请放心
+
+assured [əˈʃʊrd]adj.确定的; 自信的; 有把握的;
+
+overlooked /ˌoʊvərˈlʊkt/adj.被忽视的 v.忽略；
+
+overlook/ˌoʊvərˈlʊk/vt.没有注意到，忽视，
+
+incompetent/ɪnˈkɑːmpɪtənt/adj.无能的；n.不称职(或不能胜任、无能)的人
 
 
-  
 
-## SECTION 2
+
+
+
+
+
+
+
+
+
 
 ## SECTION 3
 
