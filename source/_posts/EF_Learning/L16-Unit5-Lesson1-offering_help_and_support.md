@@ -197,7 +197,25 @@ without any cause for concern 没有值得担忧的理由
 
 **audio**
 
-Well, in the current economic climate, it's no big surprise that employees are reporting being more stressed than ever. Workers are fretting about the possibility of being laid off, and those who survive the job cuts are left overwhelmed trying to keep on top of an increasingly burdensome workload. With these frazzled workers in mind, we've invited psychiatrist Dr. Candace Koopland into the studio to share some advice on how to cope with stress in the workplace. Dr. Koopland, thank you for joining us. Now, what advice can you give our listeners on how to deal with stress? Well, one of the most effective ways to deal with stress is to prioritize. This may sound quite obvious in theory, but in practice, many of us are tempted to focus on easy-to-tackle tasks rather than those that are truly more important. We do this so we can get a sense of accomplishment from finishing the easier jobs, but we would be better advised to put the non-essential on the back burner while we deal with our more pressing deadlines. Don't sweat the small stuff, right? Exactly. Another tip I like to share is to keep a tidy desk. This simple strategy to reduce stress means taking 5 minutes at the end of every workday to tidy up your workspace. Being greeted by a messy desk in the morning can certainly affect your mood, making you feel burned out before you even start. So why not give yourself the gift of a fresh start each day? Next, strive for a work-life balance. Chronic stress can lead to a number of stress-related conditions, including high blood pressure. With that in mind, it's essential that you take care of yourself, if only because you certainly aren't going to make headway on that important project if you get sick. So be sure to set aside some downtime from that hectic schedule to take a breather. Get a massage, read a book, or go out to a concert. Pretty much whatever helps you recharge your batteries. That's right. And speaking of recharging, it's essential that you get adequate rest. If you are having a hard time getting to sleep, try combating your insomnia by taking time before bed each night to decompress. Take a hot bath, read a short story, or do some deep breathing exercises. Many people make the mistake of bringing their laptops to bed to check their emails. No wonder they toss and turn. Whatever you do, never take your work to bed. If you find yourself plagued by your to-do list, get out of bed, write it down, and go back to bed. Rest assured that you can pick up and get started on that list in the morning. Lastly, an often overlooked strategy is to simply ask for a hand. Many workers don't ask for the help they need because they are afraid to appear incompetent. But if you can't handle the workload on your own, you shouldn't be afraid to accept a helping hand. In the end, what people will remember is that the job got done. All very good advice. Thank you, Dr. Koopland. Now, we'll open up our phone lines. Got a question for Dr. Koopland? Give a call in our studio at 555...
+Well, in the current economic climate, it's no big surprise that employees are reporting being more stressed than ever. Workers are fretting about the possibility of being laid off, and those who survive the job cuts are left overwhelmed trying to keep on top of an increasingly burdensome workload. With these frazzled workers in mind, we've invited psychiatrist Dr. Candace Koopland into the studio to share some advice on how to cope with stress in the workplace.
+
+Dr. Koopland, thank you for joining us. Now, what advice can you give our listeners on how to deal with stress?
+
+Well, one of the most effective ways to deal with stress is to prioritize. This may sound quite obvious in theory, but in practice, many of us are tempted to focus on easy-to-tackle tasks rather than those that are truly more important. We do this so we can get a sense of accomplishment from finishing the easier jobs, but we would be better advised to put the non-essential on the back burner while we deal with our more pressing deadlines.
+
+Don't sweat the small stuff, right?
+
+Exactly. Another tip I like to share is to keep a tidy desk. This simple strategy to reduce stress means taking 5 minutes at the end of every workday to tidy up your workspace. Being greeted by a messy desk in the morning can certainly affect your mood, making you feel burned out before you even start. So why not give yourself the gift of a fresh start each day?
+
+Next, strive for a work-life balance. Chronic stress can lead to a number of stress-related conditions, including high blood pressure. With that in mind, it's essential that you take care of yourself, if only because you certainly aren't going to make headway on that important project if you get sick. So be sure to set aside some downtime from that hectic schedule to take a breather. Get a massage, read a book, or go out to a concert. Pretty much whatever helps you recharge your batteries.
+
+That's right. And speaking of recharging, it's essential that you get adequate rest. If you are having a hard time getting to sleep, try combating your insomnia by taking time before bed each night to decompress. Take a hot bath, read a short story, or do some deep breathing exercises. Many people make the mistake of bringing their laptops to bed to check their emails. No wonder they toss and turn. Whatever you do, never take your work to bed.
+
+If you find yourself plagued by your to-do list, get out of bed, write it down, and go back to bed. Rest assured that you can pick up and get started on that list in the morning.
+
+Lastly, an often overlooked strategy is to simply ask for a hand. Many workers don't ask for the help they need because they are afraid to appear incompetent. But if you can't handle the workload on your own, you shouldn't be afraid to accept a helping hand. In the end, what people will remember is that the job got done.
+
+All very good advice. Thank you, Dr. Koopland. Now, we'll open up our phone lines. Got a question for Dr. Koopland? Give a call in our studio at 555...
 
 在当前的经济形势下，员工们比以往任何时候都感到更加紧张，这并不令人意外。许多员工为可能被裁员而忧心忡忡，而那些在裁员中留下来的人，则不得不承受越来越沉重的工作负担，常常感到不堪重负。考虑到这些身心俱疲的员工，我们邀请了精神科医生坎迪斯·库普兰博士来到演播室，分享一些应对职场压力的建议。
 
@@ -220,6 +238,30 @@ Well, in the current economic climate, it's no big surprise that employees are r
 这些建议都非常有价值。谢谢你，库普兰博士。接下来，我们将开通热线电话。如果你有问题想请教库普兰博士，欢迎拨打我们演播室的电话 555……
 
 **question**
+
+Which ones are true?
+
+1、The audio is about the different illnesses caused by stress.
+
+音频在讲压力导致的各种疾病
+
+2、Dr. Coupland advises taking time off work.
+
+take time off work（请假/休假）
+
+3、One of the suggested coping methods is seeing a doctor.
+
+4、The audio is about coping with stress.
+
+cope with：处理；
+
+5、One of the suggested coping methods is prioritizing.
+
+6、Dr. Coupland suggests that mess affects our mood.
+
+7、Dr. Coupland says we should never work in bed.
+
+8、Dr. Coupland suggests limiting the time we work in bed.
 
 **words**
 
@@ -253,7 +295,15 @@ tackle /ˈtækl/v.解决；
 
 accomplishment /əˈkɑːmplɪʃmənt/n.成就
 
-burner /ˈbɜːrnər/n.炉子；煤气灶火圈
+burner /ˈbɜːrnər/n. 炉头、灶眼（做饭用的火口）
+
+back burner /ˌbæk ˈbɜːrnər/ n.（习语用法）次要位置；暂缓处理的状态
+
+front burner（前炉）火力最强；最顺手；用来做当前最重要、最紧急的菜
+
+back burner /ˌbæk ˈbɜːrnər/ n.习语；火力较小；不显眼、不着急；用来慢慢炖、保温、晚点再处理
+
+put something on the back burner= 把这件事放到后面的炉子上慢慢来= 降低优先级，暂缓处理
 
 pressing /ˈpresɪŋ/adj.紧迫的；
 
@@ -279,7 +329,9 @@ make headway前进;取得进展
 
 hectic /ˈhektɪk/adj.忙碌的；
 
-set aside/ˈset əsaɪd/搁置
+set aside ... for/ˈset əsaɪd/留出
+
+downtime：/ˈdaʊntaɪm/n.停工期；(尤指计算机的)停机时间，停止运行时间；休息
 
 breather/ˈbriːðər/n.短暂的休息
 
@@ -303,9 +355,11 @@ toss and turn辗转反侧;翻来覆去
 
 plagued /pleɪɡ/vt.困扰
 
-Rest assured/rest əˈʃʊrd/放心；请放心
+Rest assured/rest əˈʃʊrd/请放心
 
 assured [əˈʃʊrd]adj.确定的; 自信的; 有把握的;
+
+to-do list：待办清单
 
 overlooked /ˌoʊvərˈlʊkt/adj.被忽视的 v.忽略；
 
@@ -313,25 +367,114 @@ overlook/ˌoʊvərˈlʊk/vt.没有注意到，忽视，
 
 incompetent/ɪnˈkɑːmpɪtənt/adj.无能的；n.不称职(或不能胜任、无能)的人
 
+keep on top of 掌握；保持优势
 
+with … in mind：考虑到……；出于对……的考虑（固定结构，表示“作为出发点/前提”）
 
+would be better advised to：更明智的做法是……；更合理/更值得建议的是……（委婉但强烈的建议）
 
+non-essential/ˌnɑːn ɪˈsenʃl/adj.非必需的；不重要的
 
+## SECTION 3 听录音 匹配相近词组
 
+toss and turn➡ sleep restlessly
 
+reenergize➡ recharge your batteries
 
+put it on the back burner➡do it when you're not busy
 
+chronic➡recurring or lasting
 
+a breather➡a break
 
+headway➡progress
 
+**word**
 
-## SECTION 3
+restless/ˈrestləs/adj.焦躁不安的；坐立不安的；不耐烦的；没有睡眠的；没有真正休息的
 
-## SECTION 4
+restlessly adv.
+不安地；不安地，慌张地，无休止地
 
-## SECTION 5
+toss and turn 是固定搭配，专指睡不着、翻来覆去。
 
+reenergize/ˌriːˈɛnərdʒaɪz/v. 重新赋予能量；恢复精力；重新激活（派生自 energy /ˈɛnərdʒi/ n. 能量、精力）
 
+energize/ˈenərdʒaɪz/vt.激励；供电
+
+recur/rɪˈkɜːr/vi.反复出现；重现；再发生
+
+recurring/rɪˈkɜːrɪŋ/v.反复出现；再发生adj.循环的；再发的
+
+last/læst/v.持续；
+
+## SECTION 4 选择正确的选项
+
+### (1/5) It can be difficult to _____ a lot of problems at the same time.
+
+handle
+
+decompress （放松）
+
+headway （进展，名词）
+
+### (2/5) I like to _____ at the end of each day by reading a book.
+
+cope with (cope with 后面要接 problems/stress)
+
+decompress 放松、减压
+
+frazzled 感到身心俱疲
+
+### (3/5) Work is so stressful at the moment. I constantly feel _____.
+
+chronic 长期的
+
+frazzled
+
+headway
+
+### (4/5) How are you going to _____ losing two members of your team?
+
+set aside
+
+cope with
+
+decompress
+
+### (5/5) I really feel like we’re making _____ on this project.
+
+downtime
+
+workload
+
+headway
+
+## SECTION 5 排序
+
+### symptoms or causes：
+
+Her schedule’s hectic.
+
+I feel frazzled.
+
+It’s a heavy workload.
+
+He’s got high blood pressure.
+
+We’ll get burnt out.
+
+### ways to cope：
+
+Recharge your batteries.
+
+Don’t sweat the small stuff.
+
+Put something on the back burner.
+
+Make headway.
+
+Take a breather.
 
 # Grammar（Emphasizing）
 
