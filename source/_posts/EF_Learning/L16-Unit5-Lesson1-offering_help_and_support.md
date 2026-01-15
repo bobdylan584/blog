@@ -478,9 +478,135 @@ Take a breather.
 
 # Grammar（Emphasizing）
 
-## SECTION 1 
+## SECTION 1 阅读材料
+
+### (1/3) Expansion: adding emphasis
+
+Sometimes speakers want to focus attention on a particular thing or idea. One way to do that is to change the order of a sentence. In some grammar books, this is referred to as a **cleft sentence**. One way is to reorder a sentence for emphasis by beginning with **What**. Then, connect the remainder of the sentence with **be**. Notice that the emphasis is on constant noise in the first sentence and how it changes to frustrates me with the What cleft.
+
+有时候，说话者希望把注意力集中在某一个特定的事物或观点上。实现这一点的一种方式，是改变句子的语序。其中一种方式，是为了强调而把句子重新排列，并以 What 开头。注意：在第一个句子中，强调的是 constant noise，而在 What 裂句中，强调点转移到了 frustrates me 这个“情绪/影响”上。
+
+The constant noise frustrates me. ---> **What frustrates me is** the constant noise.
+
+You can also put What expressions in front of a sentence to emphasize the entire sentence.
+
+你也可以把 What 引导的表达 放在句首，用来强调整句话的内容。
+
+You need to be more careful.---> **What you need to do is** be more careful.
+
+The moment you relax, your immune system crashes.--->  **What happens is**, the moment you relax, your immune system crashes.
+
+你一放松，免疫系统就会立刻崩溃。
+
+**Words**
+
+Expansion/ɪkˈspænʃn/n.扩展、延伸（这里指语法用法的延伸）
+
+adding emphasis：增加强调、突出重点；标题含义：通过结构变化来增强语气重点
+
+focus attention on：把注意力集中在……
+
+is referred to as：被称为
+
+remainder /rɪˈmeɪndər/n.余数；剩余时间；剩余物；adj.剩余的；留存下的
+
+remain/rɪˈmeɪn/n.剩余物，残余（物）
+
+entire /ɪnˈtaɪər/adj.整个的
+
+immune /ɪˈmjuːn/adj.有免疫力；
+
+### (2/3) You can also emphasize with so + adjective followed by a that clause.
+
+你也可以通过 so + 形容词 + that 从句 的结构来实现强调。
+
+I’m **so nervous that** I can’t focus. 
+
+Lolo was **so consumed by life that** she forgot to eat.Lolo 
+
+被生活忙得不可开交，甚至忘了吃饭。
+
+**You can also add emphasis using so much + adjective, preposition or noun phrase, and then a that clause.**
+
+你还可以使用 so much + 形容词 / 介词短语 / 名词短语 + that 从句 来加强语气。
+
+The traffic’s gotten **so much worse that** I’ve started taking the subway.
+
+交通状况变得糟糕得多，我都开始改坐地铁了。
+
+She’s got **so much on her mind that** she scheduled two meetings for the same time.
+
+她脑子里事情太多了，结果把两个会议排在了同一时间。
+
+Gary’s under **so much pressure at work that** he becomes a nervous wreck.
+
+Gary 工作压力大到几乎精神崩溃。
+
+**Words**
+
+consumed /kənˈsuːmd/adj.充满…的；沉迷…的
+
+consume/kənˈsuːm/vt.消费；消耗，
+
+preposition /ˌprepəˈzɪʃn/n.介词
+
+形容词（worse）
+
+介词短语（on her mind）在心里
+
+名词短语（pressure at work）
+
+wreck/rek/n.(身体或精神上)受到严重损伤的人，崩溃
+
+a nervous wreck：n.极度神经质的人;极度精神紧张的人
+
+### (3/3) You can also emphasize with **such a** or **such an +** a noun or a noun phrase followed by a **that** clause.
+
+你也可以使用 such a / such an + 名词（或名词短语）+ that 从句 的结构来加强强调。
+
+He was **such a wreck that** he forgot it was his birthday.
+
+他当时整个人糟糕透了，连自己生日都忘了。
+
+Daniel is **such a conscientious student that** I’m sure he’ll do well.
+
+Daniel 是个非常认真负责的学生，所以我确信他会表现得很好。
+
+**Note:** You cannot substitute **so** or **such** with **very**. Remember, you can omit **that** in all of these sentences.
+
+记住：在所有这些句子中，**that 都可以省略**。
+
+**Words**
+
+conscientious /ˌkɑːnʃiˈenʃəs/adj.认真的；一丝不苟的；勤勉认真的
+
+substitute /ˈsʌbstɪtuːt/v.(以…)代替
+
+such a wreck：糟糕成那样 / 崩溃到不行
+
+wreck：原义“残骸”，引申为“精神或生活一团糟的人”
+
+omit /əˈmɪt/v.省略
+
+
 
 ## SECTION 2
+
+### (1/7)
+
+### (2/7)
+
+### (3/7)
+
+### (4/7)
+
+### (5/7)
+
+### (6/7)
+
+### (7/7)
+
+
 
 ## SECTION 3
 
