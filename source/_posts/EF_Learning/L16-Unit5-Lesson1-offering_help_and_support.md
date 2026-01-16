@@ -590,27 +590,246 @@ omit /əˈmɪt/v.省略
 
 
 
-## SECTION 2
+## SECTION 2 听录音选择正确的选项
 
-### (1/7)
+**Audio**
 
-### (2/7)
+Hi Daniel, it's Mom here. I'm just calling because I know you must be nervous about next week's exams. Take it easy on yourself, though, okay? You're such a conscientious student that I'm sure you've kept up with your reading, so there's no need to run yourself ragged now. You know, when your brother was taking his final exams last year, he was so nervous that he couldn't sleep the night before, and he was so consumed by studying that he didn't take the time to eat properly. Remember, he'd planned that trip to the beach for the day after his last exam, but by the time he'd finished them, he was so sleep-deprived and malnourished that he came down with a terrible cold. He was such a wreck that he couldn't go on the trip. What happens is, the moment you slow down, your immune system crashes. So, what you need to do is take good care of yourself. Make sure you're eating and sleeping. Well, take care and good luck, kiddo. We'll be rooting for you.
 
-### (3/7)
+嗨，丹尼尔，是妈妈。我打电话是因为我知道你肯定在为下周的考试紧张。不过，别对自己太苛刻，好吗？你一直都是个非常认真的学生，我相信你早就按部就班完成了学习，现在没必要把自己累垮。你还记得吧，去年你哥哥考期末的时候紧张得前一晚都睡不着，而且一心只顾学习，连饭都不好好吃。你记得吧，他本来计划最后一门考完就去海边旅行，可等考完时，他已经严重缺觉又营养不良，结果得了场重感冒。他当时整个人都垮了，连那趟旅行都没法去了。事情往往就是这样——你一松下来，免疫系统就垮了。所以你现在最重要的，是好好照顾自己。一定要好好吃饭、好好睡觉。好了，照顾好自己，祝你好运，孩子。
 
-### (4/7)
+**Words**
 
-### (5/7)
+though/ðoʊ/adv.(尤用于句末补充说明，使语气减弱)不过，可是，
 
-### (6/7)
+Take it easy on yourself：对自己别太苛刻
 
-### (7/7)
+conscientious/ˌkɑːnʃiˈenʃəs/adj.认真的；
+
+run yourself ragged把自己累到精疲力竭（强烈口语表达）
+
+ragged /ˈræɡɪd/adj.精疲力竭的；
+
+kept up with your reading：一直按进度完成阅读任务
+
+kept up with跟上；不落后
+
+conscientious student：自律、认真的学生（高度评价）
+
+final exams：期末/毕业考试，压力极大
+
+so consumed by studying：完全被学习吞噬
+
+properly/ˈprɑːpərli/adv.适当地；正确地；恰当地；
+
+consumed /kənˈsuːmd/v.消耗，
+
+sleep-deprived 睡眠不足的
+
+deprive /dɪˈpraɪv/v.剥夺；使丧失；
+
+malnourished /ˌmælˈnɜːrɪʃt/adj.营养不良的
+
+slow down/sloʊ daʊn/放松
+
+came down with：突然患上（疾病）
+
+What happens is：解释规律、总结经验
+
+the moment：一……就……（瞬间触发）
+
+root for为某人加油、支持
+
+kiddo/ˈkɪdoʊ/n.小家伙，小伙子，年轻人(尤用作比自己年纪轻的人的爱称)
+
+### (1/7) Daniel is such a _____, she's sure he's kept up with all his reading.
+
+conscientious student
+
+student's conscience：学生的良心
+
+very conscientious
+
+**Words**
+
+conscience/ˈkɑːnʃəns/n.良心；良知；
+
+### (2/7) Daniel's brother was so nervous _____.
+
+that he vomited
+
+that he fainted
+
+that he couldn't sleep
+
+**Words**
+
+vomit/ˈvɑːmɪt/v.呕吐；
+
+faint/feɪnt/vi.昏倒；昏厥
+
+### (3/7) His brother was so _____ that he didn't take the time to eat properly.
+
+examined
+
+consumed by his exams
+
+focused on my health
+
+**Words**
+
+examine/ɪɡˈzæmɪn/vt.检查；
+
+consume/kənˈsuːm/vt.消费；消耗
+
+consumed by：被……完全占据（时间、精力、注意力）
+
+### (4/7) He was so sleep deprived and malnourished _____ .
+
+这是**标准 so … that … 结果从句**
+
+then he came down with a cold
+
+that he came down with a cold
+
+so he came down with a cold
+
+### (5/7) He was such a wreck _____ .
+
+that he couldn't go on the trip
+
+that he couldn't eat
+
+that he got a terrible cold
+
+### (6/7) What _____, the moment you slow down, your immune system crashes.
+
+happening
+
+it happens
+
+happens is
+
+### (7/7) What _____ take care of yourself.
+
+is needed to
+
+is you need to do
+
+you need to do is
 
 
 
-## SECTION 3
+## SECTION 3 选择括号内相近答案
+
+### (1/5) I was so (anxious) on the morning of my wedding that I left the rings at home.
+
+distracted/dɪˈstræktɪd/ adj. 注意力分散的，心不在焉的
+
+worry
+
+much anxiety
+
+### 句型骨架
+
+- **I was so + 形容词 + that + 结果**
+- “so … that …” 表示：**情绪强烈 → 导致具体后果**
+
+### (2/5) The boss gave me (such a heavy workload) that I'll have to stay late all week.
+
+such a work
+
+so much work
+
+a very heavy workload
+
+逐项判断：
+
+such a work （work 不可数，不能加 a）
+
+so much work （语法正确，语义等价）
+
+a very heavy workload （缺少 that，引导不了结果从句）
+
+### (3/5) The economy is in such (bad shape) that I fear for my job.
+
+dire/ˈdaɪər/adj.危急的；极其严重的；极差的；极糟的
+
+shamble/ˈʃæmbl/n.蹒跚；
+
+messy/ˈmesi/adj.混乱的；凌乱的；
+
+结构：
+
+be in such + 名词 + that …
+
+bad shape/bæd ʃeɪp/糟糕的状态
+
+### (4/5) Gary is under so much (pressure) at work that he has become a nervous wreck.
+
+stressful
+
+stressed
+
+stress
+
+### (5/5) There was (such heavy traffic) this morning that I arrived an hour late for my morning class.
+
+so traffic
+
+such traffic
+
+so much traffic
+
+精读解析
+
+traffic = 不可数名词
+
+可用结构：
+
+so much + 不可数名词
+
+such + 不可数名词 （除非有形容词 + 名词结构）
+
+逐项判断：
+
+so traffic （缺少 much）
+
+such traffic 
+
+so much traffic 
 
 ## SECTION 4
+
+**Which ones are grammatically correct?**
+
+1. The sales team is under **very much** pressure that team spirit is eroding.
+
+2. What frustrates me is the constant interruptions.
+
+3. I've got such terrible headache that I'm going to call in sick.
+
+   问题点：headache 是可数名词；such + adj + a + 可数名词
+
+   正确应为：I've got such a terrible headache that I'm going to call in sick.
+
+4. She's got so much on her mind that she's acting irrationally.
+
+5. The situation's gotten so much worse that I've lost all hope.
+
+   她最近心事太重，做事已经有点不理智了。
+
+**Words**
+
+grammatically/ɡrə'mætɪklɪ/语法上
+
+pressure 不可数名词；very much 形容数量，错误； **so much pressure**正确
+
+erode/ɪˈroʊd/v.削弱；风化；逐渐毁坏
+
+interruption/ˌɪntəˈrʌpʃn/n.中断；打扰；中断时间；插嘴；打岔
+
+irrational/ɪˈræʃənl/adj.不合理的；
 
 # Expression（Expressing help and support）
 
