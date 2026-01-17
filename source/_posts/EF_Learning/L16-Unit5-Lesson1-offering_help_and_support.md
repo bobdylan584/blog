@@ -835,9 +835,152 @@ irrational/ɪˈræʃənl/adj.不合理的；
 
 ## SECTION 1 
 
-## SECTION 2
+**Writings**
 
-## SECTION 3
+From_
+ToAll
+Hi Caleb,
+
+I got your letter yesterday — thank you for the picture of the wedding. I framed it and put it on the mantel next to your graduation picture. Does the time ever fly!
+
+我昨天收到了你的来信——谢谢你寄来的婚礼照片。我已经把它装裱起来，放在壁炉台上，和你的毕业照并排摆着。时间过得可真快啊！
+
+I understand you are under a lot of stress looking for a new place. Moving can be that way. It sounds like you are looking at a lot of places, and that can be very overwhelming. Probably what you need to do is narrow down the area you are looking in. It might be a good idea to visualize what your life would be like in the different areas of the city and decide on one. Then only look at property in that area. When you make a list of pros and cons, you ought to consider the commute, where you’ll do your grocery shopping, and even though you’re not there yet, thinking about the schools in the area couldn’t hurt.
+
+我理解你在找新住处这件事上承受着很大的压力。搬家往往就是这样。听起来你已经看了很多房子，而这确实很容易让人感到不堪重负。也许你需要做的是先缩小找房的区域范围。不妨设想一下，如果住在城市的不同区域，你的生活会是什么样子，然后选定一个区域。接下来只在这个区域内看房子。当你列出利弊清单时，应该考虑通勤情况、日常在哪儿买菜，甚至即便你现在还没考虑到那一步，提前想想附近的学校也无妨。
+
+It’s always hard to know if you are making the right decision, so don’t be afraid to ask to view the house a few times before you make an offer. And you should definitely try to schedule your viewings at different times of the day and week to get an idea of what the place is like at different hours. As for the condition, caveat emptor, or 'buyer beware' applies, so the only solution is to hire a professional house inspector, and ask loads of questions. My neighbor Dale’s son is an inspector. Why don’t you try giving him a call? I think his fee is about $500. Let me know if you would like his phone number and I’ll get it for you.
+
+是否做出了正确的决定总是很难判断，所以在出价之前，别害怕多看几次房子。而且你一定要尽量安排在一天中、以及一周中不同的时间去看房，这样才能了解房子在不同时段的真实情况。至于房屋状况，“买者自慎”（caveat emptor）的原则是适用的，因此唯一的办法就是请一位专业的房屋检测员，并且多问问题。我邻居 Dale 的儿子就是做这行的，你不妨给他打个电话试试。
+
+Well, let me know how it all goes and please give my regards to Tanya.
+
+好了，记得告诉我事情进展得怎么样，也请代我向 Tanya 问好。
+
+Love,
+
+Grandad Jack 
+
+爱你的，爷爷Jack 
+
+### Select the two accurate statements.
+
+1. Caleb gets the advice after he's already bought the house.
+
+2. Grandad Jack thinks getting a house inspector is money well spent.
+3. Caleb and his wife are trying to have a baby.
+4. Grandad Jack thinks Caleb should confine his search to a smaller area.
+5. Caleb is preparing for his upcoming marriage.
+
+**Words**
+
+Caleb/ˈkeɪləb/凯莱布
+
+mantel /ˈmæntəl/n.壁炉架;壁炉台
+
+frame/freɪm/n.(图画、门、玻璃等的)框架；帧；vt.给…镶边；给…做框
+
+Does the time ever fly!
+
+time fly：时间飞逝
+
+Does … ever fly!：强烈感叹“时间过得真快啊！”
+
+ever adv.真是；（情感加强副词）
+
+narrow /ˈnæroʊ/v.缩小；adj.狭窄的；狭隘的；狭义的；
+
+narrow down 缩减；减小；压缩
+
+grocery /ˈɡroʊsəri/n.杂货店；
+
+grocery shopping买杂货
+
+that way：确实就是这样（安慰性表达）
+
+visualize/ˈvɪʒuəlaɪz/vt.可视化；想象；
+
+property：房产（正式用法）
+
+ought to/ˈɔːt/：应该（语气比 should 稍弱但仍是建议）
+
+couldn’t hurt：想一想也无妨 / 没坏处
+
+view the house：看房
+
+view/vjuː/n.看法vt.看，(尤指)仔细察看；查看(房子等，以便购买或租用)
+
+make an offer：出价
+
+offer/ˈɔːfər/v.提供；n.报价；出价；
+
+schedule：安排
+
+get an idea of：了解
+
+at different hours：不同时段
+
+caveat /ˈkæviæt/n.警告；告诫
+
+emptor/ˈemptɔːr/（大陆法）买主；购买人
+
+caveat emptor：拉丁语，“买者自慎”
+
+As for：至于
+
+buyer beware：对拉丁语的解释
+
+applies：**买者自慎这一原则在这里是适用的**；适用
+
+至于房屋状况，“买者自慎”（buyer beware）的原则在这里是适用的，
+
+beware/bɪˈwer/v.小心；当心；提防
+
+inspector/ɪnˈspektər/n.检查员；视察员；inspector：房屋检测员
+
+regard/rɪˈɡɑːrd/n.(用于信函结尾或转达问候)致意，问候；
+
+Tanya/ˈtɑnjə/n.塔尼亚；丹耶
+
+confine /kənˈfaɪn/vt.限制；监禁；限定；
+
+money well spent（值得花的钱）
+
+## SECTION 2 点击配对
+
+What you need to do →	 is set priorities.
+
+It might be a good      → 	idea to postpone it.
+
+The only solution is   → 	to postpone the event.
+
+You ought to take       → 	a breather sometimes.
+
+Calling ahead               → 	couldn't hurt.
+
+提前打个电话也无妨。
+
+You should                    → 	definitely tell your boss.
+
+**Words**
+
+postpone/poʊˈspoʊn/vt.推迟；延期；
+
+Calling ahead  提前打个电话
+
+## SECTION 3 录音
+
+(1/6) Put it on the back burner.
+
+(2/6) what you need to do is decompress
+
+(3/6) What happens is you toss and turn and get frazzled.
+
+(4/6) What frustrates me is the constant interruptions.
+
+(5/6) It might be a good idea to read a book.
+
+(6/6) The only solution is to sit quietly.轻声地;；
 
 # Final（offering help and support）
 
