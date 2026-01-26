@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "ali-oss": "^6.23.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.3",
     "dotenv": "^17.2.3",
     "fs-extra": "^11.3.2",
     "hexo": "^7.3.0",
