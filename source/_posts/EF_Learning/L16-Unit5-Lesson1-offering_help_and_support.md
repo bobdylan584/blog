@@ -985,3 +985,70 @@ Calling ahead  提前打个电话
 # Final（offering help and support）
 
 ## SECTION 1 
+
+(1/6) this Donnelly deal is driving me crazy. There's just so much work that I can't seem to make any headway. 
+
+这桩 Donnelly 的交易真是把我折腾得快疯了。工作实在太多了，多到我怎么都推进不下去。
+
+A. Isn't there anything you can put on the back burner?难道就没有什么事情可以先放一放、不那么着急处理吗？
+
+B. Do I really seem that frazzled?我看起来真的有那么焦头烂额吗？
+
+C. How did you manage to decompress so quickly?你是怎么做到这么快就放松下来的？
+
+(2/6) You mean I should try to prioritize better? 
+
+A. Yeah, a vacation will help you recharge your batteries.
+
+B. Yeah, postpone some less important things.
+
+C. Yeah, just toss and turn until you fall asleep.
+
+(3/6) I don't know, I'll have to think about it, but right now, I just need to find a way to decompress before bed. 我也说不准，得再想想，不过现在最要紧的是，先想办法在睡前让自己放松下来。
+
+A. Great that you made some headway.太好了，你总算取得了一些进展。
+
+B. You do seem pretty frazzled.你看起来确实挺焦头烂额的。
+
+C. Too bad you just tossed and turned.可惜的是，你只是翻来覆去地没睡好。
+
+(4/6) I am. Really, I'm thinking of quitting. I just feel so uncertain about everything.
+
+是的，确实如此。说真的，我已经在考虑辞职了，我只是对一切都感到非常迷茫、不确定。
+
+A. What frustrates me are the constant interruptions.真正让我感到挫败的，是那些没完没了的打断。
+
+B. What happens is your immune system crashes.结果就是，你的免疫系统会直接崩溃。
+
+C. What you need to do is recharge your batteries.
+
+(5/6) 
+
+It might be a good idea to sit quietly for a while.也许安静地坐一会儿，会是个不错的主意。
+
+The only solution is to watch your favorite show.
+
+You ought to take on more responsibility.
+
+(6/6)
+
+Sure! It helps me so much that I sleep like a baby.
+
+Right! It irritates me so much that I turn it off at night.
+
+I know! It hurt me so much that I bought a brand new one.
+
+我懂！那感觉糟糕到我直接买了一个全新的。
+
+**word**
+
+manage to 设法做到
+
+postpone vt.推迟；
+
+immune /ɪˈmjuːn/adj.有免疫力；
+
+
+
+
+
