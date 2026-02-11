@@ -194,7 +194,9 @@ uv run fastapi dev main.py# 启动项目
 ```
 tar -czvf 文件名.tar.gz 要压缩的文件夹 
 tar -czvf backup.tar.gz file1 file2 file3   把多个文件打包成 tar.gz
-tar -xzvf 文件名.tar.gz  解压缩命令
+tar -xzvf 文件名.tar.gz  
+mkdir NewPlayer2.0
+tar -xzvf newplayer-deploy.tar.gz -C NewPlayer2.0 解压缩到指定目录下
 ```
 
 ### scp
