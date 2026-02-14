@@ -1,0 +1,145 @@
+
+api 3000.conf
+server {
+    listen 3001 ssl;
+    server_name 47.115.72.68;
+
+    ssl_certificate /etc/letsencrypt/live/assistant.altairnexus.top/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/assistant.altairnexus.top/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+
+assistant.conf
+server {
+    server_name assistant.altairnexus.top;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/assistant.altairnexus.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/assistant.altairnexus.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = assistant.altairnexus.top) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name assistant.altairnexus.top;
+    return 404; # managed by Certbot
+
+
+}
+
+
+
+blog.conf
+server {
+    server_name altairnexus.top www.altairnexus.top;
+
+    root /home/projects/blog;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/altairnexus.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/altairnexus.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    listen 80;
+    server_name altairnexus.top www.altairnexus.top;
+
+    return 301 https://$host$request_uri;
+}
+
+
+music.conf
+server {
+    server_name music.altairnexus.top;
+    add_header Content-Security-Policy "upgrade-insecure-requests" always;
+    location / {
+        proxy_pass http://127.0.0.1:8005;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/assistant.altairnexus.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/assistant.altairnexus.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = music.altairnexus.top) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name music.altairnexus.top;
+    return 404; # managed by Certbot
+
+
+}
+
+
+
+video.conf
+server {
+    server_name video.altairnexus.top;
+
+    location / {
+        proxy_pass http://127.0.0.1:8006;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/assistant.altairnexus.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/assistant.altairnexus.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = video.altairnexus.top) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name video.altairnexus.top;
+    return 404; # managed by Certbot
+
+
+}
+
